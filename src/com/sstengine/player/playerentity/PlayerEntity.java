@@ -1,13 +1,13 @@
 package com.sstengine.player.playerentity;
 
+import com.sstengine.GameSettings;
+import com.sstengine.Interactable;
+import com.sstengine.drawing.Drawable;
+import com.sstengine.drawing.Painter;
+import com.sstengine.map.tile.Tile;
 import com.sstengine.player.Player;
 import com.sstengine.Team;
-import crosstheborder.lib.*;
-import crosstheborder.lib.enumeration.MoveDirection;
-import crosstheborder.lib.interfaces.Drawable;
-import crosstheborder.lib.interfaces.GameSettings;
-import crosstheborder.lib.interfaces.Interactable;
-import crosstheborder.lib.interfaces.Painter;
+
 
 import java.awt.*;
 

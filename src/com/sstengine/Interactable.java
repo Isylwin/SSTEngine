@@ -1,7 +1,7 @@
 package com.sstengine;
 
-import crosstheborder.lib.Tile;
-import crosstheborder.lib.player.PlayerEntity;
+import com.sstengine.map.tile.Tile;
+import com.sstengine.player.playerentity.PlayerEntity;
 
 /**
  * Interface that indicates that a Class can interact with PlayerEntities.

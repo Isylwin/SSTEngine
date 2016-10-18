@@ -1,14 +1,9 @@
 package com.sstengine.player;
 
+import com.sstengine.GameSettings;
 import com.sstengine.Team;
+import com.sstengine.map.tileobject.Placeable;
 import com.sstengine.player.playerentity.MoveDirection;
-import crosstheborder.lib.Player;
-import crosstheborder.lib.Team;
-import crosstheborder.lib.enumeration.MoveDirection;
-import crosstheborder.lib.interfaces.GameSettings;
-import crosstheborder.lib.tileobject.Placeable;
-import crosstheborder.lib.tileobject.placeable.Trap;
-import crosstheborder.lib.tileobject.placeable.Wall;
 
 import java.awt.*;
 

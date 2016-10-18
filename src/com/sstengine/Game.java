@@ -1,18 +1,11 @@
 package com.sstengine;
 
+import com.sstengine.computer.Computer;
+import com.sstengine.country.Country;
 import com.sstengine.map.Map;
 import com.sstengine.map.tile.Tile;
 import com.sstengine.player.Player;
-import crosstheborder.lib.computer.Computer;
-import crosstheborder.lib.enumeration.Country;
-import crosstheborder.lib.enumeration.MoveDirection;
-import crosstheborder.lib.enumeration.PlaceableType;
-import crosstheborder.lib.interfaces.*;
-import crosstheborder.lib.player.PlayerEntity;
-import crosstheborder.lib.player.Trump;
-import crosstheborder.lib.player.entity.BorderPatrol;
-import crosstheborder.lib.player.entity.Mexican;
-import crosstheborder.lib.tileobject.Placeable;
+import com.sstengine.player.playerentity.PlayerEntity;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -27,9 +20,9 @@ import java.util.logging.Logger;
  *
  * @author Oscar de Leeuw
  */
-public class Game implements GameManipulator, GameInterface {
+public class Game {
     private static final Logger LOGGER = Logger.getLogger(Game.class.getName());
-    private static final int SERVER_TICK_RATE = ServerSettings.getInstance().getServerTickRate();
+    private static final int ENGINE_TICK_RATE = 5; //TODO Change this too a constant class.
     private GameSettings settings;
     private Timer timer = new Timer();
     private boolean inProgress;
@@ -37,7 +30,7 @@ public class Game implements GameManipulator, GameInterface {
     private int scoreLimit;
     private int timeLimit;
 
-    private Trump trump;
+    private Trump trump; //TODO make this am instance of superplayer/authorityfigure/idk.
     private List<PlayerEntity> players = new ArrayList<>();
     private List<Computer> computers = new ArrayList<>();
 
@@ -51,11 +44,11 @@ public class Game implements GameManipulator, GameInterface {
      * @param mapName The name of the map.
      */
     public Game(String mapName) {
-        this.settings = new GameSettingsImpl(SERVER_TICK_RATE);
+        this.settings = new GameSettingsImpl(ENGINE_TICK_RATE); //TODO must become a constructor parameter.
         this.scoreLimit = settings.getScoreLimit();
-        this.timeLimit = settings.getTimeLimit() * SERVER_TICK_RATE;
-        this.map = MapLoader.getInstance().buildMap(mapName);
-        usa = new Team(Country.USA, map.getUsaArea(), settings.getUsaScoringModifier());
+        this.timeLimit = settings.getTimeLimit() * ENGINE_TICK_RATE;
+        this.map = MapLoader.getInstance().buildMap(mapName); //TODO Look into making maploader part of the engine. Maybe with the help of maploader settings.
+        usa = new Team(Country.USA, map.getUsaArea(), settings.getUsaScoringModifier()); //TODO should not be two set teams.
         mex = new Team(Country.MEX, map.getMexicoArea(), settings.getMexicanScoringModifier());
     }
 
@@ -81,7 +74,7 @@ public class Game implements GameManipulator, GameInterface {
      * Gets the Trump in the list of players.
      * @return The Trump object.
      */
-    private Trump getTrump() {
+    private Trump getTrump() { //TODO should become superfigure or something.
         for (Player player : players) {
             if (player instanceof Trump) {
                 return (Trump) player;
@@ -102,7 +95,7 @@ public class Game implements GameManipulator, GameInterface {
             public void run() {
                 update();
             }
-        }, 0, 1000 / SERVER_TICK_RATE);
+        }, 0, 1000 / ENGINE_TICK_RATE);
     }
 
     /**

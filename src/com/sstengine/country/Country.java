@@ -1,5 +1,7 @@
-package com.sstengine;
+package com.sstengine.country;
 
+import com.sstengine.Interactable;
+import com.sstengine.Team;
 import crosstheborder.lib.ImageFinder;
 import crosstheborder.lib.Team;
 import crosstheborder.lib.Tile;
