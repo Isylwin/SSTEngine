@@ -1,4 +1,4 @@
-package com.sstengine.enumeration;
+package com.sstengine;
 
 import crosstheborder.lib.ImageFinder;
 import crosstheborder.lib.Team;

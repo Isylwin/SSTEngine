@@ -1,4 +1,4 @@
-package com.sstengine.enumeration;
+package com.sstengine.map.tileobject;
 
 /**
  * The ObstacleType class is an enumeration that captures all the different types of obstacles.

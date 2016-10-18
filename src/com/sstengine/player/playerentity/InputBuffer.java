@@ -1,4 +1,4 @@
-package com.sstengine;
+package com.sstengine.player.playerentity;
 
 import crosstheborder.lib.enumeration.MoveDirection;
 

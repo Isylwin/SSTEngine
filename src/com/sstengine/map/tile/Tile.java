@@ -1,4 +1,4 @@
-package com.sstengine;
+package com.sstengine.map.tile;
 
 import crosstheborder.lib.enumeration.Country;
 import crosstheborder.lib.enumeration.TileType;

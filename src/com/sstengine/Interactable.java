@@ -1,4 +1,4 @@
-package com.sstengine.interfaces;
+package com.sstengine;
 
 import crosstheborder.lib.Tile;
 import crosstheborder.lib.player.PlayerEntity;

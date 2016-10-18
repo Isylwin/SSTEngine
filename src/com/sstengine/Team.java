@@ -1,5 +1,6 @@
 package com.sstengine;
 
+import com.sstengine.player.Player;
 import crosstheborder.lib.enumeration.Country;
 
 import java.awt.*;

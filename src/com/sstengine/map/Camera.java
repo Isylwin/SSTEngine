@@ -1,4 +1,6 @@
-package com.sstengine.interfaces;
+package com.sstengine.map;
+
+import com.sstengine.drawing.Painter;
 
 import java.awt.*;
 

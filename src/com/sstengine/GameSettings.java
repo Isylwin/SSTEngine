@@ -1,4 +1,4 @@
-package com.sstengine.interfaces;
+package com.sstengine;
 
 /**
  * Interface for a settings object that allows access to the settings of a game.

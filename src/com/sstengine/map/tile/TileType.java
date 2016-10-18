@@ -1,4 +1,4 @@
-package com.sstengine.enumeration;
+package com.sstengine.map.tile;
 
 /**
  * The TileType enum captures what type of tile a tile is.

@@ -1,4 +1,4 @@
-package com.sstengine.enumeration;
+package com.sstengine.map;
 
 import java.awt.*;
 

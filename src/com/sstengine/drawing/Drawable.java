@@ -1,4 +1,4 @@
-package com.sstengine.interfaces;
+package com.sstengine.drawing;
 
 import java.awt.*;
 

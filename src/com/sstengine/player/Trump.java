@@ -1,5 +1,7 @@
 package com.sstengine.player;
 
+import com.sstengine.Team;
+import com.sstengine.player.playerentity.MoveDirection;
 import crosstheborder.lib.Player;
 import crosstheborder.lib.Team;
 import crosstheborder.lib.enumeration.MoveDirection;

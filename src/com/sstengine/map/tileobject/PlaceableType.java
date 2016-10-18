@@ -1,4 +1,4 @@
-package com.sstengine.enumeration;
+package com.sstengine.map.tileobject;
 
 import crosstheborder.lib.interfaces.GameSettings;
 import crosstheborder.lib.tileobject.Placeable;

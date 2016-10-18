@@ -1,4 +1,4 @@
-package com.sstengine.tileobject;
+package com.sstengine.map.tileobject;
 
 import crosstheborder.lib.ImageFinder;
 import crosstheborder.lib.Tile;

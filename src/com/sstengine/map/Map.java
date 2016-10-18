@@ -1,5 +1,6 @@
-package com.sstengine;
+package com.sstengine.map;
 
+import com.sstengine.map.tile.Tile;
 import crosstheborder.lib.enumeration.Country;
 import crosstheborder.lib.enumeration.Direction;
 import crosstheborder.lib.interfaces.Camera;

@@ -1,4 +1,7 @@
-package com.sstengine.interfaces;
+package com.sstengine.map.tileobject;
+
+import com.sstengine.drawing.Drawable;
+import com.sstengine.Interactable;
 
 import java.awt.*;
 

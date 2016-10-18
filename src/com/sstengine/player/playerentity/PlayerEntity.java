@@ -1,5 +1,7 @@
-package com.sstengine.player;
+package com.sstengine.player.playerentity;
 
+import com.sstengine.player.Player;
+import com.sstengine.Team;
 import crosstheborder.lib.*;
 import crosstheborder.lib.enumeration.MoveDirection;
 import crosstheborder.lib.interfaces.Drawable;

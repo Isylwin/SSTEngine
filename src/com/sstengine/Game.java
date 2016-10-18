@@ -1,5 +1,8 @@
 package com.sstengine;
 
+import com.sstengine.map.Map;
+import com.sstengine.map.tile.Tile;
+import com.sstengine.player.Player;
 import crosstheborder.lib.computer.Computer;
 import crosstheborder.lib.enumeration.Country;
 import crosstheborder.lib.enumeration.MoveDirection;
