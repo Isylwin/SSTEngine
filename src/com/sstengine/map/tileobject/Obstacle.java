@@ -1,12 +1,8 @@
 package com.sstengine.map.tileobject;
 
-import crosstheborder.lib.ImageFinder;
-import crosstheborder.lib.Tile;
-import crosstheborder.lib.enumeration.ObstacleType;
-import crosstheborder.lib.interfaces.GameManipulator;
-import crosstheborder.lib.interfaces.Painter;
-import crosstheborder.lib.interfaces.TileObject;
-import crosstheborder.lib.player.PlayerEntity;
+
+
+import com.sstengine.map.tile.Tile;
 
 import java.awt.*;
 

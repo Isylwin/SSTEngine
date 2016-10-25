@@ -46,4 +46,14 @@ public enum MoveDirection {
     public Point getTranslation() {
         return cartesianTranslation;
     }
+
+    /**
+     * Gets a point that represents the next location with this MoveDirection.
+     *
+     * @param location The current location from which should be moved.
+     * @return A point that represents the movement of this MoveDirection from the given location.
+     */
+    public Point getLocationWithMove(Point location) {
+        return new Point(location.x + cartesianTranslation.x, location.y + cartesianTranslation.y);
+    }
 }

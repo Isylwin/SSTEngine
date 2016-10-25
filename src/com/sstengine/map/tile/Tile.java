@@ -1,11 +1,11 @@
 package com.sstengine.map.tile;
 
-import crosstheborder.lib.enumeration.Country;
-import crosstheborder.lib.enumeration.TileType;
-import crosstheborder.lib.interfaces.Drawable;
-import crosstheborder.lib.interfaces.Painter;
-import crosstheborder.lib.interfaces.TileObject;
-import crosstheborder.lib.player.PlayerEntity;
+
+
+import com.sstengine.country.Country;
+import com.sstengine.drawing.Drawable;
+import com.sstengine.map.tileobject.TileObject;
+import com.sstengine.player.playerentity.PlayerEntity;
 
 import java.awt.*;
 import java.io.File;
