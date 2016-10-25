@@ -1,27 +1,45 @@
 package com.sstengine.map.tileobject;
 
+import com.sstengine.drawing.Painter;
 import com.sstengine.map.tile.Tile;
 import com.sstengine.player.playerentity.PlayerEntity;
 
 import java.awt.*;
 
 /**
- * The Placeable class represents a {@link TileObject} that can be placed by
+ * The PlaceableObstacle class represents a {@link TileObject} that can be placed by
  *
  * @author Oscar de Leeuw
  */
-public abstract class Placeable implements TileObject {
+public class PlaceableObstacle implements TileObject {
     private Tile tile;
+    private PlaceableType type;
 
     /**
      * Creates a new placeable.
      */
-    protected Placeable() {
+    public PlaceableObstacle(PlaceableType type) {
+        this.type = type;
     }
 
     @Override
     public Point getLocation() {
         return this.tile.getLocation();
+    }
+
+    @Override
+    public boolean interactWith(PlayerEntity entity) {
+        return false;
+    }
+
+    @Override
+    public boolean isAccessible(PlayerEntity entity) {
+        return false;
+    }
+
+    @Override
+    public int getCost(PlayerEntity entity) {
+        return 0;
     }
 
     @Override
@@ -34,8 +52,9 @@ public abstract class Placeable implements TileObject {
         this.tile = tile;
     }
 
-    public boolean interactWith(PlayerEntity player) {
-        return false;
+    @Override
+    public void draw(Painter painter, Point location, int tileWidth) {
+
     }
 
     /**
@@ -47,5 +66,7 @@ public abstract class Placeable implements TileObject {
      * @param south The object that would be to the south of the placeable.
      * @return A boolean that indicates whether the placeable can be placed.
      */
-    public abstract boolean canPlaceWithNeighbours(TileObject east, TileObject west, TileObject north, TileObject south);
+    /*public boolean canPlaceWithNeighbours(TileObject east, TileObject west, TileObject north, TileObject south) {
+
+    }*/
 }

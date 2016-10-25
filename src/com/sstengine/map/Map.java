@@ -198,9 +198,9 @@ public class Map {
     }
 
     /**
-     * Determines whether a given Placeable can be placed on the map.
+     * Determines whether a given PlaceableObstacle can be placed on the map.
      *
-     * @param tile  The tile the Placeable should be placed.
+     * @param tile  The tile the PlaceableObstacle should be placed.
      * @param placeable The placeable for which to run this check.
      * @return True when the placeable can be placed at the given location.
      */
