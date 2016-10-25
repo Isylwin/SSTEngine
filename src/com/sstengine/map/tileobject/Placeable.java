@@ -1,16 +1,12 @@
 package com.sstengine.map.tileobject;
 
-import crosstheborder.lib.ImageFinder;
-import crosstheborder.lib.Tile;
-import crosstheborder.lib.interfaces.GameManipulator;
-import crosstheborder.lib.interfaces.Painter;
-import crosstheborder.lib.interfaces.TileObject;
-import crosstheborder.lib.player.PlayerEntity;
+import com.sstengine.map.tile.Tile;
+import com.sstengine.player.playerentity.PlayerEntity;
 
 import java.awt.*;
 
 /**
- * The Placeable class represents a {@link TileObject} that can be placed by {@link crosstheborder.lib.player.Trump}.
+ * The Placeable class represents a {@link TileObject} that can be placed by
  *
  * @author Oscar de Leeuw
  */
@@ -38,7 +34,9 @@ public abstract class Placeable implements TileObject {
         this.tile = tile;
     }
 
-    public abstract boolean interactWith(PlayerEntity player, GameManipulator game);
+    public boolean interactWith(PlayerEntity player) {
+        return false;
+    }
 
     /**
      * Checks what the placement rules are of a placeable.
@@ -50,10 +48,4 @@ public abstract class Placeable implements TileObject {
      * @return A boolean that indicates whether the placeable can be placed.
      */
     public abstract boolean canPlaceWithNeighbours(TileObject east, TileObject west, TileObject north, TileObject south);
-
-
-    @Override
-    public void draw(Painter painter, Point location, int tileWidth) {
-        painter.drawImage(ImageFinder.getInstance().getImage(this), location, tileWidth, tileWidth);
-    }
 }

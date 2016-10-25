@@ -30,9 +30,9 @@ public class Game {
     private int scoreLimit;
     private int timeLimit;
 
-    private Trump trump; //TODO make this am instance of superplayer/authorityfigure/idk.
+    //private Trump trump; //TODO make this am instance of superplayer/authorityfigure/idk.
     private List<PlayerEntity> players = new ArrayList<>();
-    private List<Computer> computers = new ArrayList<>();
+    //private List<Computer> computers = new ArrayList<>();
 
     private Map map;
     private Team usa;
