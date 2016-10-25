@@ -30,7 +30,7 @@ public class Game {
     private int scoreLimit;
     private int timeLimit;
 
-    //private Trump trump; //TODO make this am instance of superplayer/authorityfigure/idk.
+    //private Leader trump; //TODO make this am instance of superplayer/authorityfigure/idk.
     private List<PlayerEntity> players = new ArrayList<>();
     //private List<Computer> computers = new ArrayList<>();
 
@@ -71,8 +71,8 @@ public class Game {
     }
 
     /**
-     * Gets the Trump in the list of players.
-     * @return The Trump object.
+     * Gets the Leader in the list of players.
+     * @return The Leader object.
      */
     private Trump getTrump() { //TODO should become superfigure or something.
         for (Player player : players) {
@@ -100,7 +100,7 @@ public class Game {
 
     /**
      * Turns a user into a player and adds the player to the game.
-     * Will try to create a Trump if there is none.
+     * Will try to create a Leader if there is none.
      * Will try to create a Mexican if there are more Americans than Mexicans.
      * Will otherwise try to create a BorderPatrol.
      *
@@ -162,7 +162,7 @@ public class Game {
             player.decreaseMoveTimer();
         }
 
-        //Tick the placeables for Trump.
+        //Tick the placeables for Leader.
         trump.tickPlaceableAmount();
 
         //Let all the computers compute

@@ -84,56 +84,56 @@ public interface GameSettings {
     void setUsaScoringModifier(int value);
 
     /**
-     * Gets the amount of seconds it takes for Trump to get a new wall.
+     * Gets the amount of seconds it takes for Leader to get a new wall.
      *
      * @return The amount of seconds.
      */
     int getSecondsPerWall();
 
     /**
-     * Sets the amount of seconds it takes for Trump to get a new wall.
+     * Sets the amount of seconds it takes for Leader to get a new wall.
      *
      * @param value The amount of seconds.
      */
     void setSecondsPerWall(int value);
 
     /**
-     * Gets the amount of second it takes for Trump to get a new trap.
+     * Gets the amount of second it takes for Leader to get a new trap.
      *
      * @return The amount of seconds.
      */
     int getSecondsPerTrap();
 
     /**
-     * Sets the amount of seconds it takes for Trump to get a new trap.
+     * Sets the amount of seconds it takes for Leader to get a new trap.
      *
      * @param value The amount of seconds.
      */
     void setSecondsPerTrap(int value);
 
     /**
-     * Gets the initial amount of walls Trump starts off with.
+     * Gets the initial amount of walls Leader starts off with.
      *
      * @return The amount of walls.
      */
     int getInitialWallAmount();
 
     /**
-     * Sets the initial amount of walls Trump starts off with.
+     * Sets the initial amount of walls Leader starts off with.
      *
      * @param value The initial amount.
      */
     void setInitialWallAmount(int value);
 
     /**
-     * Gets the initial amount of traps Trump starts off with.
+     * Gets the initial amount of traps Leader starts off with.
      *
      * @return The amount of traps.
      */
     int getInitialTrapAmount();
 
     /**
-     * Sets the initial amount of traps Trump starts off with.
+     * Sets the initial amount of traps Leader starts off with.
      *
      * @param value The initial amount.
      */

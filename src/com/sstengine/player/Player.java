@@ -1,18 +1,21 @@
 package com.sstengine.player;
 
+import com.sstengine.Game;
 import com.sstengine.GameSettings;
 import com.sstengine.Team;
+import com.sstengine.event.framework.Event;
 import com.sstengine.player.playerentity.MoveDirection;
+
+import java.util.List;
 
 import java.awt.*;
 
 /**
- * Player is the super class for Trump and PlayerEntity.
+ * Player is the super class for Leader and PlayerEntity.
  *
  * @author Oscar de Leeuw
  */
 public abstract class Player {
-    protected final int serverTickRate;
     protected Point cameraLocation;
     private String name;
     private Team team;
@@ -22,14 +25,12 @@ public abstract class Player {
      *
      * @param name The name of the player.
      * @param team The team the player is part of.
-     * @param settings The settings of the game.
      */
-    public Player(String name, Team team, GameSettings settings) {
+    public Player(String name, Team team) {
         this.name = name;
         this.team = team;
         team.addTeamMember(this);
-
-        this.serverTickRate = settings.getServerTickRate();
+        cameraLocation = new Point(0, 0);
     }
 
     /**
@@ -46,7 +47,9 @@ public abstract class Player {
      *
      * @return The location of the camera.
      */
-    public abstract Point getCameraLocation();
+    public Point getCameraLocation() {
+        return this.cameraLocation;
+    }
 
     /**
      * Moves the location of a camera.
@@ -54,7 +57,17 @@ public abstract class Player {
      *
      * @param md The direction the camera should move.
      */
-    public abstract void moveCameraLocation(MoveDirection md);
+    public void moveCameraLocation(MoveDirection md) {
+        this.cameraLocation = md.getLocationWithMove(cameraLocation);
+    }
+
+    /**
+     * Updates the player and generates all the events that should happen during this update.
+     *
+     * @param game The game in which the player lives.
+     * @param eventQueue The queue of events that will be executed by the game.
+     */
+    public abstract void update(Game game, List<Event> eventQueue);
 
     @Override
     public String toString(){

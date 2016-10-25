@@ -21,7 +21,7 @@ import java.util.List;
  *
  * @author Oscar de Leeuw
  */
-public abstract class PlayerEntity extends Player implements Drawable, Interactable {
+public class PlayerEntity extends Player {
     private Tile tile;
     private InputBuffer inputBuffer;
     private MoveDirection currentMove;
@@ -29,13 +29,12 @@ public abstract class PlayerEntity extends Player implements Drawable, Interacta
 
     /**
      * Abstract constructor that passes the name to the Player class.
-     * Calls the {@link Player#Player(String, Team, GameSettings)} constructor.
+     * Calls the {@link Player#Player(String, Team)} constructor.
      * @param name The name of the player.
      * @param team The team this player is part of.
-     * @param settings The settings of the game.
      */
-    public PlayerEntity(String name, Team team, GameSettings settings) {
-        super(name, team, settings);
+    public PlayerEntity(String name, Team team) {
+        super(name, team);
         this.state = new NormalState();
         this.inputBuffer = new InputBuffer();
     }
@@ -59,30 +58,6 @@ public abstract class PlayerEntity extends Player implements Drawable, Interacta
     }
 
     /**
-     * Gets the current State of the PlayerEntity.
-     * @return The current State of the PlayerEntity.
-     */
-    public State getState() {
-        return state;
-    }
-
-    @Override
-    public Tile getTile() {
-        return this.tile;
-    }
-
-    @Override
-    public void setTile(Tile tile) {
-        this.tile = tile;
-    }
-
-    public void update(Game game, List<Event> eventQueue) {
-        currentMove = inputBuffer.getNextInputMove();
-
-        state.handleInput(this, game.getMap(), eventQueue);
-    }
-
-    /**
      * Pushes a MoveDirection to the {@link InputBuffer}.
      *
      * @param move The MoveDirection that should be pushed to the InputBuffer.
@@ -92,25 +67,28 @@ public abstract class PlayerEntity extends Player implements Drawable, Interacta
     }
 
     /**
-     * {@inheritDoc}
-     * Returns a clone of the location of the object.
+     * Gets the current State of the PlayerEntity.
+     * @return The current State of the PlayerEntity.
      */
-    @Override
-    public Point getCameraLocation() {
-        return (Point) this.tile.getLocation().clone();
+    public State getState() {
+        return state;
     }
 
-    /**
-     * {@inheritDoc}
-     * Is intentionally left blank. Camera movement for player entities is not supported.
-     */
-    @Override
-    public void moveCameraLocation(MoveDirection md) {
-        //Intentionally left blank. Cannot support moving the camera due to the way player location is updated.
+
+    public Tile getTile() {
+        return this.tile;
+    }
+
+
+    public void setTile(Tile tile) {
+        this.tile = tile;
+        this.cameraLocation = tile.getLocation();
     }
 
     @Override
-    public void draw(Painter painter, Point location, int tileWidth) {
+    public void update(Game game, List<Event> eventQueue) {
+        currentMove = inputBuffer.getNextInputMove();
 
+        state.handleInput(this, game.getMap(), eventQueue);
     }
 }

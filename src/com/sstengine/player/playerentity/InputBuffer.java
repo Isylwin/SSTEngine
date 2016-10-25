@@ -1,7 +1,5 @@
 package com.sstengine.player.playerentity;
 
-import crosstheborder.lib.enumeration.MoveDirection;
-
 import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.List;
@@ -15,16 +13,14 @@ import java.util.stream.Collectors;
  *
  * @author Oscar de Leeuw
  */
-public class InputBuffer {
+class InputBuffer {
     private Deque<MoveDirection> inputMoves;
-    //private InputPropertiesGetter properties = ServerSettings.getInstance();
-    //private int bufferSize = properties.getInputBufferSize();
     private MoveDirection lastMove = MoveDirection.NONE;
 
     /**
      * Creates a new InputBuffer.
      */
-    public InputBuffer() {
+    InputBuffer() {
         inputMoves = new ArrayDeque<>();
     }
 
@@ -35,19 +31,18 @@ public class InputBuffer {
      *
      * @param md The input that was given by the user.
      */
-    public synchronized void addToInputMoves(MoveDirection md) {
-        //Add method throws an illegal state exception when you can't add any more input,
-        //(ab)using that to remove the oldest element since Java does not have a build in solution for this.
+    synchronized void addToInputMoves(MoveDirection md) {
         inputMoves.offerFirst(md);
     }
 
     /**
      * Synchronized method.
-     * Gets the oldest move in the input buffer.
+     * Gets the newest move in the InputBuffer.
+     * If there was a move that differed from the last move, the different move will get priority.
      *
-     * @return The oldest move in the input buffer.
+     * @return The highest priority move.
      */
-    public synchronized MoveDirection getNextInputMove() {
+    synchronized MoveDirection getNextInputMove() {
         MoveDirection currentMove = inputMoves.pollFirst();
 
         if (currentMove == null) {
@@ -62,7 +57,6 @@ public class InputBuffer {
             }
         }
 
-        //Poll method gives back a null when there is no element, i.e. when there is no input.
         lastMove = currentMove;
         inputMoves.clear();
         return currentMove;
