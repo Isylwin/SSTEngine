@@ -1,38 +1,42 @@
 package com.sstengine.player.playerentity;
 
+import com.sstengine.Game;
 import com.sstengine.GameSettings;
 import com.sstengine.Interactable;
 import com.sstengine.drawing.Drawable;
 import com.sstengine.drawing.Painter;
+import com.sstengine.event.framework.Event;
 import com.sstengine.map.tile.Tile;
 import com.sstengine.player.Player;
 import com.sstengine.Team;
-
+import com.sstengine.state.State;
+import com.sstengine.state.states.NormalState;
 
 import java.awt.*;
+import java.util.List;
+
 
 /**
- * Player entity is the super class for the Mexican and border patrol.
+ * The PlayerEntity class defines what constitutes as a PlayerEntity within the SSTEngine.
  *
  * @author Oscar de Leeuw
  */
 public abstract class PlayerEntity extends Player implements Drawable, Interactable {
     private Tile tile;
     private InputBuffer inputBuffer;
-    private boolean canMove = true;
-    //The amount of ticks till the player can move again.
-    private int canMoveTicks;
+    private MoveDirection currentMove;
+    private State state;
 
     /**
      * Abstract constructor that passes the name to the Player class.
      * Calls the {@link Player#Player(String, Team, GameSettings)} constructor.
-     *
      * @param name The name of the player.
      * @param team The team this player is part of.
      * @param settings The settings of the game.
      */
     public PlayerEntity(String name, Team team, GameSettings settings) {
         super(name, team, settings);
+        this.state = new NormalState();
         this.inputBuffer = new InputBuffer();
     }
 
@@ -47,12 +51,19 @@ public abstract class PlayerEntity extends Player implements Drawable, Interacta
     }
 
     /**
-     * Gets whether this entity can move.
-     *
-     * @return True when the entity can move.
+     * Gets the current move of this PlayerEntity.
+     * @return The current move of this PlayerEntity.
      */
-    public boolean canMove() {
-        return this.canMove; //TODO make the update method in game use this method.
+    public MoveDirection getCurrentMove() {
+        return this.currentMove;
+    }
+
+    /**
+     * Gets the current State of the PlayerEntity.
+     * @return The current State of the PlayerEntity.
+     */
+    public State getState() {
+        return state;
     }
 
     @Override
@@ -65,22 +76,10 @@ public abstract class PlayerEntity extends Player implements Drawable, Interacta
         this.tile = tile;
     }
 
-    /**
-     * Gets the next location this entity wants to move to.
-     *
-     * @return A point that represents the next location.
-     */
-    public Point getNextMove() {
-        MoveDirection moveDirection = inputBuffer.getNextInputMove();
+    public void update(Game game, List<Event> eventQueue) {
+        currentMove = inputBuffer.getNextInputMove();
 
-        //Exit the method as quickly as possible when there should be no movement.
-        if (moveDirection == MoveDirection.NONE || !canMove) {
-            return null;
-        }
-
-        Point currentLocation = getLocation();
-        Point translation = moveDirection.getTranslation();
-        return new Point(currentLocation.x + translation.x, currentLocation.y + translation.y);
+        state.handleInput(this, game.getMap(), eventQueue);
     }
 
     /**
@@ -90,32 +89,6 @@ public abstract class PlayerEntity extends Player implements Drawable, Interacta
      */
     public void pushInput(MoveDirection move) {
         inputBuffer.addToInputMoves(move);
-    }
-
-    /**
-     * Decreases the timer on the movement timer if the entity can't move.
-     */
-    public void decreaseMoveTimer() {
-        //If the player can't move decrease the move timer.
-        if (!canMove) {
-            //Decrease by 1 tick
-            canMoveTicks--;
-
-            if (canMoveTicks <= 0) {
-                canMove = true;
-                canMoveTicks = 0;
-            }
-        }
-    }
-
-    /**
-     * Immobilizes the player and sets the timer for when the player can move again.
-     *
-     * @param seconds The amount of seconds the player is immobile.
-     */
-    public void immobilize(int seconds) {
-        canMove = false;
-        canMoveTicks = serverTickRate * seconds;
     }
 
     /**
@@ -138,6 +111,6 @@ public abstract class PlayerEntity extends Player implements Drawable, Interacta
 
     @Override
     public void draw(Painter painter, Point location, int tileWidth) {
-        painter.drawImage(ImageFinder.getInstance().getImage(this), location, tileWidth, tileWidth);
+
     }
 }

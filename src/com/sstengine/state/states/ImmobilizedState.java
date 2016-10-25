@@ -28,13 +28,9 @@ public class ImmobilizedState extends State {
     }
 
     @Override
-    public List<Event> handleInput(PlayerEntity player, Map map, MoveDirection md) {
-        List<Event> ret = new ArrayList<>();
-
+    public void handleInput(PlayerEntity player, Map map, List<Event> eventQueue) {
         if(--ticks <= 0) {
-            ret.add(new ChangePlayerEntityStateEvent(player, new NormalState()));
+            eventQueue.add(new ChangePlayerEntityStateEvent(player, new NormalState()));
         }
-
-        return ret;
     }
 }

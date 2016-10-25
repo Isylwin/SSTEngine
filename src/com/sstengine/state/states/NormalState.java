@@ -21,17 +21,15 @@ import java.util.List;
 public class NormalState extends State {
 
     @Override
-    public List<Event> handleInput(PlayerEntity player, Map map, MoveDirection md) {
-        List<Event> ret = new ArrayList<>();
-
+    public void handleInput(PlayerEntity player, Map map, List<Event> eventQueue) {
         Point currentLocation = player.getLocation();
-        Tile nextTile = map.getTile(currentLocation);
+        MoveDirection move = player.getCurrentMove();
+        Tile nextTile = map.getTile(move.getLocationWithMove(currentLocation));
 
         if(nextTile.isAccessible(player)) {
-            ret.add(new ChangePlayerEntityTileEvent(player, nextTile));
+            eventQueue.add(new ChangePlayerEntityTileEvent(player, nextTile));
         }
 
         //TODO Handle interactions.
-        return ret;
     }
 }

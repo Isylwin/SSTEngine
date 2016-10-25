@@ -16,7 +16,7 @@ public class ChangePlayerEntityStateEvent extends AbstractEvent {
     public ChangePlayerEntityStateEvent(PlayerEntity player, State newState) {
         this.player = player;
         this.newState = newState;
-        //this.oldState = player.getState(); //TODO Give PlayerEntity a state.
+        this.oldState = player.getState();
     }
 
     public PlayerEntity getPlayer() {
