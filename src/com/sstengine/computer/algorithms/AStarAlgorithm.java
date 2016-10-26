@@ -1,10 +1,13 @@
 package com.sstengine.computer.algorithms;
 
-import crosstheborder.lib.Tile;
-import crosstheborder.lib.computer.PathingAlgorithm;
-import crosstheborder.lib.player.PlayerEntity;
+
+import com.sstengine.computer.PathingAlgorithm;
+import com.sstengine.map.Map;
+import com.sstengine.map.tile.Tile;
+import com.sstengine.player.playerentity.PlayerEntity;
 
 import java.util.*;
+
 
 /**
  * Credit goes to http://www.redblobgames.com/pathfinding/a-star/implementation.html

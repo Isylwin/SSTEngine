@@ -1,12 +1,12 @@
 package com.sstengine.computer;
 
-import crosstheborder.lib.Map;
-import crosstheborder.lib.Tile;
-import crosstheborder.lib.computer.algorithms.AStarAlgorithm;
-import crosstheborder.lib.enumeration.Country;
-import crosstheborder.lib.enumeration.MoveDirection;
-import crosstheborder.lib.interfaces.Interactable;
-import crosstheborder.lib.player.PlayerEntity;
+
+import com.sstengine.Interactable;
+import com.sstengine.computer.algorithms.AStarAlgorithm;
+import com.sstengine.map.Map;
+import com.sstengine.map.tile.Tile;
+import com.sstengine.player.playerentity.MoveDirection;
+import com.sstengine.player.playerentity.PlayerEntity;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -53,7 +53,7 @@ public class Computer {
 
         //Make sure that the recursive call is not called too much.
         //Also check whether the computer can actually move.
-        if (timesComputed >= COMPUTING_TIMEOUT || !entity.canMove()) {
+        if (timesComputed >= COMPUTING_TIMEOUT) {
             return;
         }
         timesComputed++;
@@ -114,10 +114,7 @@ public class Computer {
      * @return True when the end of the path coincides with the current target.
      */
     private boolean verifyPathEndsInGoal(Tile endOfPath) {
-        if (endOfPath != currentTarget.getTile()) {
-            return false;
-        }
-        return true;
+        return endOfPath == currentTarget.getTile();
     }
 
     /**
@@ -136,10 +133,7 @@ public class Computer {
      * @return True when the closest target is the current target.
      */
     private boolean verifyClosestTargetIsGoal() {
-        if (findClosestTarget() != currentTarget) {
-            return false;
-        }
-        return true;
+        return findClosestTarget() == currentTarget;
     }
 
     /**
@@ -184,7 +178,7 @@ public class Computer {
         possibleTargets = new ArrayList<>();
         Point currentLoc = entity.getLocation();
 
-        if (entity.getTeam().getCountry() == Country.MEX) {
+       /* if (entity.getTeam().getCountry() == Country.MEX) {
             goalPredicate = (tile -> tile.getCountry() == Country.USA);
             goalHeuristic = ((x, y) -> ((Double) (currentLoc.distance(x.getTile().getLocation()))).compareTo(currentLoc.distance(y.getTile().getLocation())));
 
@@ -199,7 +193,7 @@ public class Computer {
             //Get all the tiles that satisfy the predicate.
             possibleGoals = map.getTiles(goalPredicate);
             possibleTargets.addAll(possibleGoals.stream().map(Tile::getPlayerEntity).collect(Collectors.toList()));
-        }
+        }*/
 
         currentTarget = findClosestTarget();
         //TODO country cannot be a valid target as it is an enum and enums are static, thus all tiles are the same.

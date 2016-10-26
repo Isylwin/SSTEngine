@@ -1,18 +1,12 @@
 package com.sstengine;
 
-import com.sstengine.computer.Computer;
-import com.sstengine.country.Country;
 import com.sstengine.map.Map;
-import com.sstengine.map.tile.Tile;
-import com.sstengine.player.Player;
 import com.sstengine.player.playerentity.PlayerEntity;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
@@ -44,12 +38,12 @@ public class Game {
      * @param mapName The name of the map.
      */
     public Game(String mapName) {
-        this.settings = new GameSettingsImpl(ENGINE_TICK_RATE); //TODO must become a constructor parameter.
+        //this.settings = new GameSettingsImpl(ENGINE_TICK_RATE); //TODO must become a constructor parameter.
         this.scoreLimit = settings.getScoreLimit();
         this.timeLimit = settings.getTimeLimit() * ENGINE_TICK_RATE;
-        this.map = MapLoader.getInstance().buildMap(mapName); //TODO Look into making maploader part of the engine. Maybe with the help of maploader settings.
-        usa = new Team(Country.USA, map.getUsaArea(), settings.getUsaScoringModifier()); //TODO should not be two set teams.
-        mex = new Team(Country.MEX, map.getMexicoArea(), settings.getMexicanScoringModifier());
+        //this.map = MapLoader.getInstance().buildMap(mapName); //TODO Look into making maploader part of the engine. Maybe with the help of maploader settings.
+        //usa = new Team(CountryTemp.USA, map.getUsaArea(), settings.getUsaScoringModifier()); //TODO should not be two set teams.
+        //mex = new Team(CountryTemp.MEX, map.getMexicoArea(), settings.getMexicanScoringModifier());
     }
 
     /**
@@ -71,24 +65,11 @@ public class Game {
     }
 
     /**
-     * Gets the Leader in the list of players.
-     * @return The Leader object.
-     */
-    private Trump getTrump() { //TODO should become superfigure or something.
-        for (Player player : players) {
-            if (player instanceof Trump) {
-                return (Trump) player;
-            }
-        }
-        return null;
-    }
-
-    /**
      * Starts the game.
      */
     public void startGame() {
         this.inProgress = true;
-        this.computers.forEach(computer -> computer.resetComputer(map));
+        //this.computers.forEach(computer -> computer.resetComputer(map));
 
         this.timer.scheduleAtFixedRate(new TimerTask() {
             @Override
@@ -104,10 +85,9 @@ public class Game {
      * Will try to create a Mexican if there are more Americans than Mexicans.
      * Will otherwise try to create a BorderPatrol.
      *
-     * @param user The user that joined this game.
      */
-    public void addPlayer(User user) {
-        Player player;
+    public void addPlayer() {
+        /*Player player;
 
         //If trump does not exist make the user a trump.
         if (trump == null && !user.isComputer()) {
@@ -144,14 +124,14 @@ public class Game {
             }
         }
 
-        user.setPlayer(player);
+        user.setPlayer(player);*/
     }
 
     /**
      * Update is called at every tick of the game timer.
      */
     public void update(){
-        //Update all the player entities.
+        /*//Update all the player entities.
         for (PlayerEntity player : players) {
             //Move the player if there is input.
             Point nextLocation = player.getNextMove();
@@ -170,7 +150,7 @@ public class Game {
 
         //Check whether time has expired.
         timeLimit--;
-        checkTime();
+        checkTime();*/
     }
 
     /**
@@ -199,8 +179,7 @@ public class Game {
         this.inProgress = false;
     }
 
-    @Override
-    public void movePlayerEntity(PlayerEntity player, Point nextLocation) {
+    /*public void movePlayerEntity(PlayerEntity player, Point nextLocation) {
         Tile nextTile = map.getTile(nextLocation);
 
         //If the tile is accessible try to move to it.
@@ -315,5 +294,5 @@ public class Game {
         } catch (Exception ex) {
             LOGGER.log(Level.SEVERE, ex.toString(), ex);
         }
-    }
+    }*/
 }

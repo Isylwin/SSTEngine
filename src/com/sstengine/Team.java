@@ -2,7 +2,6 @@ package com.sstengine;
 
 import com.sstengine.country.Country;
 import com.sstengine.player.Player;
-import crosstheborder.lib.enumeration.Country;
 
 import java.awt.*;
 import java.util.ArrayList;

@@ -1,6 +1,5 @@
 package com.sstengine.drawing;
 
-import com.sstengine.drawing.Drawable;
 
 import java.awt.*;
 import java.io.File;
