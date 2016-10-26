@@ -1,4 +1,4 @@
-package com.sstengine;
+package com.sstengine.util;
 
 /**
  * Interface for a settings object that allows access to the settings of a game.
@@ -6,13 +6,6 @@ package com.sstengine;
  * @author Oscar de Leeuw
  */
 public interface GameSettings {
-    /**
-     * Gets the tick rate of the server.
-     *
-     * @return The tick rate of the server.
-     */
-    int getServerTickRate();
-
     /**
      * Gets the score limit of the game.
      *
