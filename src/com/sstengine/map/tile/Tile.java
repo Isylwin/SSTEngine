@@ -1,14 +1,10 @@
 package com.sstengine.map.tile;
 
-
-
 import com.sstengine.country.Country;
-import com.sstengine.drawing.Drawable;
 import com.sstengine.map.tileobject.TileObject;
 import com.sstengine.player.playerentity.PlayerEntity;
 
 import java.awt.*;
-import java.io.File;
 
 /**
  *  Represents a single tile that composes the map.
@@ -17,7 +13,7 @@ import java.io.File;
  *
  *  @author Oscar de Leeuw
  */
-public class Tile implements Drawable {
+public class Tile {
     private TileObject tileObject;
     private PlayerEntity playerEntity;
     private TileType type;
@@ -28,14 +24,11 @@ public class Tile implements Drawable {
      * Creates a new tile object with the given location, country and type.
      *
      * @param type The type of the tile.
-     * @param country The country of this tile.
      * @param location The location of the tile.
      */
-    public Tile(TileType type, Country country, Point location) {
+    public Tile(TileType type, Point location) {
         this.type = type;
-        this.country = country;
         this.location = location;
-        this.country.setTile(this);
     }
 
     /**
@@ -50,7 +43,7 @@ public class Tile implements Drawable {
     /**
      * Gets the country that this tile belongs to.
      *
-     * @return
+     * @return The country that belongs to this tile.
      */
     public Country getCountry() {
         return this.country;
@@ -123,7 +116,7 @@ public class Tile implements Drawable {
      * @return The cost for moving into this tile in server ticks.
      */
     public int getCost(PlayerEntity entity) throws Exception {
-        int countryCost = country.getCost(entity);
+        /*int countryCost = country.getCost(entity);
         int playerEntityCost = playerEntity != null ? playerEntity.getCost(entity) : 0;
         int tileObjectCost = tileObject != null ? tileObject.getCost(entity) : 0;
 
@@ -131,7 +124,8 @@ public class Tile implements Drawable {
             throw new Exception("Undefined cost, possibly cost request to an tile that is inaccessible"); //TODO make a custom exception.
         }
 
-        return 1 + countryCost + playerEntityCost + tileObjectCost;
+        return 1 + countryCost + playerEntityCost + tileObjectCost;*/
+        return 1;
     }
 
     /**
@@ -141,15 +135,16 @@ public class Tile implements Drawable {
      * @return True when the entity can enter the tile.
      */
     public boolean isAccessible(PlayerEntity entity) {
-        boolean tileObjectAccess = tileObject == null || tileObject.isAccessible(entity);
+        /*boolean tileObjectAccess = tileObject == null || tileObject.isAccessible(entity);
         boolean playerEntityAccess = playerEntity == null || playerEntity.isAccessible(entity);
         boolean countryAccess = country.isAccessible(entity);
 
-        return countryAccess && tileObjectAccess && playerEntityAccess;
+        return countryAccess && tileObjectAccess && playerEntityAccess;*/
+        return false;
     }
 
-    @Override
-    public void draw(Painter painter, Point location, int tileWidth) {
+
+    /*public void draw(Painter painter, Point location, int tileWidth) {
         File file = ImageFinder.getInstance().getImage(type);
         painter.drawImage(file, location, tileWidth, tileWidth);
 
@@ -161,5 +156,5 @@ public class Tile implements Drawable {
         }
 
         country.draw(painter, location, tileWidth);
-    }
+    }*/
 }

@@ -1,28 +1,28 @@
 package com.sstengine.map.tileobject;
 
-
-
+import com.sstengine.drawing.Painter;
 import com.sstengine.map.tile.Tile;
+import com.sstengine.player.playerentity.PlayerEntity;
 
 import java.awt.*;
 
 /**
- * The Obstacle class represents a {@link TileObject} that is static and unplaceable by a {@link crosstheborder.lib.player.Trump}.
+ * The StaticObstacle class represents a {@link TileObject} that is static and can only be created when loading the map.
  * Obstacles are impassable by default.
  *
  * @author Oscar de Leeuw
  */
-public class Obstacle implements TileObject {
+public class StaticObstacle implements TileObject {
     private Tile tile;
-    private ObstacleType type;
+    private StaticObstacleType type;
 
     /**
-     * Creates a new Obstacle.
+     * Creates a new StaticObstacle.
      * Sets isPassable to false;
      *
-     * @param type The {@link ObstacleType} of the Obstacle.
+     * @param type The {@link StaticObstacleType} of the StaticObstacle.
      */
-    public Obstacle(ObstacleType type) {
+    public StaticObstacle(StaticObstacleType type) {
         this.type = type;
     }
 
@@ -46,7 +46,7 @@ public class Obstacle implements TileObject {
      * {@inheritDoc}
      */
     @Override
-    public boolean interactWith(PlayerEntity player, GameManipulator game) {
+    public boolean interactWith(PlayerEntity player) {
         return false;
     }
 
@@ -70,6 +70,6 @@ public class Obstacle implements TileObject {
      */
     @Override
     public void draw(Painter painter, Point location, int tileWidth) {
-        painter.drawImage(ImageFinder.getInstance().getImage(type), location, tileWidth, tileWidth);
+        //painter.drawImage(ImageFinder.getInstance().getImage(type), location, tileWidth, tileWidth);
     }
 }
