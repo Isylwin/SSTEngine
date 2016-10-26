@@ -1,0 +1,27 @@
+package com.sstengine.component.physical;
+
+import com.sstengine.event.framework.Event;
+import com.sstengine.player.playerentity.PlayerEntity;
+
+import java.util.List;
+
+/**
+ * @author Oscar de Leeuw
+ */
+public interface Physical {
+    /**
+     * Determines whether this physical object is accessible.
+     *
+     * @param entity The entity that is accessing the GameObject.
+     * @return True when the entity is allowed to access the GameObject.
+     */
+    boolean isAccessible(PlayerEntity entity);
+
+    /**
+     * Handles the interaction between a Physical object and a PlayerEntity.
+     *
+     * @param entity     The entity that is interacting with the GameObject.
+     * @param eventQueue The queue of events to which the interaction can add events.
+     */
+    void interactWith(PlayerEntity entity, List<Event> eventQueue);
+}

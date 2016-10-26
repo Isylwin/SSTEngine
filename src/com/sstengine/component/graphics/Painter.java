@@ -1,11 +1,11 @@
-package com.sstengine.drawing;
+package com.sstengine.component.graphics;
 
 
 import java.awt.*;
 import java.io.File;
 
 /**
- * Painter is an utility for the library to allow drawing of {@link Drawable}s.
+ * Painter is an utility for the library to allow graphics of {@link Graphics}s.
  * Painter should be implemented in the UI.
  *
  * @author Oscar de Leeuw
