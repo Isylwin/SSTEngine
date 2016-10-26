@@ -1,13 +1,11 @@
-package com.sstengine.state.states;
+package com.sstengine.player.playerentity.states;
 
 import com.sstengine.event.events.ChangePlayerEntityStateEvent;
 import com.sstengine.event.framework.Event;
 import com.sstengine.map.Map;
-import com.sstengine.player.playerentity.MoveDirection;
 import com.sstengine.player.playerentity.PlayerEntity;
-import com.sstengine.state.State;
+import com.sstengine.player.playerentity.State;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**

@@ -1,4 +1,4 @@
-package com.sstengine.state.states;
+package com.sstengine.player.playerentity.states;
 
 import com.sstengine.event.events.ChangePlayerEntityTileEvent;
 import com.sstengine.event.framework.Event;
@@ -6,10 +6,9 @@ import com.sstengine.map.Map;
 import com.sstengine.map.tile.Tile;
 import com.sstengine.player.playerentity.MoveDirection;
 import com.sstengine.player.playerentity.PlayerEntity;
-import com.sstengine.state.State;
+import com.sstengine.player.playerentity.State;
 
 import java.awt.*;
-import java.util.ArrayList;
 import java.util.List;
 
 /**

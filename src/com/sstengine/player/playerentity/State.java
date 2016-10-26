@@ -1,9 +1,7 @@
-package com.sstengine.state;
+package com.sstengine.player.playerentity;
 
 import com.sstengine.event.framework.Event;
 import com.sstengine.map.Map;
-import com.sstengine.player.playerentity.MoveDirection;
-import com.sstengine.player.playerentity.PlayerEntity;
 
 import java.util.List;
 
