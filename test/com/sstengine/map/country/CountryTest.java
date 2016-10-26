@@ -16,8 +16,8 @@ public class CountryTest {
 
     @Before
     public void setUp() throws Exception {
-        countryMex = new Country(MockCountryTag.MEX);
-        countryUsa = new Country(MockCountryTag.USA);
+        countryMex = new Country(null, null, MockCountryTag.MEX);
+        countryUsa = new Country(null, null, MockCountryTag.USA);
     }
 
     @Test

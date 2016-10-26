@@ -1,6 +1,6 @@
 package com.sstengine.event.events;
 
-import com.sstengine.map.obstacle.StaticObstacle;
+import com.sstengine.map.obstacle.Obstacle;
 import com.sstengine.map.tile.Tile;
 
 /**
@@ -9,11 +9,11 @@ import com.sstengine.map.tile.Tile;
  * @author Oscar de Leeuw
  */
 public class ChangeObstacleTileEvent extends AbstractEvent {
-    private StaticObstacle obstacle;
+    private Obstacle obstacle;
     private Tile newTile;
     private Tile oldTile;
 
-    public ChangeObstacleTileEvent(StaticObstacle obstacle, Tile newTile) {
+    public ChangeObstacleTileEvent(Obstacle obstacle, Tile newTile) {
         this.obstacle = obstacle;
         this.newTile = newTile;
         this.oldTile = obstacle.getTile();
@@ -24,7 +24,7 @@ public class ChangeObstacleTileEvent extends AbstractEvent {
      *
      * @return The obstacle object.
      */
-    public StaticObstacle getObstacle() {
+    public Obstacle getObstacle() {
         return obstacle;
     }
 

@@ -110,7 +110,7 @@ public class AStarAlgorithm implements PathingAlgorithm {
                 if (next.isAccessible(entity)) {
                     //Calculate the cost of moving to the next location.
                     //Currently 1 since the map will only return tiles which can be freely moved to.
-                    double newCost = costSoFar.get(current) + next.getCost(entity);
+                    double newCost = costSoFar.get(current); //+ next.getCost(entity);
                     //If the next location has not been evaluated or the newCost is lower than previously evaluated.
                     if (!costSoFar.containsKey(next) || newCost < costSoFar.get(next)) {
                         //Add the location to the costSoFar HashMap.
