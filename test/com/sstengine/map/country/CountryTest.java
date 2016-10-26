@@ -1,11 +1,13 @@
-package com.sstengine.country;
+package com.sstengine.map.country;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
+ * Tests the Country class.
+ *
  * @author Oscar de Leeuw
  */
 public class CountryTest {
@@ -23,13 +25,4 @@ public class CountryTest {
         assertEquals(MockCountryTag.MEX, countryMex.getTag());
         assertEquals(MockCountryTag.USA, countryUsa.getTag());
     }
-
-    private enum MockCountryTag implements CountryTag<MockCountryTag> {
-        MEX,USA;
-
-        public MockCountryTag getTag() {
-            return this;
-        }
-    }
-
 }

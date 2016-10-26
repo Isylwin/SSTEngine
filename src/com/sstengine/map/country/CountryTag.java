@@ -1,8 +1,8 @@
-package com.sstengine.country;
+package com.sstengine.map.country;
 
 /**
  * The CountryTag interface is an interface that should be implemented by an enum.
- * This enum should represent the possible tags/names a country can have within the game.
+ * This enum should represent the possible tags/names a team can have within the game.
  *
  * @author Oscar de Leeuw
  */
