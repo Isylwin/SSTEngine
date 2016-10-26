@@ -1,7 +1,7 @@
 package com.sstengine.event.events;
 
 import com.sstengine.player.playerentity.PlayerEntity;
-import com.sstengine.state.State;
+import com.sstengine.player.playerentity.State;
 
 /**
  * The ChangePlayerEntityStateEvent changes the {@link State} of a PlayerEntity to the given state.

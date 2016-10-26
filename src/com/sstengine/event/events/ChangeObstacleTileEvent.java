@@ -1,7 +1,7 @@
 package com.sstengine.event.events;
 
+import com.sstengine.map.obstacle.StaticObstacle;
 import com.sstengine.map.tile.Tile;
-import com.sstengine.map.tileobject.StaticObstacle;
 
 /**
  * The ChangeObstacleTileEvent is an event that changes the location of a given obstacle to a new Tile.

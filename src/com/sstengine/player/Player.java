@@ -1,36 +1,50 @@
 package com.sstengine.player;
 
 import com.sstengine.Game;
-import com.sstengine.GameSettings;
-import com.sstengine.Team;
 import com.sstengine.event.framework.Event;
+import com.sstengine.player.leader.Leader;
 import com.sstengine.player.playerentity.MoveDirection;
-
-import java.util.List;
+import com.sstengine.player.playerentity.PlayerEntity;
+import com.sstengine.team.Team;
 
 import java.awt.*;
+import java.util.List;
 
 /**
- * Player is the super class for Leader and PlayerEntity.
+ *
  *
  * @author Oscar de Leeuw
  */
-public abstract class Player {
-    protected Point cameraLocation;
+public class Player {
+    private Point cameraLocation;
     private String name;
     private Team team;
 
+    private Leader leader;
+    private PlayerEntity entity;
+
     /**
-     * Abstract constructor that sets the name of the player.
+     * Private constructor that sets the name and team of the player.
      *
      * @param name The name of the player.
      * @param team The team the player is part of.
      */
-    public Player(String name, Team team) {
+    private Player(String name, Team team) {
         this.name = name;
         this.team = team;
-        team.addTeamMember(this);
         cameraLocation = new Point(0, 0);
+    }
+
+    public Player(String name, Team team, Leader leader) {
+        this(name, team);
+        this.leader = leader;
+        team.setLeader(leader);
+    }
+
+    public Player(String name, Team team, PlayerEntity entity) {
+        this(name, team);
+        this.entity = entity;
+        team.addPlayerEntity(entity);
     }
 
     /**
@@ -62,12 +76,20 @@ public abstract class Player {
     }
 
     /**
-     * Updates the player and generates all the events that should happen during this update.
+     * Updates the player. Calls either the update on the leader or entity
      *
      * @param game The game in which the player lives.
      * @param eventQueue The queue of events that will be executed by the game.
      */
-    public abstract void update(Game game, List<Event> eventQueue);
+    public void update(Game game, List<Event> eventQueue) {
+        if (leader != null) {
+            leader.update(game, eventQueue);
+        } else if (entity != null) {
+            entity.update(game, eventQueue);
+        } else {
+            //TODO exception.
+        }
+    }
 
     @Override
     public String toString(){

@@ -27,7 +27,7 @@ public abstract class PhysicalComponent {
      * @param entity The entity that is accessing the GameObject.
      * @return True when the entity is allowed to access the GameObject.
      */
-    public boolean isAccessible(Physical caller, PlayerEntity entity) {
+    public synchronized boolean isAccessible(Physical caller, PlayerEntity entity) {
         return accessStrategy.execute(caller, entity);
     }
 
@@ -38,7 +38,7 @@ public abstract class PhysicalComponent {
      * @param entity     The entity that is interacting with the GameObject.
      * @param eventQueue The queue of events to which the interaction can add events.
      */
-    public void interactWith(Physical caller, PlayerEntity entity, List<Event> eventQueue) {
+    public synchronized void interactWith(Physical caller, PlayerEntity entity, List<Event> eventQueue) {
         interactionStrategy.execute(caller, entity, eventQueue);
     }
 }

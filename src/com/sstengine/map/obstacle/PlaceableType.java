@@ -1,4 +1,4 @@
-package com.sstengine.map.tileobject;
+package com.sstengine.map.obstacle;
 
 /**
  * The PlaceableType interface is an interface that should be

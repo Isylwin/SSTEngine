@@ -1,4 +1,4 @@
-package com.sstengine.map.tileobject;
+package com.sstengine.map.obstacle;
 
 /**
  * The StaticObstacleType interface is an interface that should be implemented by an enum.

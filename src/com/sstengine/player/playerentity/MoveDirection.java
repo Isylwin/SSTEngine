@@ -1,6 +1,6 @@
 package com.sstengine.player.playerentity;
 
-import com.sstengine.map.Direction;
+import com.sstengine.util.enumeration.Direction;
 
 import java.awt.*;
 

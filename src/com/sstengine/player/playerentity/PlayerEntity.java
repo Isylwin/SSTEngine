@@ -1,16 +1,12 @@
 package com.sstengine.player.playerentity;
 
 import com.sstengine.Game;
-import com.sstengine.GameSettings;
-import com.sstengine.Interactable;
-import com.sstengine.drawing.Drawable;
-import com.sstengine.drawing.Painter;
+import com.sstengine.GameObject;
+import com.sstengine.component.graphics.GraphicsComponent;
+import com.sstengine.component.physical.PhysicalComponent;
 import com.sstengine.event.framework.Event;
 import com.sstengine.map.tile.Tile;
-import com.sstengine.player.Player;
-import com.sstengine.Team;
-import com.sstengine.state.State;
-import com.sstengine.state.states.NormalState;
+import com.sstengine.player.playerentity.states.NormalState;
 
 import java.awt.*;
 import java.util.List;
@@ -21,20 +17,14 @@ import java.util.List;
  *
  * @author Oscar de Leeuw
  */
-public class PlayerEntity extends Player {
+public class PlayerEntity extends GameObject {
     private Tile tile;
     private InputBuffer inputBuffer;
     private MoveDirection currentMove;
     private State state;
 
-    /**
-     * Abstract constructor that passes the name to the Player class.
-     * Calls the {@link Player#Player(String, Team)} constructor.
-     * @param name The name of the player.
-     * @param team The team this player is part of.
-     */
-    public PlayerEntity(String name, Team team) {
-        super(name, team);
+    public PlayerEntity(PhysicalComponent physical, GraphicsComponent graphics) {
+        super(physical, graphics);
         this.state = new NormalState();
         this.inputBuffer = new InputBuffer();
     }
@@ -50,7 +40,29 @@ public class PlayerEntity extends Player {
     }
 
     /**
+     * Gets the current State of the PlayerEntity.
+     * @return The current State of the PlayerEntity.
+     */
+    public State getState() {
+        return state;
+    }
+
+    public void setState(State state) {
+        this.state = state;
+    }
+
+    public Tile getTile() {
+        return this.tile;
+    }
+
+    public void setTile(Tile tile) {
+        this.tile = tile;
+        //this.cameraLocation = tile.getLocation();
+    }
+
+    /**
      * Gets the current move of this PlayerEntity.
+     *
      * @return The current move of this PlayerEntity.
      */
     public MoveDirection getCurrentMove() {
@@ -66,26 +78,6 @@ public class PlayerEntity extends Player {
         inputBuffer.addToInputMoves(move);
     }
 
-    /**
-     * Gets the current State of the PlayerEntity.
-     * @return The current State of the PlayerEntity.
-     */
-    public State getState() {
-        return state;
-    }
-
-
-    public Tile getTile() {
-        return this.tile;
-    }
-
-
-    public void setTile(Tile tile) {
-        this.tile = tile;
-        this.cameraLocation = tile.getLocation();
-    }
-
-    @Override
     public void update(Game game, List<Event> eventQueue) {
         currentMove = inputBuffer.getNextInputMove();
 

@@ -2,6 +2,8 @@ package com.sstengine;
 
 import com.sstengine.map.Map;
 import com.sstengine.player.playerentity.PlayerEntity;
+import com.sstengine.team.Team;
+import com.sstengine.util.GameSettings;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -194,11 +196,11 @@ public class Game {
             }
 
             //Check whether there's a TileObject at the next location.
-            if (shouldMove && nextTile.hasTileObject()) {
-                shouldMove = nextTile.getTileObject().interactWith(player, this);
+            if (shouldMove && nextTile.hasObstacle()) {
+                shouldMove = nextTile.getObstacle().interactWith(player, this);
             }
 
-            //Interact with the country of the next location.
+            //Interact with the team of the next location.
             if (shouldMove) {
                 shouldMove = nextTile.getCountry().interactWith(player, this);
             }
@@ -244,14 +246,14 @@ public class Game {
         Tile currentLocation = object.getTile();
 
         if (currentLocation != null) {
-            currentLocation.setTileObject(null);
+            currentLocation.setObstacle(null);
         }
-        nextLocation.setTileObject(object);
+        nextLocation.setObstacle(object);
     }
 
     @Override
     public void removeTileObject(TileObject tileObject) {
-        tileObject.getTile().setTileObject(null);
+        tileObject.getTile().setObstacle(null);
     }
 
     @Override

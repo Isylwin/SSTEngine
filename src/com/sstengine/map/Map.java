@@ -1,9 +1,10 @@
 package com.sstengine.map;
 
+import com.sstengine.map.obstacle.Obstacle;
+import com.sstengine.map.obstacle.PlaceableObstacle;
 import com.sstengine.map.tile.Tile;
-import com.sstengine.map.tileobject.PlaceableObstacle;
-import com.sstengine.map.tileobject.TileObject;
 import com.sstengine.player.playerentity.PlayerEntity;
+import com.sstengine.util.enumeration.Direction;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -202,12 +203,12 @@ public class Map {
      * @return True when the placeable can be placed at the given location.
      */
     public boolean canPlacePlaceable(Tile tile, PlaceableObstacle placeable) {
-        if (!tile.hasTileObject()) { //TODO Make a upgrade logic at some point.
+        if (!tile.hasObstacle()) { //TODO Make a upgrade logic at some point.
             Point location = tile.getLocation(); //TODO Set this shit in a getNeighbours method.
-            TileObject east = getTile(location.x + 1, location.y).getTileObject();
-            TileObject west = getTile(location.x - 1, location.y).getTileObject();
-            TileObject north = getTile(location.x, location.y - 1).getTileObject();
-            TileObject south = getTile(location.x, location.y + 1).getTileObject();
+            Obstacle east = getTile(location.x + 1, location.y).getObstacle();
+            Obstacle west = getTile(location.x - 1, location.y).getObstacle();
+            Obstacle north = getTile(location.x, location.y - 1).getObstacle();
+            Obstacle south = getTile(location.x, location.y + 1).getObstacle();
 
             return false;
         }

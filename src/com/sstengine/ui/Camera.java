@@ -1,6 +1,6 @@
 package com.sstengine.ui;
 
-import com.sstengine.graphics.Painter;
+import com.sstengine.component.graphics.Painter;
 
 import java.awt.*;
 

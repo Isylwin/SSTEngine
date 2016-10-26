@@ -1,5 +1,8 @@
 package com.sstengine.map.country;
 
+import com.sstengine.GameObject;
+import com.sstengine.component.graphics.GraphicsComponent;
+import com.sstengine.component.physical.PhysicalComponent;
 import com.sstengine.map.tile.Tile;
 
 import java.util.ArrayList;
@@ -15,11 +18,12 @@ import java.util.List;
  *
  * @author Oscar de Leeuw
  */
-public class Country {
+public class Country extends GameObject {
     private CountryTag tag;
     private List<Tile> land;
 
-    public Country(CountryTag tag) {
+    public Country(PhysicalComponent physical, GraphicsComponent graphics, CountryTag tag) {
+        super(physical, graphics);
         this.tag = tag;
         this.land = new ArrayList<>();
     }
