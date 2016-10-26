@@ -1,96 +1,63 @@
 package com.sstengine.country;
 
-import com.sstengine.Interactable;
-import com.sstengine.Team;
-import crosstheborder.lib.ImageFinder;
-import crosstheborder.lib.Team;
-import crosstheborder.lib.Tile;
-import crosstheborder.lib.interfaces.Drawable;
-import crosstheborder.lib.interfaces.GameManipulator;
-import crosstheborder.lib.interfaces.Interactable;
-import crosstheborder.lib.interfaces.Painter;
-import crosstheborder.lib.player.PlayerEntity;
+import com.sstengine.map.tile.Tile;
+import com.sstengine.player.leader.Leader;
+import com.sstengine.player.playerentity.PlayerEntity;
 
-import java.awt.*;
-import java.io.File;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
- * Enum for capturing the Countries that can exist within the game.
+ * The Country class represents a country that exists within the game.<br>
+ * Every player in the game must belong to a country.<br>
+ * Every country has a certain amount of land in tiles.<br>
+ * Every country should specify behaviour entering and interacting with a tile that belongs to the country.<br>
+ * Every country should specify how it should be drawn graphically.<br>
  *
  * @author Oscar de Leeuw
  */
-public enum Country implements Drawable, Interactable {
-    USA, MEX, NONE;
+public class Country {
+    private CountryTag tag;
+    private List<Tile> land;
+    private Leader leader;
+    private List<PlayerEntity> players;
 
-    private Tile tile;
-
-    @Override
-    public Tile getTile() {
-        return this.tile;
+    public Country(CountryTag tag) {
+        this.tag = tag;
+        this.land = new ArrayList<>();
+        this.players = new ArrayList<>();
     }
 
-    @Override
-    public void setTile(Tile tile) {
-        this.tile = tile;
+    public CountryTag getTag() {
+        return tag;
     }
 
-    /**
-     * {@inheritDoc}
-     * <p>
-     * Handles the interaction between a country and an entity.
-     * <p>
-     *     Calls the follow methods on GameManipulator:
-     *     <ul>
-     *         <li>Calls: {@link GameManipulator#increaseScore(Team)} when a MEX enters the USA.</li>
-     *         <li>Calls: {@link GameManipulator#respawnPlayer(PlayerEntity)} when a MEX enters the USA.</li>
-     *     </ul>
-     * </p>
-     * Will return false when a Mexican has scored.
-     */
-    @Override
-    public boolean interactWith(PlayerEntity entity, GameManipulator game) {
-        switch (this) {
-            case USA:
-                if (entity.getTeam().getCountry() == MEX) {
-                    game.increaseScore(entity.getTeam());
-                    game.respawnPlayer(entity);
-                    return false;
-                }
+    public List<Tile> getLand() {
+        return Collections.unmodifiableList(land);
+    }
+
+    public void addLand(Tile tile) {
+        if(!land.contains(tile)) {
+            land.add(tile);
         }
-
-        return true;
     }
 
-    /**
-     * {@inheritDoc}
-     * <p>
-     * Will only return false when an USA entity tries to enter MEX.
-     */
-    @Override
-    public boolean isAccessible(PlayerEntity entity) {
-        switch (this) {
-            case MEX:
-                if (entity.getTeam().getCountry() == USA) {
-                    return false;
-                }
+    public Leader getLeader() {
+        return leader;
+    }
+
+    public void setLeader(Leader leader) {
+        this.leader = leader;
+    }
+
+    public List<PlayerEntity> getPlayers() {
+        return Collections.unmodifiableList(players);
+    }
+
+    public void addPlayer(PlayerEntity entity) {
+        if(!players.contains(entity)) {
+            players.add(entity);
         }
-
-        return true;
-    }
-
-    @Override
-    public int getCost(PlayerEntity entity) {
-        if (!isAccessible(entity)) {
-            return -1;
-        }
-
-        return 0;
-    }
-
-
-    @Override
-    public void draw(Painter painter, Point location, int tileWidth) {
-        File file = ImageFinder.getInstance().getImage(this);
-        painter.drawImage(file, location, tileWidth, tileWidth);
     }
 }
