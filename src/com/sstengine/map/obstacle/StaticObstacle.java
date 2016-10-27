@@ -19,7 +19,7 @@ public class StaticObstacle extends Obstacle {
      * @param type
      */
     public StaticObstacle(GraphicsComponent graphicsComponent, StaticObstacleType type) {
-        super(StaticObstaclePhysicalComponent.getInstance(), graphicsComponent);
+        super(new StaticObstaclePhysicalComponent(), graphicsComponent);
         this.type = type;
     }
 }
