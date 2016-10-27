@@ -1,11 +1,14 @@
 package com.sstengine.map.tile;
 
-import com.sstengine.GameObject;
+import com.sstengine.component.graphics.Graphics;
+import com.sstengine.component.graphics.GraphicsComponent;
+import com.sstengine.event.framework.Event;
 import com.sstengine.map.country.Country;
 import com.sstengine.map.obstacle.Obstacle;
 import com.sstengine.player.playerentity.PlayerEntity;
 
 import java.awt.*;
+import java.util.List;
 
 /**
  *  Represents a single tile that composes the map.
@@ -13,12 +16,15 @@ import java.awt.*;
  *
  *  @author Oscar de Leeuw
  */
-public class Tile extends GameObject {
+public final class Tile implements Graphics {
+    private TileType type;
+    private Point location;
+    private GraphicsComponent graphics;
+
     private Obstacle obstacle;
     private PlayerEntity playerEntity;
-    private TileType type;
     private Country country;
-    private Point location;
+
 
     /**
      * Creates a new tile object with the given location, team and type.
@@ -26,8 +32,8 @@ public class Tile extends GameObject {
      * @param type The type of the tile.
      * @param location The location of the tile.
      */
-    public Tile(TileType type, Point location) {
-        super(null, null); //TODO create special Tile Components.
+    public Tile(GraphicsComponent graphics, TileType type, Point location) {
+        this.graphics = graphics;
         this.type = type;
         this.location = location;
     }
@@ -138,32 +144,49 @@ public class Tile extends GameObject {
     }*/
 
     /**
+     * Calls all the interactWith methods on all GameObjects that exist on this tile.
+     *
+     * @param entity     The entity that is interacting with the GameObject.
+     * @param eventQueue The queue of events to which the interaction can add events.
+     */
+    public void interactWithGameObjects(PlayerEntity entity, List<Event> eventQueue) {
+        if (playerEntity != null) {
+            playerEntity.interactWith(entity, eventQueue);
+        }
+        if (obstacle != null) {
+            obstacle.interactWith(entity, eventQueue);
+        }
+        if (country != null) {
+            country.interactWith(entity, eventQueue);
+        }
+    }
+
+    /**
      * Gets whether the given entity can access this tile.
      *
      * @param entity The entity for which to check the accessibility.
      * @return True when the entity can enter the tile.
      */
-    /*public boolean isAccessible(PlayerEntity entity) {
+    public boolean isAccessible(PlayerEntity entity) {
         boolean tileObjectAccess = obstacle == null || obstacle.isAccessible(entity);
         boolean playerEntityAccess = playerEntity == null || playerEntity.isAccessible(entity);
-        boolean countryAccess = team.isAccessible(entity);
+        boolean countryAccess = country == null || country.isAccessible(entity);
 
         return countryAccess && tileObjectAccess && playerEntityAccess;
-        return false;
-    }*/
+    }
 
-
-    /*public void draw(Painter painter, Point location, int tileWidth) {
-        File file = ImageFinder.getInstance().getImage(type);
-        painter.drawImage(file, location, tileWidth, tileWidth);
-
-        if (hasObstacle()) {
-            obstacle.draw(painter, location, tileWidth);
+    @Override
+    public void render() {
+        if (country != null) {
+            country.render();
         }
-        if (hasPlayerEntity()) {
-            playerEntity.draw(painter, location, tileWidth);
+        if (obstacle != null) {
+            obstacle.render();
+        }
+        if (playerEntity != null) {
+            playerEntity.render();
         }
 
-        team.draw(painter, location, tileWidth);
-    }*/
+        graphics.render(this);
+    }
 }
