@@ -6,6 +6,9 @@ import com.sstengine.player.playerentity.PlayerEntity;
 import java.util.List;
 
 /**
+ * The Physical interface is a contract for all object that exist physically within the game.
+ * Every Physical object should define interaction and accessibility behaviour.
+ *
  * @author Oscar de Leeuw
  */
 public interface Physical {
