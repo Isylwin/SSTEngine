@@ -2,6 +2,7 @@ package com.sstengine.map.tile;
 
 import com.sstengine.component.graphics.Graphics;
 import com.sstengine.component.graphics.GraphicsComponent;
+import com.sstengine.component.graphics.Painter;
 import com.sstengine.event.framework.Event;
 import com.sstengine.map.country.Country;
 import com.sstengine.map.obstacle.Obstacle;
@@ -176,17 +177,17 @@ public final class Tile implements Graphics {
     }
 
     @Override
-    public void render() {
+    public void render(Painter painter, Point location, int width, int height) {
         if (country != null) {
-            country.render();
+            country.render(painter, location, width, height);
         }
         if (obstacle != null) {
-            obstacle.render();
+            obstacle.render(painter, location, width, height);
         }
         if (playerEntity != null) {
-            playerEntity.render();
+            playerEntity.render(painter, location, width, height);
         }
 
-        graphics.render(this);
+        graphics.render(this, painter, location, width, height);
     }
 }

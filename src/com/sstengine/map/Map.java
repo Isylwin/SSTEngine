@@ -81,17 +81,12 @@ public class Map {
     }
 
     /**
-     * Gets a camera/viewport of the map.
-     *
-     * @param center       The center of the camera.
-     * @param tileWidth    The width of the tiles in the camera in pixels.
-     * @param cameraWidth  The width of the camera in pixels.
-     * @param cameraHeight The height of the camera in pixels.
-     * @return A camera object.
+     * Gets all the tiles on the map.
+     * @return All the tiles on the map.
      */
-    /*public Camera getCamera(Point center, int tileWidth, int cameraWidth, int cameraHeight) {
-        return new CameraImpl(center, tileWidth, cameraWidth, cameraHeight, tiles);
-    }*/
+    public Tile[][] getAllTiles() {
+        return tiles;
+    }
 
     /**
      * Gets the tile from a given location.

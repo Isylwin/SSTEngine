@@ -2,14 +2,19 @@ package com.sstengine;
 
 import com.sstengine.component.graphics.Graphics;
 import com.sstengine.component.graphics.GraphicsComponent;
+import com.sstengine.component.graphics.Painter;
 import com.sstengine.component.physical.Physical;
 import com.sstengine.component.physical.PhysicalComponent;
 import com.sstengine.event.framework.Event;
 import com.sstengine.player.playerentity.PlayerEntity;
 
+import java.awt.*;
 import java.util.List;
 
 /**
+ * The GameObject class represents all objects within the game that are physical.
+ * All GameObjects must describe a physical component and a graphical component.
+ *
  * @author Oscar de Leeuw
  */
 public abstract class GameObject implements Physical, Graphics {
@@ -32,7 +37,7 @@ public abstract class GameObject implements Physical, Graphics {
     }
 
     @Override
-    public void render() {
-        graphics.render(this);
+    public void render(Painter painter, Point location, int width, int height) {
+        graphics.render(this, painter, location, width, height);
     }
 }

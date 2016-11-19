@@ -3,20 +3,17 @@ package com.sstengine.player;
 import com.sstengine.Game;
 import com.sstengine.event.framework.Event;
 import com.sstengine.player.leader.Leader;
-import com.sstengine.player.playerentity.MoveDirection;
 import com.sstengine.player.playerentity.PlayerEntity;
 import com.sstengine.team.Team;
 
-import java.awt.*;
 import java.util.List;
 
 /**
- *
+ * The Player class represents a player within the game.
  *
  * @author Oscar de Leeuw
  */
 public class Player {
-    private Point cameraLocation;
     private String name;
     private Team team;
 
@@ -32,7 +29,6 @@ public class Player {
     private Player(String name, Team team) {
         this.name = name;
         this.team = team;
-        cameraLocation = new Point(0, 0);
     }
 
     public Player(String name, Team team, Leader leader) {
@@ -54,25 +50,6 @@ public class Player {
      */
     public Team getTeam() {
         return this.team;
-    }
-
-    /**
-     * Gets the location of a camera of a player.
-     *
-     * @return The location of the camera.
-     */
-    public Point getCameraLocation() {
-        return this.cameraLocation;
-    }
-
-    /**
-     * Moves the location of a camera.
-     * Does not work for PlayerEntities.
-     *
-     * @param md The direction the camera should move.
-     */
-    public void moveCameraLocation(MoveDirection md) {
-        this.cameraLocation = md.getLocationWithMove(cameraLocation);
     }
 
     /**
