@@ -1,6 +1,7 @@
 package com.sstengine.component.graphics;
 
 
+
 import java.awt.*;
 import java.io.File;
 
@@ -10,8 +11,21 @@ import java.io.File;
  *
  * @author Oscar de Leeuw
  */
-@FunctionalInterface
 public interface Painter {
+    /**
+     * Gets the total height of the Painter in pixels.
+     *
+     * @return The height of the Painter in pixels.
+     */
+    int getHeight();
+
+    /**
+     * Gets the total width of the Painter in pixels.
+     *
+     * @return The width of the Painter in pixels.
+     */
+    int getWidth();
+
     /**
      * Draws an image onto the UI.
      *
