@@ -6,7 +6,7 @@ package com.sstengine.map.country;
  *
  * @author Oscar de Leeuw
  */
-interface CountryTag<T extends Enum> {
+public interface CountryTag<T extends Enum> {
     /**
      * Gets the tag of the Country.
      *

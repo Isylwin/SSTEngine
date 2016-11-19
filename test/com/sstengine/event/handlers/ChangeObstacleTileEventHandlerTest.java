@@ -4,6 +4,7 @@ import com.sstengine.event.events.ChangeObstacleTileEvent;
 import com.sstengine.map.obstacle.Obstacle;
 import com.sstengine.map.obstacle.StaticObstacle;
 import com.sstengine.map.tile.Tile;
+import com.sstengine.mocks.MockTileType;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -24,8 +25,8 @@ public class ChangeObstacleTileEventHandlerTest {
 
     @Before
     public void setUp() throws Exception {
-        tile1 = new Tile(null, new Point(0, 0));
-        tile2 = new Tile(null, new Point(1, 0));
+        tile1 = new Tile(null, MockTileType.DIRT, new Point(0, 0));
+        tile2 = new Tile(null, MockTileType.DIRT, new Point(1, 0));
 
         obstacle = new StaticObstacle(null, null);
         tile1.setObstacle(obstacle);

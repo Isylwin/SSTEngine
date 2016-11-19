@@ -1,5 +1,6 @@
 package com.sstengine.map.country;
 
+import com.sstengine.mocks.MockCountryTag;
 import org.junit.Before;
 import org.junit.Test;
 

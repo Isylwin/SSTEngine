@@ -2,6 +2,7 @@ package com.sstengine.event.handlers;
 
 import com.sstengine.event.events.ChangePlayerEntityTileEvent;
 import com.sstengine.map.tile.Tile;
+import com.sstengine.mocks.MockTileType;
 import com.sstengine.player.playerentity.PlayerEntity;
 import org.junit.Before;
 import org.junit.Test;
@@ -23,8 +24,8 @@ public class ChangePlayerEntityTileEventHandlerTest {
 
     @Before
     public void setUp() throws Exception {
-        tile1 = new Tile(null, new Point(0, 0));
-        tile2 = new Tile(null, new Point(1, 0));
+        tile1 = new Tile(null, MockTileType.DIRT, new Point(0, 0));
+        tile2 = new Tile(null, MockTileType.DIRT, new Point(1, 0));
 
         entity = new PlayerEntity(null, null);
         tile1.setPlayerEntity(entity);

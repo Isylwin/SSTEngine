@@ -1,4 +1,6 @@
-package com.sstengine.map.country;
+package com.sstengine.mocks;
+
+import com.sstengine.map.country.CountryTag;
 
 /**
  * Mock implementation of the CountryTag interface.
