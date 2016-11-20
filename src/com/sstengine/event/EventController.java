@@ -2,8 +2,14 @@ package com.sstengine.event;
 
 
 import com.sstengine.Game;
+import com.sstengine.event.events.ChangeObstacleTileEvent;
+import com.sstengine.event.events.ChangePlayerEntityStateEvent;
+import com.sstengine.event.events.ChangePlayerEntityTileEvent;
 import com.sstengine.event.framework.Event;
 import com.sstengine.event.framework.EventDispatcher;
+import com.sstengine.event.handlers.ChangeObstacleTileEventHandler;
+import com.sstengine.event.handlers.ChangePlayerEntityStateEventHandler;
+import com.sstengine.event.handlers.ChangePlayerEntityTileEventHandler;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,10 +21,10 @@ import java.util.List;
  */
 public class EventController {
     private EventDispatcher dispatcher;
-    private List<Event> eventLog;
+    private List<Event> eventQueue;
 
     public EventController() {
-        this.eventLog = new ArrayList<>();
+        this.eventQueue = new ArrayList<>();
         this.dispatcher = new EventDispatcher();
         registerAllEvents();
     }
@@ -28,15 +34,17 @@ public class EventController {
      *
      * @return A list of all the events that have been fired.
      */
-    public List<Event> getEventLog() {
-        return eventLog;
+    public List<Event> getEventQueue() {
+        return eventQueue;
     }
 
     /**
      * Registers all the events with their corresponding eventHandler.
      */
     protected void registerAllEvents() {
-
+        dispatcher.registerHandler(ChangeObstacleTileEvent.class, new ChangeObstacleTileEventHandler());
+        dispatcher.registerHandler(ChangePlayerEntityTileEvent.class, new ChangePlayerEntityTileEventHandler());
+        dispatcher.registerHandler(ChangePlayerEntityStateEvent.class, new ChangePlayerEntityStateEventHandler());
     }
 
     /**
@@ -48,16 +56,20 @@ public class EventController {
      */
     public void fireEvent(Event event, Game game) {
         dispatcher.dispatch(event, game);
-        logEvent(event);
     }
 
     /**
-     * Logs a given event.
-     * @param event The event to log.
+     * Fires all the events in the eventQueue.
+     * Requires the game for handling events.
+     * Clears the eventQueue after firing all events.
+     *
+     * @param game The game of which the eventHandler can execute the event.
      */
-    private void logEvent(Event event) {
-        if(!eventLog.contains(event)) {
-            eventLog.add(event);
+    public void fireEventQueue(Game game) {
+        for (Event event : eventQueue) {
+            fireEvent(event, game);
         }
+
+        eventQueue.clear();
     }
 }
