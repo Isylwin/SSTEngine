@@ -61,6 +61,24 @@ public class Game extends Observable {
     }
 
     /**
+     * Gets all the teams in the game.
+     *
+     * @return A List of all the teams.
+     */
+    public List<Team> getTeams() {
+        return teams;
+    }
+
+    /**
+     * Gets all the players in the game.
+     *
+     * @return A List of all the players.
+     */
+    public List<Player> getPlayers() {
+        return players;
+    }
+
+    /**
      * Adds a given Player to the game.
      * Will not add the Player if it already exists within the game.
      *

@@ -40,6 +40,14 @@ public class Team {
         return score;
     }
 
+    /**
+     * Increases the score by the given amount.
+     *
+     * @param change The amount of change.
+     */
+    public void changeScore(int change) {
+        this.score += change;
+    }
 
     /**
      * Gets team of the team.
