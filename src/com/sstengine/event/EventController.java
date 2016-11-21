@@ -12,7 +12,9 @@ import com.sstengine.event.handlers.ChangePlayerEntityStateEventHandler;
 import com.sstengine.event.handlers.ChangePlayerEntityTileEventHandler;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * The EventController is a class that controls the event system within the game.
@@ -22,10 +24,14 @@ import java.util.List;
 public class EventController {
     private EventDispatcher dispatcher;
     private List<Event> eventQueue;
+    private List<Event> eventCache;
+    private Map<Integer, EventLog> loggedGameTurns;
 
     public EventController() {
         this.eventQueue = new ArrayList<>();
         this.dispatcher = new EventDispatcher();
+        this.eventCache = new ArrayList<>();
+        this.loggedGameTurns = new HashMap<>();
         registerAllEvents();
     }
 
@@ -61,15 +67,61 @@ public class EventController {
     /**
      * Fires all the events in the eventQueue.
      * Requires the game for handling events.
+     *
+     * Caches every event it fires.
      * Clears the eventQueue after firing all events.
      *
-     * @param game The game of which the eventHandler can execute the event.
+     * @param game The game on which the eventHandler can execute the event.
      */
     public void fireEventQueue(Game game) {
         for (Event event : eventQueue) {
             fireEvent(event, game);
+            cacheEvent(event);
         }
 
         eventQueue.clear();
+    }
+
+    /**
+     * Fires all events in a given EventLog.
+     *
+     * @param log  The EventLog whose Events need to be fired.
+     * @param game The game on which the eventHandler can execute the event.
+     */
+    public void fireEventLog(EventLog log, Game game) {
+        for (Event event : log.getEvents()) {
+            fireEvent(event, game);
+        }
+    }
+
+    /**
+     * Saves the current cache of events to an {@link EventLog} under the given id.
+     * Clears the eventCache after saving.
+     *
+     * @param turnId The id under which to save the EventLog.
+     */
+    public void logGameTurn(int turnId) {
+        loggedGameTurns.put(turnId, new EventLog(eventCache, turnId));
+        eventCache.clear();
+    }
+
+    /**
+     * Gets the EventLog of a given turn.
+     * Will return null if the requested turn does not have an EventLog.
+     *
+     * @param turnId The turn for which to look up the EventLog.
+     * @return The EventLog of the given turn.
+     */
+    public EventLog getGameTurnLog(int turnId) {
+        return loggedGameTurns.get(turnId);
+    }
+
+    /**
+     * Caches the given event.
+     *
+     * @param event The event to cache.
+     */
+    private void cacheEvent(Event event) {
+        eventCache.add(event);
     }
 }

@@ -1,6 +1,7 @@
 package com.sstengine;
 
 import com.sstengine.event.EventController;
+import com.sstengine.event.EventLog;
 import com.sstengine.game.GameSettings;
 import com.sstengine.map.Map;
 import com.sstengine.player.Player;
@@ -8,6 +9,7 @@ import com.sstengine.team.Team;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
 
 /**
  * The Game class is the entry point into the engine.
@@ -17,7 +19,7 @@ import java.util.List;
  *
  * @author Oscar de Leeuw
  */
-public class Game {
+public class Game extends Observable {
     private EventController eventController;
 
     private GameSettings settings;
@@ -27,7 +29,7 @@ public class Game {
     private List<Team> teams = new ArrayList<>();
     private List<Player> players = new ArrayList<>();
 
-    private int elapsedTicks;
+    private int elapsedTurns;
 
     /**
      * Constructor of Game class.
@@ -73,17 +75,36 @@ public class Game {
     /**
      * Updates all the players in the game.
      * It will fetch the inputs of the players and process them.
+     * Logs all events that were processed on this turn.
      * Checks whether the score and time victory conditions have been met.
      */
     public void update(){
         for (Player player : players) {
             player.update(this, eventController.getEventQueue());
             eventController.fireEventQueue(this);
+            checkScore();
         }
 
-        elapsedTicks++;
-        checkScore();
+        eventController.logGameTurn(elapsedTurns);
+        elapsedTurns++;
+
         checkTime();
+    }
+
+    /**
+     * Processes a given EventLog by called the {@link EventController#fireEventLog(EventLog, Game)} method.
+     *
+     * @param eventLog The EventLog that should be executed on the game.
+     */
+    public void executeEventLog(EventLog eventLog) {
+        eventController.fireEventLog(eventLog, this);
+    }
+
+    /**
+     * Notifies all the observers that the current game should end.
+     */
+    private void stop() {
+        notifyObservers();
     }
 
     /**
@@ -99,15 +120,8 @@ public class Game {
      * Checks whether the time limit has been reached.
      */
     private void checkTime() {
-        if (elapsedTicks >= settings.getTimeLimit()) {
+        if (elapsedTurns >= settings.getTimeLimit()) {
             stop();
         }
-    }
-
-    /**
-     * Stops the game.
-     */
-    public void stop() {
-        //TODO Think about whether this object should be responsible for stopping the game or its container.
     }
 }
