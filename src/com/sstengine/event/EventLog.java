@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * The EventLog class holds an log of events.
+ * Every EventLog has an Id.
+ *
  * @author Oscar de Leeuw
  */
 public class EventLog {
@@ -19,6 +22,15 @@ public class EventLog {
     public EventLog(List<Event> events, int id) {
         this.events = new ArrayList<>(events);
         this.id = id;
+    }
+
+    /**
+     * Gets the Id of the EventLog.
+     *
+     * @return The Id of the EventLog.
+     */
+    public int getId() {
+        return this.id;
     }
 
     /**
