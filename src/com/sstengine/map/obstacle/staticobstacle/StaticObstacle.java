@@ -1,7 +1,8 @@
-package com.sstengine.map.obstacle;
+package com.sstengine.map.obstacle.staticobstacle;
 
 import com.sstengine.component.graphics.GraphicsComponent;
 import com.sstengine.component.physical.standard.StaticObstaclePhysicalComponent;
+import com.sstengine.map.obstacle.Obstacle;
 
 /**
  * The StaticObstacle class represents a {@link Obstacle} that is static and can only be created when loading the map.
@@ -15,8 +16,8 @@ public class StaticObstacle extends Obstacle {
     /**
      * Creates a new StaticObstacle.
      *
-     * @param graphicsComponent
-     * @param type
+     * @param graphicsComponent The graphics component of the obstacle, defines how it should be represented graphically.
+     * @param type The type of static obstacle.
      */
     public StaticObstacle(GraphicsComponent graphicsComponent, StaticObstacleType type) {
         super(new StaticObstaclePhysicalComponent(), graphicsComponent);

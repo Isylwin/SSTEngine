@@ -14,7 +14,5 @@ public class StaticObstaclePhysicalComponent extends PhysicalComponent {
     public StaticObstaclePhysicalComponent() {
         super(new DefaultAccessibilityStrategy(), new DefaultInteractionStrategy());
     }
-
-    //TODO find a way to only make one instance of this per game.
 }
 

@@ -1,6 +1,6 @@
 package com.sstengine.player.leader;
 
-import com.sstengine.map.obstacle.PlaceableType;
+import com.sstengine.map.obstacle.placeableobstacle.PlaceableType;
 
 import java.util.Map;
 

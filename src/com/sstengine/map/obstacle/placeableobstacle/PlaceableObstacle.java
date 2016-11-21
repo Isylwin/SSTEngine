@@ -1,7 +1,8 @@
-package com.sstengine.map.obstacle;
+package com.sstengine.map.obstacle.placeableobstacle;
 
 import com.sstengine.component.graphics.GraphicsComponent;
 import com.sstengine.component.physical.PhysicalComponent;
+import com.sstengine.map.obstacle.Obstacle;
 
 /**
  * The PlaceableObstacle class represents a {@link Obstacle} that can be placed by a {@link com.sstengine.player.leader.Leader}

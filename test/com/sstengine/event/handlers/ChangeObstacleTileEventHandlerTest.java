@@ -2,7 +2,7 @@ package com.sstengine.event.handlers;
 
 import com.sstengine.event.events.ChangeObstacleTileEvent;
 import com.sstengine.map.obstacle.Obstacle;
-import com.sstengine.map.obstacle.StaticObstacle;
+import com.sstengine.map.obstacle.staticobstacle.StaticObstacle;
 import com.sstengine.map.tile.Tile;
 import com.sstengine.mocks.MockTileType;
 import org.junit.Before;

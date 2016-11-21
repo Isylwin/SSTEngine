@@ -1,7 +1,7 @@
 package com.sstengine.map;
 
 import com.sstengine.map.obstacle.Obstacle;
-import com.sstengine.map.obstacle.PlaceableObstacle;
+import com.sstengine.map.obstacle.placeableobstacle.PlaceableObstacle;
 import com.sstengine.map.tile.Tile;
 import com.sstengine.player.playerentity.PlayerEntity;
 import com.sstengine.util.enumeration.Direction;

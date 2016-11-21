@@ -13,7 +13,7 @@ import java.awt.*;
 public abstract class Obstacle extends GameObject {
     private Tile tile;
 
-    Obstacle(PhysicalComponent physical, GraphicsComponent graphics) {
+    protected Obstacle(PhysicalComponent physical, GraphicsComponent graphics) {
         super(physical, graphics);
     }
 
