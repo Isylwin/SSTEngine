@@ -1,44 +1,43 @@
 package com.sstengine;
 
 import com.sstengine.event.EventController;
+import com.sstengine.game.GameSettings;
 import com.sstengine.map.Map;
 import com.sstengine.player.Player;
 import com.sstengine.team.Team;
-import com.sstengine.util.GameSettings;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * This class makes an instance of Game.
+ * The Game class is the entry point into the engine.
+ * Game holds all objects of the engine.
+ *
+ * Game should be updated at every tick of the game.
  *
  * @author Oscar de Leeuw
  */
 public class Game {
-    private static final int ENGINE_TICK_RATE = 5; //TODO Change this too a constant class.
-    private GameSettings settings;
-
-    private int scoreLimit;
-    private int timeLimit;
-
-    private List<Player> players = new ArrayList<>();
-
     private EventController eventController;
 
+    private GameSettings settings;
+
     private Map map;
-    private Team usa;
-    private Team mex;
+
+    private List<Team> teams = new ArrayList<>();
+    private List<Player> players = new ArrayList<>();
+
+    private int elapsedTicks;
 
     /**
      * Constructor of Game class.
      */
-    public Game() {
-        this.eventController = new EventController();
+    public Game(GameSettings settings, Map map, List<Team> teams) {
+        this.settings = settings;
+        this.map = map;
+        this.teams = teams;
 
-        this.scoreLimit = settings.getScoreLimit();
-        this.timeLimit = settings.getTimeLimit();
-        //this.map = MapLoader.getInstance().buildMap(mapName); //TODO Look into making maploader part of the engine. Maybe with the help of maploader settings.
-        //usa = new Team(CountryTemp.USA, map.getUsaArea(), settings.getUsaScoringModifier()); //TODO should not be two set teams.
+        this.eventController = new EventController();
     }
 
     /**
@@ -82,7 +81,7 @@ public class Game {
             eventController.fireEventQueue(this);
         }
 
-        timeLimit--;
+        elapsedTicks++;
         checkScore();
         checkTime();
     }
@@ -91,7 +90,7 @@ public class Game {
      * Checks whether the score limit has been reached.
      */
     private void checkScore() {
-        if (mex.getScore() >= scoreLimit || usa.getScore() >= scoreLimit) {
+        if (teams.stream().anyMatch(team -> team.getScore() >= settings.getScoreLimit())) {
             stop();
         }
     }
@@ -100,7 +99,7 @@ public class Game {
      * Checks whether the time limit has been reached.
      */
     private void checkTime() {
-        if (timeLimit <= 0) {
+        if (elapsedTicks >= settings.getTimeLimit()) {
             stop();
         }
     }
@@ -109,6 +108,6 @@ public class Game {
      * Stops the game.
      */
     public void stop() {
-
+        //TODO Think about whether this object should be responsible for stopping the game or its container.
     }
 }
