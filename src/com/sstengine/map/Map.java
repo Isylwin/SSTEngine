@@ -1,7 +1,5 @@
 package com.sstengine.map;
 
-import com.sstengine.map.obstacle.Obstacle;
-import com.sstengine.map.obstacle.placeableobstacle.PlaceableObstacle;
 import com.sstengine.map.tile.Tile;
 import com.sstengine.player.playerentity.PlayerEntity;
 import com.sstengine.util.enumeration.CardinalDirection;
@@ -34,14 +32,9 @@ public class Map {
 
     private Tile[][] tiles;
 
-    private Rectangle usaArea;
-    private Rectangle mexicoArea;
-
     private Map(Builder builder) {
         this.width = builder.width;
         this.height = builder.height;
-        this.usaArea = builder.usaArea;
-        this.mexicoArea = builder.mexicoArea;
         this.name = builder.name;
         this.tiles = builder.tiles;
     }
@@ -62,24 +55,6 @@ public class Map {
      */
     public int getHeight() {
         return this.height;
-    }
-
-    /**
-     * Gets the area that is considered USA.
-     *
-     * @return A rectangle object that represents the USA area.
-     */
-    public Rectangle getUsaArea() {
-        return this.usaArea;
-    }
-
-    /**
-     * Get the area that is considered Mexican.
-     *
-     * @return A rectangle object that represents the Mexican area.
-     */
-    public Rectangle getMexicoArea() {
-        return this.mexicoArea;
     }
 
     /**
@@ -218,34 +193,12 @@ public class Map {
     }
 
     /**
-     * Determines whether a given PlaceableObstacle can be placed on the map.
-     *
-     * @param tile  The tile the PlaceableObstacle should be placed.
-     * @param placeable The placeable for which to run this check.
-     * @return True when the placeable can be placed at the given location.
-     */
-    public boolean canPlacePlaceable(Tile tile, PlaceableObstacle placeable) {
-        if (!tile.hasObstacle()) { //TODO Make a upgrade logic at some point.
-            Point location = tile.getLocation(); //TODO Set this shit in a getCardinalNeighbours method.
-            Obstacle east = getTile(location.x + 1, location.y).getObstacle();
-            Obstacle west = getTile(location.x - 1, location.y).getObstacle();
-            Obstacle north = getTile(location.x, location.y - 1).getObstacle();
-            Obstacle south = getTile(location.x, location.y + 1).getObstacle();
-
-            return false;
-        }
-        return false;
-    }
-
-    /**
      * Builds a map class.
      */
     public static class Builder {
         private String name;
         private int width;
         private int height;
-        private Rectangle usaArea;
-        private Rectangle mexicoArea;
         private Tile[][] tiles;
 
         /**
@@ -280,28 +233,6 @@ public class Map {
         }
 
         /**
-         * The area of the USA team.
-         *
-         * @param area The area of the USA team.
-         * @return This builder object.
-         */
-        public Builder setUsaArea(Rectangle area) {
-            this.usaArea = area;
-            return this;
-        }
-
-        /**
-         * Sets the area of the Mexico team.
-         *
-         * @param area The area of the Mexico team.
-         * @return This builder object.
-         */
-        public Builder setMexicoArea(Rectangle area) {
-            this.mexicoArea = area;
-            return this;
-        }
-
-        /**
          * Sets the tiles of the map.
          *
          * @param tiles A two dimensional array of tiles.
@@ -318,7 +249,7 @@ public class Map {
          * @return A map object.
          */
         public Map build() {
-            if (tiles == null || mexicoArea == null || usaArea == null || name == null || width == 0 || height == 0) {
+            if (tiles == null || name == null || width == 0 || height == 0) {
                 throw new IllegalArgumentException("All properties of the map need to be initialized.");
             }
 
