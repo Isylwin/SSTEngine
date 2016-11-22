@@ -11,9 +11,12 @@ import com.sstengine.player.playerentity.states.NormalState;
 import java.awt.*;
 import java.util.List;
 
-
 /**
  * The PlayerEntity class defines what constitutes as a PlayerEntity within the SSTEngine.
+ * PlayerEntity extends the GameObject class.
+ *
+ * A PlayerEntity exists on a tile.
+ * A PlayerEntity has a certain state which defines how it reacts to input.
  *
  * @author Oscar de Leeuw
  */
@@ -23,6 +26,13 @@ public class PlayerEntity extends GameObject {
     private MoveDirection currentMove;
     private State state;
 
+    /**
+     * Creates a new PlayerEntity.
+     * Calls the constructor of {@link GameObject}.
+     *
+     * @param physical The physical component of the PlayerEntity.
+     * @param graphics The graphical component of the PlayerEntity.
+     */
     public PlayerEntity(PhysicalComponent physical, GraphicsComponent graphics) {
         super(physical, graphics);
         this.state = new NormalState();

@@ -53,6 +53,7 @@ public abstract class UI {
      */
     protected void addUIObject(UIObject uiObject) {
         uiObjects.add(uiObject);
+        uiObjects.sort(UIObject::compareTo);
     }
 
     /**
@@ -66,6 +67,6 @@ public abstract class UI {
      * Renders the UI.
      */
     public void render() {
-        uiObjects.forEach(o -> o.render(painter));
+        uiObjects.stream().filter(o -> !o.isHidden()).forEach(o -> o.render(painter));
     }
 }

@@ -121,6 +121,11 @@ public final class Tile implements Graphics {
         return this.playerEntity != null;
     }
 
+    /**
+     * Returns whether this tile has a Country associated with it.
+     *
+     * @return True when this tile has a Country associated with it.
+     */
     public boolean hasCountry() {
         return this.country != null;
     }

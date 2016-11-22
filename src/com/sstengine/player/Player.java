@@ -12,6 +12,9 @@ import java.util.List;
 
 /**
  * The Player class represents a player within the game.
+ * The Player holds either a {@link Leader} or a {@link PlayerEntity}.
+ * Player should be updated at every tick and relegates the update request to the underlying entity.
+ * Player serves as the interface to push input to the underlying entity.
  *
  * @author Oscar de Leeuw
  */

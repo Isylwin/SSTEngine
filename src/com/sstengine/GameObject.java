@@ -21,6 +21,12 @@ public abstract class GameObject implements Physical, Graphics {
     private PhysicalComponent physical;
     private GraphicsComponent graphics;
 
+    /**
+     * Creates a new GameObject.
+     *
+     * @param physical The physical component of the GameObject.
+     * @param graphics The graphical component of the GameObject.
+     */
     protected GameObject(PhysicalComponent physical, GraphicsComponent graphics) {
         this.graphics = graphics;
         this.physical = physical;

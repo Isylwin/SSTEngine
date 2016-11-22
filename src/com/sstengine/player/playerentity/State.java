@@ -18,7 +18,6 @@ public abstract class State {
      * @param player The playerEntity for which to process input.
      * @param map The map of the game.
      * @param eventQueue The queue of events that will be executed by the game.
-     * @return A list of events that should be executed on the game.
      */
     public abstract void handleInput(PlayerEntity player, Map map, List<Event> eventQueue);
 }

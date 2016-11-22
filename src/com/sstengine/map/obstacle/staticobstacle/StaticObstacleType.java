@@ -7,5 +7,10 @@ package com.sstengine.map.obstacle.staticobstacle;
  * @author Oscar de Leeuw
  */
 public interface StaticObstacleType<T extends Enum> {
+    /**
+     * Gets the enum that implements this interface.
+     *
+     * @return The enum that implements this interface.
+     */
     T getType();
 }

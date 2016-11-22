@@ -7,5 +7,10 @@ package com.sstengine.map.tile;
  * @author Oscar de Leeuw
  */
 public interface TileType<T extends Enum> {
+    /**
+     * Gets the enum that is implementing this interface.
+     *
+     * @return The enum that implemented this interface.
+     */
     T getType();
 }
