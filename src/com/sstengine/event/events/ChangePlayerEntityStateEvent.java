@@ -13,16 +13,30 @@ public class ChangePlayerEntityStateEvent extends AbstractEvent {
     private State newState;
     private State oldState;
 
+    /**
+     * Creates a new ChangePlayerEntityStateEvent.
+     *
+     * @param player   The PlayerEntity whose state will be changed.
+     * @param newState The new State of the PlayerEntity.
+     */
     public ChangePlayerEntityStateEvent(PlayerEntity player, State newState) {
         this.player = player;
         this.newState = newState;
         this.oldState = player.getState();
     }
 
+    /**
+     * Gets the PlayerEntity that is associated with this event.
+     * @return The PlayerEntity that is associated with this event.
+     */
     public PlayerEntity getPlayer() {
         return player;
     }
 
+    /**
+     * Gets the State that is associated with this event.
+     * @return The State that is associated with this event.
+     */
     public State getNewState() {
         return newState;
     }

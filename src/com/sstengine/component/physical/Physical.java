@@ -8,6 +8,7 @@ import java.util.List;
 /**
  * The Physical interface is a contract for all object that exist physically within the game.
  * Every Physical object should define interaction and accessibility behaviour.
+ * Most object that implement Physical should fulfill this requirement by having a {@link PhysicalComponent}.
  *
  * @author Oscar de Leeuw
  */

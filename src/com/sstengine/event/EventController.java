@@ -23,6 +23,9 @@ public class EventController {
     private List<Event> eventCache;
     private Map<Integer, EventLog> loggedGameTurns;
 
+    /**
+     * Creates a new EventController.
+     */
     public EventController() {
         this.eventQueue = new ArrayList<>();
         this.dispatcher = new EventDispatcher();

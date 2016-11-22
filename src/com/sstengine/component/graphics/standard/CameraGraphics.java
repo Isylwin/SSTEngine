@@ -10,6 +10,7 @@ import java.awt.*;
 /**
  * The CameraGraphics is a standard GraphicsComponent for the {@link Camera} class.
  * It handles the rendering of the tiles of the camera on the painter.
+ * Should only be used by a Camera class, using any other class will result in a runtime InvalidCastException.
  *
  * @author Oscar de Leeuw
  */

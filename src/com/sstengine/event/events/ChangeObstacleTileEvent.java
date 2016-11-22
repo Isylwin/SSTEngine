@@ -13,6 +13,12 @@ public class ChangeObstacleTileEvent extends AbstractEvent {
     private Tile newTile;
     private Tile oldTile;
 
+    /**
+     * Creates a new ChangeObstacleTileEvent.
+     *
+     * @param obstacle The Obstacle whose Tile will be changed.
+     * @param newTile  The new Tile of the Obstacle.
+     */
     public ChangeObstacleTileEvent(Obstacle obstacle, Tile newTile) {
         this.obstacle = obstacle;
         this.newTile = newTile;

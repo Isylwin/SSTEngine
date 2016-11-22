@@ -1,6 +1,5 @@
 package com.sstengine.event.events;
 
-import com.sstengine.event.framework.Event;
 import com.sstengine.map.tile.Tile;
 import com.sstengine.player.playerentity.PlayerEntity;
 
@@ -15,6 +14,12 @@ public class ChangePlayerEntityTileEvent extends AbstractEvent {
     private Tile newTile;
     private Tile oldTile;
 
+    /**
+     * Creates a new ChangePlayerEntityTileEvent.
+     *
+     * @param player  The PlayerEntity whose tile will be changed.
+     * @param newTile The new Tile of the PlayerEntity.
+     */
     public ChangePlayerEntityTileEvent(PlayerEntity player, Tile newTile) {
         this.player = player;
         this.newTile = newTile;

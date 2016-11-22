@@ -7,7 +7,10 @@ import com.sstengine.strategy.InteractionStrategy;
 
 import java.util.List;
 
-/*
+/**
+ * The PhysicalComponent class represents the physical part of an object.
+ * This defines how a physical object will react with a {@link PlayerEntity}.
+ * Every physical object should define when it is accessible by a given PlayerEntity and its interaction with a PlayerEntity.
  *
  * @author Oscar de Leeuw
  */
@@ -15,6 +18,12 @@ public abstract class PhysicalComponent {
     private AccessibilityStrategy accessStrategy;
     private InteractionStrategy interactionStrategy;
 
+    /**
+     * Creates a new PhysicalComponent.
+     *
+     * @param accessStrategy      The logic that will handle the accessibility of this component.
+     * @param interactionStrategy The logic that will handle the interaction between a PlayerEntity and the owner of this component.
+     */
     protected PhysicalComponent(AccessibilityStrategy accessStrategy, InteractionStrategy interactionStrategy) {
         this.accessStrategy = accessStrategy;
         this.interactionStrategy = interactionStrategy;

@@ -32,6 +32,9 @@ public class EventDispatcher {
 
     private Map<Class<? extends Event>, Handler<? extends Event>> handlers;
 
+    /**
+     * Creates a new EventDispatcher.
+     */
     public EventDispatcher() {
         handlers = new HashMap<>();
     }

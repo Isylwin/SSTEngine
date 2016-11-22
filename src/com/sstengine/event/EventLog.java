@@ -15,10 +15,20 @@ public class EventLog {
     private List<Event> events;
     private int id;
 
+    /**
+     * Creates a new EventLog.
+     *
+     * @param id The id of the EventLog.
+     */
     public EventLog(int id) {
         this(new ArrayList<>(), id);
     }
 
+    /**
+     * Creates a new EventLog.
+     * @param events A list of events that should be logged by this EventLog.
+     * @param id The id of the EventLog.
+     */
     public EventLog(List<Event> events, int id) {
         this.events = new ArrayList<>(events);
         this.id = id;

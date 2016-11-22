@@ -6,6 +6,8 @@ import com.sstengine.event.framework.Event;
 import java.util.List;
 
 /**
+ * Currently not in use.
+ *
  * @author Oscar de Leeuw
  */
 public abstract class ControlComponent {

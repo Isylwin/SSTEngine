@@ -4,6 +4,7 @@ import java.awt.*;
 
 /**
  * The graphics interface is a contract for all objects that require a graphical representation.
+ * Most object that implement Graphics should fulfill this requirement by having a {@link GraphicsComponent}.
  *
  * @author Oscar de Leeuw
  */

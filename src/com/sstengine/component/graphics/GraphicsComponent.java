@@ -3,7 +3,8 @@ package com.sstengine.component.graphics;
 import java.awt.*;
 
 /**
- * The GraphicsComponent class
+ * The GraphicsComponent class represents the graphical part of an object.
+ * This means that it will define how an object will be drawn on a {@link Painter}.
  *
  * @author Oscar de Leeuw
  */

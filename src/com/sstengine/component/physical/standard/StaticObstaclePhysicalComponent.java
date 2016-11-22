@@ -11,6 +11,9 @@ import com.sstengine.strategy.strategies.DefaultInteractionStrategy;
  * @author Oscar de Leeuw
  */
 public class StaticObstaclePhysicalComponent extends PhysicalComponent {
+    /**
+     * Creates a new PhysicalComponent with a {@link DefaultAccessibilityStrategy} and {@link DefaultInteractionStrategy}.
+     */
     public StaticObstaclePhysicalComponent() {
         super(new DefaultAccessibilityStrategy(), new DefaultInteractionStrategy());
     }
