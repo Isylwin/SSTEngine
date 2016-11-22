@@ -3,6 +3,11 @@ package com.sstengine.map.obstacle.placeableobstacle;
 import com.sstengine.component.graphics.GraphicsComponent;
 import com.sstengine.component.physical.PhysicalComponent;
 import com.sstengine.map.obstacle.Obstacle;
+import com.sstengine.map.tile.Tile;
+import com.sstengine.strategy.PlacementStrategy;
+import com.sstengine.util.enumeration.OrdinalDirection;
+
+import java.util.Map;
 
 /**
  * The PlaceableObstacle class represents a {@link Obstacle} that can be placed by a {@link com.sstengine.player.leader.Leader}
@@ -11,25 +16,37 @@ import com.sstengine.map.obstacle.Obstacle;
  */
 public class PlaceableObstacle extends Obstacle {
     private PlaceableType type;
+    private PlacementStrategy placementStrategy;
 
     /**
-     * Creates a new placeable.
+     * Creates a new PlaceableObstacle.
+     *
+     * @param physical The physical component of the obstacle.
+     * @param graphics The graphical component of the obstacle.
+     * @param strategy The placement strategy for this obstacle.
+     * @param type The type of this obstacle.
      */
-    public PlaceableObstacle(PhysicalComponent physical, GraphicsComponent graphicsComponent, PlaceableType type) {
-        super(physical, graphicsComponent);
+    public PlaceableObstacle(PhysicalComponent physical, GraphicsComponent graphics, PlacementStrategy strategy, PlaceableType type) {
+        super(physical, graphics);
         this.type = type;
+        this.placementStrategy = strategy;
+    }
+
+    /**
+     * Gets the type of the PlaceableObstacle.
+     * @return The type of the PlaceableObstacle.
+     */
+    public PlaceableType getType() {
+        return type;
     }
 
     /**
      * Checks what the placement rules are of a placeable.
      *
-     * @param east  The object that would be to the east of the placeable.
-     * @param west  The object that would be to the west of the placeable.
-     * @param north The object that would be to the north of the placeable.
-     * @param south The object that would be to the south of the placeable.
+     * @param neighbours The neighbours of this placeable.
      * @return A boolean that indicates whether the placeable can be placed.
      */
-    /*public boolean canPlaceWithNeighbours(TileObject east, TileObject west, TileObject north, TileObject south) {
-
-    }*/
+    public boolean canPlaceWithNeighbours(Map<OrdinalDirection, Tile> neighbours) {
+        return placementStrategy.execute(this, neighbours);
+    }
 }
