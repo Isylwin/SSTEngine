@@ -1,6 +1,6 @@
 package com.sstengine.player.playerentity;
 
-import com.sstengine.util.enumeration.Direction;
+import com.sstengine.util.enumeration.CardinalDirection;
 
 import java.awt.*;
 
@@ -13,10 +13,10 @@ public enum MoveDirection {
     UP, DOWN, LEFT, RIGHT, NONE;
 
     static {
-        UP.cartesianTranslation = Direction.NORTH.getCartesianRepresentation();
-        DOWN.cartesianTranslation = Direction.SOUTH.getCartesianRepresentation();
-        LEFT.cartesianTranslation = Direction.WEST.getCartesianRepresentation();
-        RIGHT.cartesianTranslation = Direction.EAST.getCartesianRepresentation();
+        UP.cartesianTranslation = CardinalDirection.NORTH.getCartesianRepresentation();
+        DOWN.cartesianTranslation = CardinalDirection.SOUTH.getCartesianRepresentation();
+        LEFT.cartesianTranslation = CardinalDirection.WEST.getCartesianRepresentation();
+        RIGHT.cartesianTranslation = CardinalDirection.EAST.getCartesianRepresentation();
         NONE.cartesianTranslation = new Point(0, 0);
     }
 

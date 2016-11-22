@@ -1,11 +1,13 @@
 package com.sstengine.player.leader;
 
+import com.sstengine.event.events.ChangePlaceableCount;
+
 /**
  * The PlaceableCounter class records placement data of a single placeableType.
  * This class should be managed by a manager.
  * The placeable has a certain amount. This captures how many of this type the leader can place at the current moment.
- * The placeable has a tick threshold. After an amount of ticks equal to the tick threshold the amount is increased by one.
- * This class should be updated at every tick of the server.
+ * The placeable has a tick threshold. After an amount of ticks equal to the tick threshold the amount is increased by one through an {@link ChangePlaceableCount} event.
+ * This class should be queried at every tick of the server.
  *
  * @author Oscar de Leeuw
  */
@@ -60,19 +62,23 @@ public class PlaceableCounter {
 
     /**
      * Updates the placeable.
-     * If the amount of ticks surpasses the tick threshold it will add one to the amount.
+     * If the amount of ticks surpasses the tick threshold it will return true.
+     *
+     * @return True if the PlaceableType that is associated with this counter should be increased.
      */
-    public void update() {
+    public boolean update() {
         if(++currentTick >= tickThreshold) {
-            amount++;
             currentTick = 0;
+            return true;
         }
+        return false;
     }
 
     /**
-     * Decreases the amount by one.
+     * Increases the amount by the given integer.
+     * @param change The amount of change to increase by.
      */
-    public void decreaseAmount() {
-        amount--;
+    public void increaseAmount(int change) {
+        amount += change;
     }
 }

@@ -3,6 +3,8 @@ package com.sstengine.player;
 import com.sstengine.Game;
 import com.sstengine.event.framework.Event;
 import com.sstengine.player.leader.Leader;
+import com.sstengine.player.leader.LeaderInput;
+import com.sstengine.player.playerentity.MoveDirection;
 import com.sstengine.player.playerentity.PlayerEntity;
 import com.sstengine.team.Team;
 
@@ -63,6 +65,23 @@ public class Player {
             leader.update(game, eventQueue);
         } else if (entity != null) {
             entity.update(game, eventQueue);
+        } else {
+            //TODO exception.
+        }
+    }
+
+    /**
+     * Pushes input to the underlying Leader or PlayerEntity that is controlled by this Player.
+     *
+     * @param input The input that should be pushed to the underlying entity.
+     */
+    public void pushInput(Object input) {
+        if (leader != null) {
+            LeaderInput li = (LeaderInput) input;
+            leader.pushInput(li);
+        } else if (entity != null) {
+            MoveDirection md = (MoveDirection) input;
+            entity.pushInput(md);
         } else {
             //TODO exception.
         }
