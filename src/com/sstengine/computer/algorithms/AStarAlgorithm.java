@@ -105,7 +105,7 @@ public class AStarAlgorithm implements PathingAlgorithm {
             }
 
             //Foreach neighbour of the current location perform the following.
-            for (Tile next : map.getNeighbours(current)) {
+            for (Tile next : map.getCardinalNeighbours(current).values()) {
                 //Check whether the tile can be accessed.
                 if (next.isAccessible(entity)) {
                     //Calculate the cost of moving to the next location.

@@ -4,10 +4,12 @@ import com.sstengine.map.obstacle.Obstacle;
 import com.sstengine.map.obstacle.placeableobstacle.PlaceableObstacle;
 import com.sstengine.map.tile.Tile;
 import com.sstengine.player.playerentity.PlayerEntity;
-import com.sstengine.util.enumeration.Direction;
+import com.sstengine.util.enumeration.CardinalDirection;
+import com.sstengine.util.enumeration.OrdinalDirection;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.Predicate;
@@ -172,19 +174,44 @@ public class Map {
     }
 
     /**
-     * Gets the neighbours of a Tile.
+     * Gets all the direct, non-diagonal, neighbours of a given tile.
+     * Uses the {@link CardinalDirection} enum to map every neighbour.
      *
      * @param tile The location of which to get the neighbours.
-     * @return A list of neighbours.
+     * @return A HashMap of all the the neighbouring tiles with the key being the cardinal direction of the neighbour relative to the given tile.
      */
-    public List<Tile> getNeighbours(Tile tile) {
-        List<Tile> ret = new ArrayList<>();
+    public java.util.Map<CardinalDirection, Tile> getCardinalNeighbours(Tile tile) {
+        java.util.Map<CardinalDirection, Tile> ret = new HashMap<>();
 
-        for (Direction dir : Direction.values()) {
-            Tile neighbour = getTile(tile.getLocation().x + dir.getCartesianRepresentation().x, tile.getLocation().y + dir.getCartesianRepresentation().y);
-            if (neighbour != null) {
-                ret.add(neighbour);
-            }
+        for (CardinalDirection dir : CardinalDirection.values()) {
+            int x = tile.getLocation().x + dir.getCartesianRepresentation().x;
+            int y = tile.getLocation().y + dir.getCartesianRepresentation().y;
+
+            Tile neighbour = getTile(x, y);
+
+            ret.put(dir, neighbour);
+        }
+
+        return ret;
+    }
+
+    /**
+     * Gets all the surrounding, including diagonal, neighbours of a given tile.
+     * Uses the {@link OrdinalDirection} enum to map every neighbour.
+     *
+     * @param tile The tile for which to retrieve all the neighbours.
+     * @return A HashMap of all the neighbouring tiles with the key being the ordinal direction of the neighbour relative to the given tile.
+     */
+    public java.util.Map<OrdinalDirection, Tile> getOrdinalNeighbours(Tile tile) {
+        java.util.Map<OrdinalDirection, Tile> ret = new HashMap<>();
+
+        for (OrdinalDirection dir : OrdinalDirection.values()) {
+            int x = tile.getLocation().x + dir.getCartesianRepresentation().x;
+            int y = tile.getLocation().y + dir.getCartesianRepresentation().y;
+
+            Tile neighbour = getTile(x, y);
+
+            ret.put(dir, neighbour);
         }
 
         return ret;
@@ -199,7 +226,7 @@ public class Map {
      */
     public boolean canPlacePlaceable(Tile tile, PlaceableObstacle placeable) {
         if (!tile.hasObstacle()) { //TODO Make a upgrade logic at some point.
-            Point location = tile.getLocation(); //TODO Set this shit in a getNeighbours method.
+            Point location = tile.getLocation(); //TODO Set this shit in a getCardinalNeighbours method.
             Obstacle east = getTile(location.x + 1, location.y).getObstacle();
             Obstacle west = getTile(location.x - 1, location.y).getObstacle();
             Obstacle north = getTile(location.x, location.y - 1).getObstacle();
