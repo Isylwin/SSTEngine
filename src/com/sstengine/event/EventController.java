@@ -2,14 +2,10 @@ package com.sstengine.event;
 
 
 import com.sstengine.Game;
-import com.sstengine.event.events.ChangeObstacleTileEvent;
-import com.sstengine.event.events.ChangePlayerEntityStateEvent;
-import com.sstengine.event.events.ChangePlayerEntityTileEvent;
+import com.sstengine.event.events.*;
 import com.sstengine.event.framework.Event;
 import com.sstengine.event.framework.EventDispatcher;
-import com.sstengine.event.handlers.ChangeObstacleTileEventHandler;
-import com.sstengine.event.handlers.ChangePlayerEntityStateEventHandler;
-import com.sstengine.event.handlers.ChangePlayerEntityTileEventHandler;
+import com.sstengine.event.handlers.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -51,6 +47,8 @@ public class EventController {
         dispatcher.registerHandler(ChangeObstacleTileEvent.class, new ChangeObstacleTileEventHandler());
         dispatcher.registerHandler(ChangePlayerEntityTileEvent.class, new ChangePlayerEntityTileEventHandler());
         dispatcher.registerHandler(ChangePlayerEntityStateEvent.class, new ChangePlayerEntityStateEventHandler());
+        dispatcher.registerHandler(ChangeTeamScoreEvent.class, new ChangeTeamScoreEventHandler());
+        dispatcher.registerHandler(ChangePlaceableCount.class, new ChangePlaceableCountHandler());
     }
 
     /**
