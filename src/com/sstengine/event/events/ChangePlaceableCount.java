@@ -1,6 +1,6 @@
 package com.sstengine.event.events;
 
-import com.sstengine.map.obstacle.placeableobstacle.PlaceableType;
+import com.sstengine.obstacle.placeableobstacle.PlaceableType;
 import com.sstengine.player.leader.Leader;
 
 /**

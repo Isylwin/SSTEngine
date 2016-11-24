@@ -3,9 +3,9 @@ package com.sstengine.map.tile;
 import com.sstengine.component.graphics.Graphics;
 import com.sstengine.component.graphics.GraphicsComponent;
 import com.sstengine.component.graphics.Painter;
+import com.sstengine.country.Country;
 import com.sstengine.event.framework.Event;
-import com.sstengine.map.country.Country;
-import com.sstengine.map.obstacle.Obstacle;
+import com.sstengine.obstacle.Obstacle;
 import com.sstengine.player.playerentity.PlayerEntity;
 
 import java.awt.*;

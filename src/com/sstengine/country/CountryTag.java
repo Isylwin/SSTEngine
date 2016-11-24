@@ -1,4 +1,4 @@
-package com.sstengine.map.country;
+package com.sstengine.country;
 
 /**
  * The CountryTag interface is an interface that should be implemented by an enum.

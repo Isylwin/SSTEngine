@@ -1,6 +1,6 @@
 package com.sstengine.team;
 
-import com.sstengine.map.country.Country;
+import com.sstengine.country.Country;
 import com.sstengine.map.tile.Tile;
 import com.sstengine.player.leader.Leader;
 import com.sstengine.player.playerentity.PlayerEntity;

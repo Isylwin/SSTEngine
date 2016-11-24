@@ -1,7 +1,7 @@
 package com.sstengine.player.leader;
 
-import com.sstengine.map.obstacle.placeableobstacle.PlaceableObstacle;
 import com.sstengine.map.tile.Tile;
+import com.sstengine.obstacle.placeableobstacle.PlaceableObstacle;
 
 /**
  * The LeaderInput class represents an single input from a {@link Leader}.

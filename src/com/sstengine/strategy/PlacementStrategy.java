@@ -1,7 +1,7 @@
 package com.sstengine.strategy;
 
-import com.sstengine.map.obstacle.placeableobstacle.PlaceableObstacle;
 import com.sstengine.map.tile.Tile;
+import com.sstengine.obstacle.placeableobstacle.PlaceableObstacle;
 import com.sstengine.util.enumeration.OrdinalDirection;
 
 import java.util.Map;

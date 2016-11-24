@@ -3,7 +3,7 @@ package com.sstengine.event.handlers;
 import com.sstengine.Game;
 import com.sstengine.event.events.ChangePlaceableCount;
 import com.sstengine.event.framework.Handler;
-import com.sstengine.map.obstacle.placeableobstacle.PlaceableType;
+import com.sstengine.obstacle.placeableobstacle.PlaceableType;
 import com.sstengine.player.leader.Leader;
 import com.sstengine.player.leader.PlaceableManager;
 

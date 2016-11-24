@@ -1,4 +1,4 @@
-package com.sstengine.map.country;
+package com.sstengine.country;
 
 import com.sstengine.map.tile.Tile;
 import com.sstengine.mocks.MockCountryTag;

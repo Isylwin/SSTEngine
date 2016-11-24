@@ -5,9 +5,9 @@ import com.sstengine.event.events.ChangeObstacleTileEvent;
 import com.sstengine.event.events.ChangePlaceableCount;
 import com.sstengine.event.framework.Event;
 import com.sstengine.map.Map;
-import com.sstengine.map.obstacle.placeableobstacle.PlaceableObstacle;
-import com.sstengine.map.obstacle.placeableobstacle.PlaceableType;
 import com.sstengine.map.tile.Tile;
+import com.sstengine.obstacle.placeableobstacle.PlaceableObstacle;
+import com.sstengine.obstacle.placeableobstacle.PlaceableType;
 import com.sstengine.util.enumeration.OrdinalDirection;
 
 import java.util.List;

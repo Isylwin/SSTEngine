@@ -1,4 +1,4 @@
-package com.sstengine.map.country;
+package com.sstengine.country;
 
 import com.sstengine.GameObject;
 import com.sstengine.component.graphics.GraphicsComponent;

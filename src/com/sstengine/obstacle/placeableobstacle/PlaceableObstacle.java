@@ -1,9 +1,9 @@
-package com.sstengine.map.obstacle.placeableobstacle;
+package com.sstengine.obstacle.placeableobstacle;
 
 import com.sstengine.component.graphics.GraphicsComponent;
 import com.sstengine.component.physical.PhysicalComponent;
-import com.sstengine.map.obstacle.Obstacle;
 import com.sstengine.map.tile.Tile;
+import com.sstengine.obstacle.Obstacle;
 import com.sstengine.strategy.PlacementStrategy;
 import com.sstengine.util.enumeration.OrdinalDirection;
 

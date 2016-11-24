@@ -1,4 +1,4 @@
-package com.sstengine.map.obstacle;
+package com.sstengine.obstacle;
 
 import com.sstengine.GameObject;
 import com.sstengine.component.graphics.GraphicsComponent;
