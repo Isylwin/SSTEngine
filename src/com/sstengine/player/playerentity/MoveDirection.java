@@ -1,5 +1,6 @@
 package com.sstengine.player.playerentity;
 
+import com.sstengine.player.PlayerInput;
 import com.sstengine.util.enumeration.CardinalDirection;
 
 import java.awt.*;
@@ -9,7 +10,7 @@ import java.awt.*;
  *
  * @author Oscar de Leeuw
  */
-public enum MoveDirection {
+public enum MoveDirection implements PlayerInput {
     UP, DOWN, LEFT, RIGHT, NONE;
 
     static {

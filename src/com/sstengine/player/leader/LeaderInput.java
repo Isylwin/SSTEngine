@@ -2,6 +2,7 @@ package com.sstengine.player.leader;
 
 import com.sstengine.map.tile.Tile;
 import com.sstengine.obstacle.placeableobstacle.PlaceableObstacle;
+import com.sstengine.player.PlayerInput;
 
 /**
  * The LeaderInput class represents an single input from a {@link Leader}.
@@ -9,7 +10,7 @@ import com.sstengine.obstacle.placeableobstacle.PlaceableObstacle;
  *
  * @author Oscar de Leeuw
  */
-public class LeaderInput {
+public class LeaderInput implements PlayerInput {
     private PlaceableObstacle placeable;
     private Tile tile;
 

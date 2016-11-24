@@ -5,6 +5,7 @@ import com.sstengine.event.EventLog;
 import com.sstengine.game.GameSettings;
 import com.sstengine.map.Map;
 import com.sstengine.player.Player;
+import com.sstengine.player.PlayerInput;
 import com.sstengine.team.Team;
 
 import java.util.ArrayList;
@@ -107,6 +108,16 @@ public class Game extends Observable {
         elapsedTurns++;
 
         checkTime();
+    }
+
+    /**
+     * Temp method.
+     *
+     * @param player
+     * @param input
+     */
+    public void pushInput(Player player, PlayerInput input) {
+        players.stream().filter(p -> p == player).findFirst().ifPresent(p -> p.pushInput(input));
     }
 
     /**

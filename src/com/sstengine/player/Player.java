@@ -69,7 +69,7 @@ public class Player {
         } else if (entity != null) {
             entity.update(game, eventQueue);
         } else {
-            //TODO exception.
+            throw new NullPointerException("This Player does not wrap a Leader or PlayerEntity object");
         }
     }
 
@@ -78,7 +78,7 @@ public class Player {
      *
      * @param input The input that should be pushed to the underlying entity.
      */
-    public void pushInput(Object input) {
+    public void pushInput(PlayerInput input) {
         if (leader != null) {
             LeaderInput li = (LeaderInput) input;
             leader.pushInput(li);
@@ -86,7 +86,7 @@ public class Player {
             MoveDirection md = (MoveDirection) input;
             entity.pushInput(md);
         } else {
-            //TODO exception.
+            throw new NullPointerException("This Player does not wrap a Leader or PlayerEntity object");
         }
     }
 
