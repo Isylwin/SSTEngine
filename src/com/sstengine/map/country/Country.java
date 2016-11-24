@@ -4,10 +4,12 @@ import com.sstengine.GameObject;
 import com.sstengine.component.graphics.GraphicsComponent;
 import com.sstengine.component.physical.PhysicalComponent;
 import com.sstengine.map.tile.Tile;
+import com.sstengine.player.playerentity.PlayerEntity;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * The Country class represents a team that exists within the game.<br>
@@ -59,5 +61,23 @@ public class Country extends GameObject {
         if (!land.contains(tile)) {
             land.add(tile);
         }
+    }
+
+    /**
+     * Gets a list of all the Tiles that belong to this Country and are accessible to a given PlayerEntity.
+     * Uses the {@link Tile#isAccessible(PlayerEntity)} method to determine accessibility.
+     *
+     * @param entity The PlayerEntity for which the accessibility should be checked.
+     * @return A List of all the Tiles that are accessible for the given PlayerEntity.
+     * @throws IllegalStateException When there are no Tiles that are accessible to the given PlayerEntity.
+     */
+    public List<Tile> getAccessibleLand(PlayerEntity entity) throws IllegalStateException {
+        List<Tile> ret = land.stream().filter(t -> t.isAccessible(entity)).collect(Collectors.toList());
+
+        if (ret.size() == 0) {
+            throw new IllegalStateException("No tiles are accessible to the given PlayerEntity");
+        }
+
+        return ret;
     }
 }

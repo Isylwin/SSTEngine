@@ -1,7 +1,6 @@
 package com.sstengine.map;
 
 import com.sstengine.map.tile.Tile;
-import com.sstengine.player.playerentity.PlayerEntity;
 import com.sstengine.util.enumeration.CardinalDirection;
 import com.sstengine.util.enumeration.OrdinalDirection;
 
@@ -9,7 +8,6 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -37,6 +35,15 @@ public class Map {
         this.height = builder.height;
         this.name = builder.name;
         this.tiles = builder.tiles;
+    }
+
+    /**
+     * Gets the name of the Map.
+     *
+     * @return A String that represents the name of the map.
+     */
+    public String getName() {
+        return this.name;
     }
 
     /**
@@ -92,39 +99,6 @@ public class Map {
             //Intentionally caught and disregarded.
         }
         return null;
-    }
-
-    /**
-     * Gets a Tile inside an given area that is accessible to the given entity.
-     * Can be an infinite loop.
-     *
-     * @param area The area out of which a point is requested.
-     * @param entity The entity for which the tile should be accessible.
-     * @return A tile that is free.
-     */
-    public Tile getFreeTileInArea(Rectangle area, PlayerEntity entity) {
-
-        //Generate a random point within the given area.
-        int x = ThreadLocalRandom.current().nextInt(area.x, area.x + area.width);
-        int y = ThreadLocalRandom.current().nextInt(area.y, area.y + area.height);
-        Tile nextLocation = getTile(x, y);
-
-        //If the tile is occupied find a new location.
-        if (entity == null || nextLocation.isAccessible(entity)) {
-            return nextLocation;
-        } else {
-            return getFreeTileInArea(area, entity);
-        }
-    }
-
-    /**
-     * Gets a random tile in the given area.
-     *
-     * @param area The area out of which you want a tile.
-     * @return A tile in the area.
-     */
-    public Tile getTileInArea(Rectangle area) {
-        return getFreeTileInArea(area, null);
     }
 
     /**

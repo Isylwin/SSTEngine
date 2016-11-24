@@ -1,8 +1,11 @@
 package com.sstengine.map.country;
 
+import com.sstengine.map.tile.Tile;
 import com.sstengine.mocks.MockCountryTag;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.awt.*;
 
 import static org.junit.Assert.assertEquals;
 
@@ -25,5 +28,18 @@ public class CountryTest {
     public void getTag() throws Exception {
         assertEquals(MockCountryTag.MEX, countryMex.getTag());
         assertEquals(MockCountryTag.USA, countryUsa.getTag());
+    }
+
+    @Test
+    public void getLand() throws Exception {
+        Tile tile = new Tile(null, null, new Point(0, 0));
+        countryMex.addLand(tile);
+        Tile mexLand = countryMex.getLand().get(0);
+
+        assertEquals(tile, mexLand);
+
+        mexLand.setCountry(countryUsa);
+
+        assertEquals(tile.getCountry(), mexLand.getCountry());
     }
 }
