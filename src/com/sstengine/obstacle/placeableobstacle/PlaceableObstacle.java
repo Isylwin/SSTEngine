@@ -21,13 +21,14 @@ public class PlaceableObstacle extends Obstacle {
     /**
      * Creates a new PlaceableObstacle.
      *
+     * @param id The id of this obstacle.
      * @param physical The physical component of the obstacle.
      * @param graphics The graphical component of the obstacle.
      * @param strategy The placement strategy for this obstacle.
      * @param type The type of this obstacle.
      */
-    public PlaceableObstacle(PhysicalComponent physical, GraphicsComponent graphics, PlacementStrategy strategy, PlaceableType type) {
-        super(physical, graphics);
+    public PlaceableObstacle(int id, PhysicalComponent physical, GraphicsComponent graphics, PlacementStrategy strategy, PlaceableType type) {
+        super(id, physical, graphics);
         this.type = type;
         this.placementStrategy = strategy;
     }

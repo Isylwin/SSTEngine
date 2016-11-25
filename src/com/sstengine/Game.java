@@ -17,6 +17,7 @@ import java.util.Observable;
  * Game holds all objects of the engine.
  *
  * Game should be updated at every tick of the game.
+ * Game is observable so it can notify when it has reached a stopping state.
  *
  * @author Oscar de Leeuw
  */
@@ -111,13 +112,16 @@ public class Game extends Observable {
     }
 
     /**
-     * Temp method.
+     * Pushes the given PlayerInput to the {@link Player} with the given id.
+     * Will do nothing if the given id does not match a Player.
      *
-     * @param player
-     * @param input
+     * Might become deprecated in the near future.
+     *
+     * @param playerId The Id of the Player.
+     * @param input The input of the Player.
      */
-    public void pushInput(Player player, PlayerInput input) {
-        players.stream().filter(p -> p == player).findFirst().ifPresent(p -> p.pushInput(input));
+    public void pushInput(int playerId, PlayerInput input) {
+        players.stream().filter(p -> p.getId() == playerId).findFirst().ifPresent(p -> p.pushInput(input));
     }
 
     /**

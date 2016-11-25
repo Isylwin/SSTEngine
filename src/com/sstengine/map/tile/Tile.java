@@ -7,6 +7,7 @@ import com.sstengine.country.Country;
 import com.sstengine.event.framework.Event;
 import com.sstengine.obstacle.Obstacle;
 import com.sstengine.player.playerentity.PlayerEntity;
+import com.sstengine.util.Identifiable;
 
 import java.awt.*;
 import java.util.List;
@@ -17,7 +18,8 @@ import java.util.List;
  *
  *  @author Oscar de Leeuw
  */
-public final class Tile implements Graphics {
+public final class Tile implements Graphics, Identifiable {
+    private int id;
     private TileType type;
     private Point location;
     private GraphicsComponent graphics;
@@ -30,13 +32,20 @@ public final class Tile implements Graphics {
     /**
      * Creates a new tile object with the given location, team and type.
      *
+     * @param id The id of this tile.
      * @param type The type of the tile.
      * @param location The location of the tile.
      */
-    public Tile(GraphicsComponent graphics, TileType type, Point location) {
+    public Tile(int id, GraphicsComponent graphics, TileType type, Point location) {
+        this.id = id;
         this.graphics = graphics;
         this.type = type;
         this.location = location;
+    }
+
+    @Override
+    public int getId() {
+        return this.id;
     }
 
     /**
@@ -46,6 +55,15 @@ public final class Tile implements Graphics {
      */
     public Point getLocation() {
         return this.location;
+    }
+
+    /**
+     * Gets the type of the Tile.
+     *
+     * @return A TileType that represents the type of the tile.
+     */
+    public TileType getType() {
+        return type;
     }
 
     /**

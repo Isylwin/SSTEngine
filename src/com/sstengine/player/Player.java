@@ -7,6 +7,7 @@ import com.sstengine.player.leader.LeaderInput;
 import com.sstengine.player.playerentity.MoveDirection;
 import com.sstengine.player.playerentity.PlayerEntity;
 import com.sstengine.team.Team;
+import com.sstengine.util.Identifiable;
 
 import java.util.List;
 
@@ -18,7 +19,8 @@ import java.util.List;
  *
  * @author Oscar de Leeuw
  */
-public class Player {
+public class Player implements Identifiable {
+    private int id;
     private String name;
     private Team team;
 
@@ -28,24 +30,46 @@ public class Player {
     /**
      * Private constructor that sets the name and team of the player.
      *
+     * @param id The id of the player.
      * @param name The name of the player.
      * @param team The team the player is part of.
      */
-    private Player(String name, Team team) {
+    private Player(int id, String name, Team team) {
         this.name = name;
         this.team = team;
     }
 
-    public Player(String name, Team team, Leader leader) {
-        this(name, team);
+    /**
+     * Creates a new Player that wraps a Leader.
+     *
+     * @param id     The id of the player.
+     * @param name   The name of the player.
+     * @param team   The team the player is part of.
+     * @param leader The Leader that this player wraps.
+     */
+    public Player(int id, String name, Team team, Leader leader) {
+        this(id, name, team);
         this.leader = leader;
         team.setLeader(leader);
     }
 
-    public Player(String name, Team team, PlayerEntity entity) {
-        this(name, team);
+    /**
+     * Creates a new Player that wraps a PlayerEntity.
+     *
+     * @param id     The id of the player.
+     * @param name   The name of the player.
+     * @param team   The team the player is part of.
+     * @param entity The PlayerEntity that this Player wraps.
+     */
+    public Player(int id, String name, Team team, PlayerEntity entity) {
+        this(id, name, team);
         this.entity = entity;
         team.addPlayerEntity(entity);
+    }
+
+    @Override
+    public int getId() {
+        return id;
     }
 
     /**

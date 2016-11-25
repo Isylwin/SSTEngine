@@ -16,11 +16,12 @@ public class StaticObstacle extends Obstacle {
     /**
      * Creates a new StaticObstacle.
      *
+     * @param id The id of this StaticObstacle.
      * @param graphicsComponent The graphics component of the obstacle, defines how it should be represented graphically.
      * @param type The type of static obstacle.
      */
-    public StaticObstacle(GraphicsComponent graphicsComponent, StaticObstacleType type) {
-        super(new StaticObstaclePhysicalComponent(), graphicsComponent);
+    public StaticObstacle(int id, GraphicsComponent graphicsComponent, StaticObstacleType type) {
+        super(id, new StaticObstaclePhysicalComponent(), graphicsComponent);
         this.type = type;
     }
 }

@@ -4,6 +4,7 @@ import com.sstengine.GameObject;
 import com.sstengine.component.graphics.GraphicsComponent;
 import com.sstengine.component.physical.PhysicalComponent;
 import com.sstengine.map.tile.Tile;
+import com.sstengine.util.Identifiable;
 
 import java.awt.*;
 
@@ -14,11 +15,18 @@ import java.awt.*;
  *
  * @author Oscar de Leeuw
  */
-public abstract class Obstacle extends GameObject {
+public abstract class Obstacle extends GameObject implements Identifiable {
+    private int id;
     private Tile tile;
 
-    protected Obstacle(PhysicalComponent physical, GraphicsComponent graphics) {
+    protected Obstacle(int id, PhysicalComponent physical, GraphicsComponent graphics) {
         super(physical, graphics);
+        this.id = id;
+    }
+
+    @Override
+    public int getId() {
+        return id;
     }
 
     /**

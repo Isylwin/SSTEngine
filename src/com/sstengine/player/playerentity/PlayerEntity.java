@@ -7,6 +7,7 @@ import com.sstengine.component.physical.PhysicalComponent;
 import com.sstengine.event.framework.Event;
 import com.sstengine.map.tile.Tile;
 import com.sstengine.player.playerentity.states.NormalState;
+import com.sstengine.util.Identifiable;
 
 import java.awt.*;
 import java.util.List;
@@ -20,7 +21,8 @@ import java.util.List;
  *
  * @author Oscar de Leeuw
  */
-public class PlayerEntity extends GameObject {
+public class PlayerEntity extends GameObject implements Identifiable {
+    private int id;
     private Tile tile;
     private InputBuffer inputBuffer;
     private MoveDirection currentMove;
@@ -33,10 +35,16 @@ public class PlayerEntity extends GameObject {
      * @param physical The physical component of the PlayerEntity.
      * @param graphics The graphical component of the PlayerEntity.
      */
-    public PlayerEntity(PhysicalComponent physical, GraphicsComponent graphics) {
+    public PlayerEntity(int id, PhysicalComponent physical, GraphicsComponent graphics) {
         super(physical, graphics);
+        this.id = id;
         this.state = new NormalState();
         this.inputBuffer = new InputBuffer();
+    }
+
+    @Override
+    public int getId() {
+        return id;
     }
 
     /**

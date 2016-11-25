@@ -8,8 +8,10 @@ import com.sstengine.map.Map;
 import com.sstengine.map.tile.Tile;
 import com.sstengine.obstacle.placeableobstacle.PlaceableObstacle;
 import com.sstengine.obstacle.placeableobstacle.PlaceableType;
+import com.sstengine.util.Identifiable;
 import com.sstengine.util.enumeration.OrdinalDirection;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -18,17 +20,26 @@ import java.util.List;
  *
  *  @author Oscar de Leeuw
  */
-public class Leader {
+public class Leader implements Identifiable {
+    private int id;
     private PlaceableManager manager;
     private List<LeaderInput> inputs;
 
     /**
      * Creates a new Leader object with the given name.
      *
-     * @param manager The PlaceableManager of this leader.
+     * @param id The id of this Leader.
+     * @param manager The PlaceableManager of this Leader.
      */
-    public Leader(PlaceableManager manager) {
+    public Leader(int id, PlaceableManager manager) {
+        this.id = id;
         this.manager = manager;
+        this.inputs = new ArrayList<>();
+    }
+
+    @Override
+    public int getId() {
+        return id;
     }
 
     /**
@@ -61,13 +72,27 @@ public class Leader {
         processInputs(game, eventQueue);
     }
 
-    private void createPlaceableEvents(List<PlaceableType> types, Game game, List<Event> eventQueue) {
+    /**
+     * Creates {@link ChangePlaceableCount} events for all the PlaceableTypes who's count need to be updated.
+     * Increments all counts of the given list of types by 1.
+     *
+     * @param types      A list of the PlaceableTypes that should be updated.
+     * @param game       The game which can be used for logic.
+     * @param eventQueue A list of events to which events can be added.
+     */
+    protected void createPlaceableEvents(List<PlaceableType> types, Game game, List<Event> eventQueue) {
         for (PlaceableType type : types) {
             eventQueue.add(new ChangePlaceableCount(this, type, 1));
         }
     }
 
-    private void processInputs(Game game, List<Event> eventQueue) {
+    /**
+     * Processes all the input that was given to this Leader on a single turn.
+     *
+     * @param game       The game which can be used for logic.
+     * @param eventQueue A list of events to which events can be added.
+     */
+    protected void processInputs(Game game, List<Event> eventQueue) {
         Map map = game.getMap();
 
         for (LeaderInput input : inputs) {

@@ -4,6 +4,7 @@ import com.sstengine.country.Country;
 import com.sstengine.map.tile.Tile;
 import com.sstengine.player.leader.Leader;
 import com.sstengine.player.playerentity.PlayerEntity;
+import com.sstengine.util.Identifiable;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -19,7 +20,8 @@ import java.util.Random;
  *
  * @author Oscar de Leeuw
  */
-public class Team {
+public class Team implements Identifiable {
+    private int id;
     private Country country;
     private int score;
 
@@ -29,12 +31,19 @@ public class Team {
     /**
      * Constructor of Team class.
      *
-     * @param country The team of the team.
+     * @param id The id of this Team.
+     * @param country The Country of this Team.
      */
-    public Team(Country country) {
+    public Team(int id, Country country) {
+        this.id = id;
         this.country = country;
         this.score = 0;
         this.playerEntities = new ArrayList<>();
+    }
+
+    @Override
+    public int getId() {
+        return id;
     }
 
     /**
