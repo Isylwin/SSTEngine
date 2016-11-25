@@ -65,17 +65,29 @@ public class PlayerEntity extends GameObject implements Identifiable {
         return state;
     }
 
+    /**
+     * Sets the current State of the PlayerEntity.
+     *
+     * @param state The new State of the PlayerEntity.
+     */
     public void setState(State state) {
         this.state = state;
     }
 
+    /**
+     * Gets the Tile that this PlayerEntity lives on.
+     * @return The Tile that this PlayerEntity lives on.
+     */
     public Tile getTile() {
         return this.tile;
     }
 
+    /**
+     * Sets the Tile that this PlayerEntity lives on.
+     * @param tile The new Tile that this PlayerEntity lives on.
+     */
     public void setTile(Tile tile) {
         this.tile = tile;
-        //this.cameraLocation = tile.getLocation();
     }
 
     /**
@@ -96,6 +108,12 @@ public class PlayerEntity extends GameObject implements Identifiable {
         inputBuffer.addToInputMoves(move);
     }
 
+    /**
+     * Updates the PlayerEntity according to the buffered input and the current state of the PlayerEntity.
+     *
+     * @param game The game from which the logic can query information.
+     * @param eventQueue The queue of events that will be executed by the game.
+     */
     public void update(Game game, List<Event> eventQueue) {
         currentMove = inputBuffer.getNextInputMove();
 
