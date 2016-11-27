@@ -1,17 +1,13 @@
 package com.sstengine.map;
 
 import com.sstengine.map.tile.Tile;
-import crosstheborder.lib.enumeration.Country;
-import crosstheborder.lib.enumeration.Direction;
-import crosstheborder.lib.interfaces.Camera;
-import crosstheborder.lib.interfaces.TileObject;
-import crosstheborder.lib.player.PlayerEntity;
-import crosstheborder.lib.tileobject.Placeable;
+import com.sstengine.util.enumeration.CardinalDirection;
+import com.sstengine.util.enumeration.OrdinalDirection;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -34,16 +30,20 @@ public class Map {
 
     private Tile[][] tiles;
 
-    private Rectangle usaArea;
-    private Rectangle mexicoArea;
-
     private Map(Builder builder) {
         this.width = builder.width;
         this.height = builder.height;
-        this.usaArea = builder.usaArea;
-        this.mexicoArea = builder.mexicoArea;
         this.name = builder.name;
         this.tiles = builder.tiles;
+    }
+
+    /**
+     * Gets the name of the Map.
+     *
+     * @return A String that represents the name of the map.
+     */
+    public String getName() {
+        return this.name;
     }
 
     /**
@@ -65,34 +65,11 @@ public class Map {
     }
 
     /**
-     * Gets the area that is considered USA.
-     *
-     * @return A rectangle object that represents the USA area.
+     * Gets all the tiles on the map.
+     * @return All the tiles on the map.
      */
-    public Rectangle getUsaArea() {
-        return this.usaArea;
-    }
-
-    /**
-     * Get the area that is considered Mexican.
-     *
-     * @return A rectangle object that represents the Mexican area.
-     */
-    public Rectangle getMexicoArea() {
-        return this.mexicoArea;
-    }
-
-    /**
-     * Gets a camera/viewport of the map.
-     *
-     * @param center       The center of the camera.
-     * @param tileWidth    The width of the tiles in the camera in pixels.
-     * @param cameraWidth  The width of the camera in pixels.
-     * @param cameraHeight The height of the camera in pixels.
-     * @return A camera object.
-     */
-    public Camera getCamera(Point center, int tileWidth, int cameraWidth, int cameraHeight) {
-        return new CameraImpl(center, tileWidth, cameraWidth, cameraHeight, tiles);
+    public Tile[][] getAllTiles() {
+        return tiles;
     }
 
     /**
@@ -125,39 +102,6 @@ public class Map {
     }
 
     /**
-     * Gets a Tile inside an given area that is accessible to the given entity.
-     * Can be an infinite loop.
-     *
-     * @param area The area out of which a point is requested.
-     * @param entity The entity for which the tile should be accessible.
-     * @return A tile that is free.
-     */
-    public Tile getFreeTileInArea(Rectangle area, PlayerEntity entity) {
-
-        //Generate a random point within the given area.
-        int x = ThreadLocalRandom.current().nextInt(area.x, area.x + area.width);
-        int y = ThreadLocalRandom.current().nextInt(area.y, area.y + area.height);
-        Tile nextLocation = getTile(x, y);
-
-        //If the tile is occupied find a new location.
-        if (entity == null || nextLocation.isAccessible(entity)) {
-            return nextLocation;
-        } else {
-            return getFreeTileInArea(area, entity);
-        }
-    }
-
-    /**
-     * Gets a random tile in the given area.
-     *
-     * @param area The area out of which you want a tile.
-     * @return A tile in the area.
-     */
-    public Tile getTileInArea(Rectangle area) {
-        return getFreeTileInArea(area, null);
-    }
-
-    /**
      * Gets all the tiles that satisfy a given predicate.
      *
      * @param predicate The predicate to test the tile for.
@@ -179,42 +123,47 @@ public class Map {
     }
 
     /**
-     * Gets the neighbours of a Tile.
+     * Gets all the direct, non-diagonal, neighbours of a given tile.
+     * Uses the {@link CardinalDirection} enum to map every neighbour.
      *
      * @param tile The location of which to get the neighbours.
-     * @return A list of neighbours.
+     * @return A HashMap of all the the neighbouring tiles with the key being the cardinal direction of the neighbour relative to the given tile.
      */
-    public List<Tile> getNeighbours(Tile tile) {
-        List<Tile> ret = new ArrayList<>();
+    public java.util.Map<CardinalDirection, Tile> getCardinalNeighbours(Tile tile) {
+        java.util.Map<CardinalDirection, Tile> ret = new HashMap<>();
 
-        for (Direction dir : Direction.values()) {
-            Tile neighbour = getTile(tile.getLocation().x + dir.getCartesianRepresentation().x, tile.getLocation().y + dir.getCartesianRepresentation().y);
-            if (neighbour != null) {
-                ret.add(neighbour);
-            }
+        for (CardinalDirection dir : CardinalDirection.values()) {
+            int x = tile.getLocation().x + dir.getCartesianRepresentation().x;
+            int y = tile.getLocation().y + dir.getCartesianRepresentation().y;
+
+            Tile neighbour = getTile(x, y);
+
+            ret.put(dir, neighbour);
         }
 
         return ret;
     }
 
     /**
-     * Determines whether a given Placeable can be placed on the map.
+     * Gets all the surrounding, including diagonal, neighbours of a given tile.
+     * Uses the {@link OrdinalDirection} enum to map every neighbour.
      *
-     * @param tile  The tile the Placeable should be placed.
-     * @param placeable The placeable for which to run this check.
-     * @return True when the placeable can be placed at the given location.
+     * @param tile The tile for which to retrieve all the neighbours.
+     * @return A HashMap of all the neighbouring tiles with the key being the ordinal direction of the neighbour relative to the given tile.
      */
-    public boolean canPlacePlaceable(Tile tile, Placeable placeable) {
-        if (tile.getCountry() == Country.NONE && !tile.hasTileObject()) { //TODO Make a upgrade logic at some point.
-            Point location = tile.getLocation(); //TODO Set this shit in a getNeighbours method.
-            TileObject east = getTile(location.x + 1, location.y).getTileObject();
-            TileObject west = getTile(location.x - 1, location.y).getTileObject();
-            TileObject north = getTile(location.x, location.y - 1).getTileObject();
-            TileObject south = getTile(location.x, location.y + 1).getTileObject();
+    public java.util.Map<OrdinalDirection, Tile> getOrdinalNeighbours(Tile tile) {
+        java.util.Map<OrdinalDirection, Tile> ret = new HashMap<>();
 
-            return placeable.canPlaceWithNeighbours(east, west, north, south);
+        for (OrdinalDirection dir : OrdinalDirection.values()) {
+            int x = tile.getLocation().x + dir.getCartesianRepresentation().x;
+            int y = tile.getLocation().y + dir.getCartesianRepresentation().y;
+
+            Tile neighbour = getTile(x, y);
+
+            ret.put(dir, neighbour);
         }
-        return false;
+
+        return ret;
     }
 
     /**
@@ -224,8 +173,6 @@ public class Map {
         private String name;
         private int width;
         private int height;
-        private Rectangle usaArea;
-        private Rectangle mexicoArea;
         private Tile[][] tiles;
 
         /**
@@ -260,28 +207,6 @@ public class Map {
         }
 
         /**
-         * The area of the USA team.
-         *
-         * @param area The area of the USA team.
-         * @return This builder object.
-         */
-        public Builder setUsaArea(Rectangle area) {
-            this.usaArea = area;
-            return this;
-        }
-
-        /**
-         * Sets the area of the Mexico team.
-         *
-         * @param area The area of the Mexico team.
-         * @return This builder object.
-         */
-        public Builder setMexicoArea(Rectangle area) {
-            this.mexicoArea = area;
-            return this;
-        }
-
-        /**
          * Sets the tiles of the map.
          *
          * @param tiles A two dimensional array of tiles.
@@ -298,7 +223,7 @@ public class Map {
          * @return A map object.
          */
         public Map build() {
-            if (tiles == null || mexicoArea == null || usaArea == null || name == null || width == 0 || height == 0) {
+            if (tiles == null || name == null || width == 0 || height == 0) {
                 throw new IllegalArgumentException("All properties of the map need to be initialized.");
             }
 

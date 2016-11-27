@@ -1,31 +1,16 @@
 package com.sstengine.map.tile;
 
 /**
- * The TileType enum captures what type of tile a tile is.
- * Used to determine what texture to draw for a tile.
+ * The TileType interface is an interface that should be implemented by an enum.
+ * This enum should represent the possible types of tile there can be within the game.
  *
  * @author Oscar de Leeuw
  */
-public enum TileType {
-    DIRT, SAND, GRASS;
-
-    static {
-        DIRT.code = 'd';
-        SAND.code = 's';
-        GRASS.code = 'g';
-    }
-
+public interface TileType<T extends Enum> {
     /**
-     * The code for this TileType in the .ctbmap format.
-     */
-    private char code;
-
-    /**
-     * The code for the tile type in the .ctbmap file format.
+     * Gets the enum that is implementing this interface.
      *
-     * @return The code of the tile type.
+     * @return The enum that implemented this interface.
      */
-    public char getCode() {
-        return this.code;
-    }
+    T getType();
 }

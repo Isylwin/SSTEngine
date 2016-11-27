@@ -1,41 +1,51 @@
 package com.sstengine.map.tile;
 
-import crosstheborder.lib.enumeration.Country;
-import crosstheborder.lib.enumeration.TileType;
-import crosstheborder.lib.interfaces.Drawable;
-import crosstheborder.lib.interfaces.Painter;
-import crosstheborder.lib.interfaces.TileObject;
-import crosstheborder.lib.player.PlayerEntity;
+import com.sstengine.component.graphics.Graphics;
+import com.sstengine.component.graphics.GraphicsComponent;
+import com.sstengine.component.graphics.Painter;
+import com.sstengine.country.Country;
+import com.sstengine.event.framework.Event;
+import com.sstengine.obstacle.Obstacle;
+import com.sstengine.player.playerentity.PlayerEntity;
+import com.sstengine.util.Identifiable;
 
 import java.awt.*;
-import java.io.File;
+import java.util.List;
 
 /**
  *  Represents a single tile that composes the map.
  *  The tile has a certain location.
- *  Can have a {@link TileObject} that fills the tile.
  *
  *  @author Oscar de Leeuw
  */
-public class Tile implements Drawable {
-    private TileObject tileObject;
-    private PlayerEntity playerEntity;
+public final class Tile implements Graphics, Identifiable {
+    private int id;
     private TileType type;
-    private Country country;
     private Point location;
+    private GraphicsComponent graphics;
+
+    private Obstacle obstacle;
+    private PlayerEntity playerEntity;
+    private Country country;
+
 
     /**
-     * Creates a new tile object with the given location, country and type.
+     * Creates a new tile object with the given location, team and type.
      *
+     * @param id The id of this tile.
      * @param type The type of the tile.
-     * @param country The country of this tile.
      * @param location The location of the tile.
      */
-    public Tile(TileType type, Country country, Point location) {
+    public Tile(int id, GraphicsComponent graphics, TileType type, Point location) {
+        this.id = id;
+        this.graphics = graphics;
         this.type = type;
-        this.country = country;
         this.location = location;
-        this.country.setTile(this);
+    }
+
+    @Override
+    public int getId() {
+        return this.id;
     }
 
     /**
@@ -48,12 +58,25 @@ public class Tile implements Drawable {
     }
 
     /**
-     * Gets the country that this tile belongs to.
+     * Gets the type of the Tile.
      *
-     * @return
+     * @return A TileType that represents the type of the tile.
+     */
+    public TileType getType() {
+        return type;
+    }
+
+    /**
+     * Gets the team that this tile belongs to.
+     *
+     * @return The team that belongs to this tile.
      */
     public Country getCountry() {
         return this.country;
+    }
+
+    public void setCountry(Country country) {
+        this.country = country;
     }
 
     /**
@@ -78,33 +101,33 @@ public class Tile implements Drawable {
     }
 
     /**
-     * Returns the {@link TileObject} this tile has. Returns null if it does not have a {@link TileObject}.
+     * Returns the {@link Obstacle} this tile has. Returns null if it does not have a {@link Obstacle}.
      *
-     * @return The {@link TileObject} object. Can be null.
+     * @return The {@link Obstacle} object. Can be null.
      */
-    public TileObject getTileObject() {
-        return this.tileObject;
+    public Obstacle getObstacle() {
+        return this.obstacle;
     }
 
     /**
-     * Sets the {@link TileObject} for this tile.
+     * Sets the {@link Obstacle} for this tile.
      *
      * @param tileObject The object that fills the tile.
      */
-    public void setTileObject(TileObject tileObject) {
+    public void setObstacle(Obstacle tileObject) {
         if (tileObject != null) {
             tileObject.setTile(this);
         }
-        this.tileObject = tileObject;
+        this.obstacle = tileObject;
     }
 
     /**
-     * Returns whether the tile has a {@link TileObject} or not.
+     * Returns whether the tile has a {@link Obstacle} or not.
      *
-     * @return True if the tile has a {@link TileObject}. False if it doesn't have a {@link TileObject}.
+     * @return True if the tile has a {@link Obstacle}. False if it doesn't have a {@link Obstacle}.
      */
-    public boolean hasTileObject() {
-        return this.tileObject != null;
+    public boolean hasObstacle() {
+        return this.obstacle != null;
     }
 
     /**
@@ -117,21 +140,49 @@ public class Tile implements Drawable {
     }
 
     /**
+     * Returns whether this tile has a Country associated with it.
+     *
+     * @return True when this tile has a Country associated with it.
+     */
+    public boolean hasCountry() {
+        return this.country != null;
+    }
+
+    /**
      * Gets the cost for moving into this tile.
      *
      * @param entity The entity that will be moving into this tile.
      * @return The cost for moving into this tile in server ticks.
      */
-    public int getCost(PlayerEntity entity) throws Exception {
-        int countryCost = country.getCost(entity);
+    /*public int getCost(PlayerEntity entity) throws Exception {
+        int countryCost = team.getCost(entity);
         int playerEntityCost = playerEntity != null ? playerEntity.getCost(entity) : 0;
-        int tileObjectCost = tileObject != null ? tileObject.getCost(entity) : 0;
+        int tileObjectCost = obstacle != null ? obstacle.getCost(entity) : 0;
 
         if (countryCost == -1 || playerEntityCost == -1 || tileObjectCost == -1) {
             throw new Exception("Undefined cost, possibly cost request to an tile that is inaccessible"); //TODO make a custom exception.
         }
 
         return 1 + countryCost + playerEntityCost + tileObjectCost;
+        return 1;
+    }*/
+
+    /**
+     * Calls all the interactWith methods on all GameObjects that exist on this tile.
+     *
+     * @param entity     The entity that is interacting with the GameObject.
+     * @param eventQueue The queue of events to which the interaction can add events.
+     */
+    public void interactWithGameObjects(PlayerEntity entity, List<Event> eventQueue) {
+        if (playerEntity != null) {
+            playerEntity.interactWith(entity, eventQueue);
+        }
+        if (obstacle != null) {
+            obstacle.interactWith(entity, eventQueue);
+        }
+        if (country != null) {
+            country.interactWith(entity, eventQueue);
+        }
     }
 
     /**
@@ -141,25 +192,25 @@ public class Tile implements Drawable {
      * @return True when the entity can enter the tile.
      */
     public boolean isAccessible(PlayerEntity entity) {
-        boolean tileObjectAccess = tileObject == null || tileObject.isAccessible(entity);
+        boolean tileObjectAccess = obstacle == null || obstacle.isAccessible(entity);
         boolean playerEntityAccess = playerEntity == null || playerEntity.isAccessible(entity);
-        boolean countryAccess = country.isAccessible(entity);
+        boolean countryAccess = country == null || country.isAccessible(entity);
 
         return countryAccess && tileObjectAccess && playerEntityAccess;
     }
 
     @Override
-    public void draw(Painter painter, Point location, int tileWidth) {
-        File file = ImageFinder.getInstance().getImage(type);
-        painter.drawImage(file, location, tileWidth, tileWidth);
-
-        if (hasTileObject()) {
-            tileObject.draw(painter, location, tileWidth);
+    public void render(Painter painter, Point location, int width, int height) {
+        if (country != null) {
+            country.render(painter, location, width, height);
         }
-        if (hasPlayerEntity()) {
-            playerEntity.draw(painter, location, tileWidth);
+        if (obstacle != null) {
+            obstacle.render(painter, location, width, height);
+        }
+        if (playerEntity != null) {
+            playerEntity.render(painter, location, width, height);
         }
 
-        country.draw(painter, location, tileWidth);
+        graphics.render(this, painter, location, width, height);
     }
 }

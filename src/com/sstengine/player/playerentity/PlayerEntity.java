@@ -1,39 +1,50 @@
 package com.sstengine.player.playerentity;
 
-import com.sstengine.GameSettings;
-import com.sstengine.Interactable;
-import com.sstengine.drawing.Drawable;
-import com.sstengine.drawing.Painter;
+import com.sstengine.Game;
+import com.sstengine.GameObject;
+import com.sstengine.component.graphics.GraphicsComponent;
+import com.sstengine.component.physical.PhysicalComponent;
+import com.sstengine.event.framework.Event;
 import com.sstengine.map.tile.Tile;
-import com.sstengine.player.Player;
-import com.sstengine.Team;
-
+import com.sstengine.player.playerentity.states.NormalState;
+import com.sstengine.util.Identifiable;
 
 import java.awt.*;
+import java.util.List;
 
 /**
- * Player entity is the super class for the Mexican and border patrol.
+ * The PlayerEntity class defines what constitutes as a PlayerEntity within the SSTEngine.
+ * PlayerEntity extends the GameObject class.
+ *
+ * A PlayerEntity exists on a tile.
+ * A PlayerEntity has a certain state which defines how it reacts to input.
  *
  * @author Oscar de Leeuw
  */
-public abstract class PlayerEntity extends Player implements Drawable, Interactable {
+public class PlayerEntity extends GameObject implements Identifiable {
+    private int id;
     private Tile tile;
     private InputBuffer inputBuffer;
-    private boolean canMove = true;
-    //The amount of ticks till the player can move again.
-    private int canMoveTicks;
+    private MoveDirection currentMove;
+    private State state;
 
     /**
-     * Abstract constructor that passes the name to the Player class.
-     * Calls the {@link Player#Player(String, Team, GameSettings)} constructor.
+     * Creates a new PlayerEntity.
+     * Calls the constructor of {@link GameObject}.
      *
-     * @param name The name of the player.
-     * @param team The team this player is part of.
-     * @param settings The settings of the game.
+     * @param physical The physical component of the PlayerEntity.
+     * @param graphics The graphical component of the PlayerEntity.
      */
-    public PlayerEntity(String name, Team team, GameSettings settings) {
-        super(name, team, settings);
+    public PlayerEntity(int id, PhysicalComponent physical, GraphicsComponent graphics) {
+        super(physical, graphics);
+        this.id = id;
+        this.state = new NormalState();
         this.inputBuffer = new InputBuffer();
+    }
+
+    @Override
+    public int getId() {
+        return id;
     }
 
     /**
@@ -47,40 +58,45 @@ public abstract class PlayerEntity extends Player implements Drawable, Interacta
     }
 
     /**
-     * Gets whether this entity can move.
-     *
-     * @return True when the entity can move.
+     * Gets the current State of the PlayerEntity.
+     * @return The current State of the PlayerEntity.
      */
-    public boolean canMove() {
-        return this.canMove; //TODO make the update method in game use this method.
+    public State getState() {
+        return state;
     }
 
-    @Override
+    /**
+     * Sets the current State of the PlayerEntity.
+     *
+     * @param state The new State of the PlayerEntity.
+     */
+    public void setState(State state) {
+        this.state = state;
+    }
+
+    /**
+     * Gets the Tile that this PlayerEntity lives on.
+     * @return The Tile that this PlayerEntity lives on.
+     */
     public Tile getTile() {
         return this.tile;
     }
 
-    @Override
+    /**
+     * Sets the Tile that this PlayerEntity lives on.
+     * @param tile The new Tile that this PlayerEntity lives on.
+     */
     public void setTile(Tile tile) {
         this.tile = tile;
     }
 
     /**
-     * Gets the next location this entity wants to move to.
+     * Gets the current move of this PlayerEntity.
      *
-     * @return A point that represents the next location.
+     * @return The current move of this PlayerEntity.
      */
-    public Point getNextMove() {
-        MoveDirection moveDirection = inputBuffer.getNextInputMove();
-
-        //Exit the method as quickly as possible when there should be no movement.
-        if (moveDirection == MoveDirection.NONE || !canMove) {
-            return null;
-        }
-
-        Point currentLocation = getLocation();
-        Point translation = moveDirection.getTranslation();
-        return new Point(currentLocation.x + translation.x, currentLocation.y + translation.y);
+    public MoveDirection getCurrentMove() {
+        return this.currentMove;
     }
 
     /**
@@ -93,51 +109,14 @@ public abstract class PlayerEntity extends Player implements Drawable, Interacta
     }
 
     /**
-     * Decreases the timer on the movement timer if the entity can't move.
-     */
-    public void decreaseMoveTimer() {
-        //If the player can't move decrease the move timer.
-        if (!canMove) {
-            //Decrease by 1 tick
-            canMoveTicks--;
-
-            if (canMoveTicks <= 0) {
-                canMove = true;
-                canMoveTicks = 0;
-            }
-        }
-    }
-
-    /**
-     * Immobilizes the player and sets the timer for when the player can move again.
+     * Updates the PlayerEntity according to the buffered input and the current state of the PlayerEntity.
      *
-     * @param seconds The amount of seconds the player is immobile.
+     * @param game The game from which the logic can query information.
+     * @param eventQueue The queue of events that will be executed by the game.
      */
-    public void immobilize(int seconds) {
-        canMove = false;
-        canMoveTicks = serverTickRate * seconds;
-    }
+    public void update(Game game, List<Event> eventQueue) {
+        currentMove = inputBuffer.getNextInputMove();
 
-    /**
-     * {@inheritDoc}
-     * Returns a clone of the location of the object.
-     */
-    @Override
-    public Point getCameraLocation() {
-        return (Point) this.tile.getLocation().clone();
-    }
-
-    /**
-     * {@inheritDoc}
-     * Is intentionally left blank. Camera movement for player entities is not supported.
-     */
-    @Override
-    public void moveCameraLocation(MoveDirection md) {
-        //Intentionally left blank. Cannot support moving the camera due to the way player location is updated.
-    }
-
-    @Override
-    public void draw(Painter painter, Point location, int tileWidth) {
-        painter.drawImage(ImageFinder.getInstance().getImage(this), location, tileWidth, tileWidth);
+        state.handleInput(this, game.getMap(), eventQueue);
     }
 }

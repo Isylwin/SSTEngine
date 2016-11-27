@@ -1,19 +1,5 @@
 package com.sstengine.computer;
 
-import crosstheborder.lib.Map;
-import crosstheborder.lib.Tile;
-import crosstheborder.lib.computer.algorithms.AStarAlgorithm;
-import crosstheborder.lib.enumeration.Country;
-import crosstheborder.lib.enumeration.MoveDirection;
-import crosstheborder.lib.interfaces.Interactable;
-import crosstheborder.lib.player.PlayerEntity;
-
-import java.awt.*;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 //TODO make sure computers can climb a wall. Or rather, know that a certain move is going to cost more and thus repeat the move.
 //TODO refactor this whole mess into nice little methods.
@@ -21,7 +7,7 @@ import java.util.stream.Collectors;
 /**
  * @author Oscar de Leeuw
  */
-public class Computer {
+/*public class Computer {
     private final static int COMPUTING_TIMEOUT = 5;
     private int timesComputed;
 
@@ -39,11 +25,11 @@ public class Computer {
         this.path = new Path(new AStarAlgorithm());
     }
 
-    /**
+    *//**
      * Computes a move for this computer.
      *
      * @param map The map on which to compute a move.
-     */
+ *//*
     public void computeMove(Map map) {
         //If the possible targets have never been set or is empty, reset the computer.
         if (possibleTargets == null || possibleTargets.isEmpty()) {
@@ -53,7 +39,7 @@ public class Computer {
 
         //Make sure that the recursive call is not called too much.
         //Also check whether the computer can actually move.
-        if (timesComputed >= COMPUTING_TIMEOUT || !entity.canMove()) {
+        if (timesComputed >= COMPUTING_TIMEOUT) {
             return;
         }
         timesComputed++;
@@ -71,7 +57,7 @@ public class Computer {
         }
 
         //If the next location is not accessible then try to move around it.
-        /*if (!nextTile.isAccessible(entity)) {
+        *//*if (!nextTile.isAccessible(entity)) {
             path.precedePath(currentTile, map, entity);
             computeMove(map);
             return;
@@ -81,7 +67,7 @@ public class Computer {
         if (!verifyPathEndsInGoal(path.getEndTile())) {
             //Recalculate the path to the goal.
             path.extendPath(currentTile, currentTarget.getTile(), map, entity);
-        }*/
+        }*//*
 
         //If the next location is accessible, push the input to the buffer.
         if (nextTile.isAccessible(entity)) {
@@ -93,11 +79,11 @@ public class Computer {
         path.age();
     }
 
-    /**
+    *//**
      * Pushes input to the input buffer.
      *
      * @param nextLoc The location to move to next.
-     */
+ *//*
     private void moveTo(Point nextLoc) {
         Point currentLoc = entity.getLocation();
 
@@ -107,44 +93,38 @@ public class Computer {
         entity.pushInput(md);
     }
 
-    /**
+    *//**
      * Checks whether the end of the path is still the same as the location of the target.
      *
      * @param endOfPath The end of the path.
      * @return True when the end of the path coincides with the current target.
-     */
+ *//*
     private boolean verifyPathEndsInGoal(Tile endOfPath) {
-        if (endOfPath != currentTarget.getTile()) {
-            return false;
-        }
-        return true;
+        return endOfPath == currentTarget.getTile();
     }
 
-    /**
+    *//**
      * Verifies that a goal can be reached by this entity.
      *
      * @param goal The goal.
      * @return True when the goal can be reached.
-     */
+ *//*
     private boolean verifyGoalCanBeReached(Tile goal) {
         return goal.isAccessible(entity);
     }
 
-    /**
+    *//**
      * Verifies that the current target the closest target.
      *
      * @return True when the closest target is the current target.
-     */
+ *//*
     private boolean verifyClosestTargetIsGoal() {
-        if (findClosestTarget() != currentTarget) {
-            return false;
-        }
-        return true;
+        return findClosestTarget() == currentTarget;
     }
 
-    /**
+    *//**
      * Finds the closest target that is accessible to the computer as defined by the heuristic function.
-     */
+ *//*
     private Interactable findClosestTarget() {
         //Get only the targets that are accessible.
         List<Interactable> targets = possibleTargets.stream().filter(x -> x.getTile().isAccessible(entity)).collect(Collectors.toList());
@@ -173,18 +153,18 @@ public class Computer {
         return false;
     }
 
-    /**
+    *//**
      * Resets all the possible targets of the computer.
      * Requires the map of the game in order to acquire targets.
      *
      * @param map The map of the game.
-     */
+ *//*
     public void resetComputer(Map map) {
         List<Tile> possibleGoals;
         possibleTargets = new ArrayList<>();
         Point currentLoc = entity.getLocation();
 
-        if (entity.getTeam().getCountry() == Country.MEX) {
+       *//* if (entity.getTeam().getCountry() == Country.MEX) {
             goalPredicate = (tile -> tile.getCountry() == Country.USA);
             goalHeuristic = ((x, y) -> ((Double) (currentLoc.distance(x.getTile().getLocation()))).compareTo(currentLoc.distance(y.getTile().getLocation())));
 
@@ -199,10 +179,10 @@ public class Computer {
             //Get all the tiles that satisfy the predicate.
             possibleGoals = map.getTiles(goalPredicate);
             possibleTargets.addAll(possibleGoals.stream().map(Tile::getPlayerEntity).collect(Collectors.toList()));
-        }
+        }*//*
 
         currentTarget = findClosestTarget();
-        //TODO country cannot be a valid target as it is an enum and enums are static, thus all tiles are the same.
+        //TODO team cannot be a valid target as it is an enum and enums are static, thus all tiles are the same.
     }
 
-}
+}*/

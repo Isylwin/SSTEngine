@@ -1,8 +1,9 @@
 package com.sstengine.computer;
 
-import crosstheborder.lib.Map;
-import crosstheborder.lib.Tile;
-import crosstheborder.lib.player.PlayerEntity;
+
+import com.sstengine.map.Map;
+import com.sstengine.map.tile.Tile;
+import com.sstengine.player.playerentity.PlayerEntity;
 
 import java.util.Deque;
 

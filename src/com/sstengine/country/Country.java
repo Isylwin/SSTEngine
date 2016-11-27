@@ -1,96 +1,83 @@
 package com.sstengine.country;
 
-import com.sstengine.Interactable;
-import com.sstengine.Team;
-import crosstheborder.lib.ImageFinder;
-import crosstheborder.lib.Team;
-import crosstheborder.lib.Tile;
-import crosstheborder.lib.interfaces.Drawable;
-import crosstheborder.lib.interfaces.GameManipulator;
-import crosstheborder.lib.interfaces.Interactable;
-import crosstheborder.lib.interfaces.Painter;
-import crosstheborder.lib.player.PlayerEntity;
+import com.sstengine.GameObject;
+import com.sstengine.component.graphics.GraphicsComponent;
+import com.sstengine.component.physical.PhysicalComponent;
+import com.sstengine.map.tile.Tile;
+import com.sstengine.player.playerentity.PlayerEntity;
 
-import java.awt.*;
-import java.io.File;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
- * Enum for capturing the Countries that can exist within the game.
+ * The Country class represents a team that exists within the game.<br>
+ * Every country has a certain amount of land in tiles.<br>
+ * Every country should specify behaviour entering and interacting with a tile that belongs to the country.<br>
+ * Every country should specify how it should be drawn graphically.<br>
  *
  * @author Oscar de Leeuw
  */
-public enum Country implements Drawable, Interactable {
-    USA, MEX, NONE;
+public class Country extends GameObject {
+    private CountryTag tag;
+    private List<Tile> land;
 
-    private Tile tile;
-
-    @Override
-    public Tile getTile() {
-        return this.tile;
-    }
-
-    @Override
-    public void setTile(Tile tile) {
-        this.tile = tile;
+    /**
+     * Creates a country.
+     * Calls the GameObject constructor.
+     *
+     * @param physical The physical component of this object.
+     * @param graphics The graphical component of this object.
+     * @param tag      The tag that belongs to this country.
+     */
+    public Country(PhysicalComponent physical, GraphicsComponent graphics, CountryTag tag) {
+        super(physical, graphics);
+        this.tag = tag;
+        this.land = new ArrayList<>();
     }
 
     /**
-     * {@inheritDoc}
-     * <p>
-     * Handles the interaction between a country and an entity.
-     * <p>
-     *     Calls the follow methods on GameManipulator:
-     *     <ul>
-     *         <li>Calls: {@link GameManipulator#increaseScore(Team)} when a MEX enters the USA.</li>
-     *         <li>Calls: {@link GameManipulator#respawnPlayer(PlayerEntity)} when a MEX enters the USA.</li>
-     *     </ul>
-     * </p>
-     * Will return false when a Mexican has scored.
+     * Gets the CountryTag of this country.
+     * @return The CountryTag of this country.
      */
-    @Override
-    public boolean interactWith(PlayerEntity entity, GameManipulator game) {
-        switch (this) {
-            case USA:
-                if (entity.getTeam().getCountry() == MEX) {
-                    game.increaseScore(entity.getTeam());
-                    game.respawnPlayer(entity);
-                    return false;
-                }
-        }
-
-        return true;
+    public CountryTag getTag() {
+        return tag;
     }
 
     /**
-     * {@inheritDoc}
-     * <p>
-     * Will only return false when an USA entity tries to enter MEX.
+     * Gets the list of tiles that belongs to this country.
+     * @return A list of tiles that represents all the land that belongs to this country.
      */
-    @Override
-    public boolean isAccessible(PlayerEntity entity) {
-        switch (this) {
-            case MEX:
-                if (entity.getTeam().getCountry() == USA) {
-                    return false;
-                }
-        }
-
-        return true;
+    public List<Tile> getLand() {
+        return Collections.unmodifiableList(land);
     }
 
-    @Override
-    public int getCost(PlayerEntity entity) {
-        if (!isAccessible(entity)) {
-            return -1;
+    /**
+     * Adds an tile to this country.
+     * @param tile The tile that should be added to the land of this country.
+     */
+    public void addLand(Tile tile) {
+        if (!land.contains(tile)) {
+            land.add(tile);
         }
-
-        return 0;
     }
 
+    /**
+     * Gets a list of all the Tiles that belong to this Country and are accessible to a given PlayerEntity.
+     * Uses the {@link Tile#isAccessible(PlayerEntity)} method to determine accessibility.
+     *
+     * @param entity The PlayerEntity for which the accessibility should be checked.
+     * @return A List of all the Tiles that are accessible for the given PlayerEntity.
+     * @throws IllegalStateException When there are no Tiles that are accessible to the given PlayerEntity.
+     */
+    public List<Tile> getAccessibleLand(PlayerEntity entity) throws IllegalStateException {
+        List<Tile> ret = land.stream().filter(t -> t.isAccessible(entity)).collect(Collectors.toList());
 
-    @Override
-    public void draw(Painter painter, Point location, int tileWidth) {
-        File file = ImageFinder.getInstance().getImage(this);
-        painter.drawImage(file, location, tileWidth, tileWidth);
+        if (ret.size() == 0) {
+            throw new IllegalStateException("No tiles are accessible to the given PlayerEntity");
+        }
+
+        return ret;
     }
 }

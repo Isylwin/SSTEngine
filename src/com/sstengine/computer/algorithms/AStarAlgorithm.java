@@ -1,10 +1,13 @@
 package com.sstengine.computer.algorithms;
 
-import crosstheborder.lib.Tile;
-import crosstheborder.lib.computer.PathingAlgorithm;
-import crosstheborder.lib.player.PlayerEntity;
+
+import com.sstengine.computer.PathingAlgorithm;
+import com.sstengine.map.Map;
+import com.sstengine.map.tile.Tile;
+import com.sstengine.player.playerentity.PlayerEntity;
 
 import java.util.*;
+
 
 /**
  * Credit goes to http://www.redblobgames.com/pathfinding/a-star/implementation.html
@@ -102,12 +105,12 @@ public class AStarAlgorithm implements PathingAlgorithm {
             }
 
             //Foreach neighbour of the current location perform the following.
-            for (Tile next : map.getNeighbours(current)) {
+            for (Tile next : map.getCardinalNeighbours(current).values()) {
                 //Check whether the tile can be accessed.
                 if (next.isAccessible(entity)) {
                     //Calculate the cost of moving to the next location.
                     //Currently 1 since the map will only return tiles which can be freely moved to.
-                    double newCost = costSoFar.get(current) + next.getCost(entity);
+                    double newCost = costSoFar.get(current); //+ next.getCost(entity);
                     //If the next location has not been evaluated or the newCost is lower than previously evaluated.
                     if (!costSoFar.containsKey(next) || newCost < costSoFar.get(next)) {
                         //Add the location to the costSoFar HashMap.
