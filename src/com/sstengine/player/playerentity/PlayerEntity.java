@@ -6,8 +6,11 @@ import com.sstengine.component.graphics.GraphicsComponent;
 import com.sstengine.component.physical.PhysicalComponent;
 import com.sstengine.event.framework.Event;
 import com.sstengine.map.tile.Tile;
+import com.sstengine.player.Playable;
+import com.sstengine.player.Player;
+import com.sstengine.player.PlayerInput;
 import com.sstengine.player.playerentity.states.NormalState;
-import com.sstengine.util.Identifiable;
+import com.sstengine.team.Team;
 
 import java.awt.*;
 import java.util.List;
@@ -21,9 +24,11 @@ import java.util.List;
  *
  * @author Oscar de Leeuw
  */
-public class PlayerEntity extends GameObject implements Identifiable {
-    private int id;
+public class PlayerEntity extends GameObject implements Playable {
+    private Player player;
+
     private Tile tile;
+
     private InputBuffer inputBuffer;
     private MoveDirection currentMove;
     private State state;
@@ -35,16 +40,24 @@ public class PlayerEntity extends GameObject implements Identifiable {
      * @param physical The physical component of the PlayerEntity.
      * @param graphics The graphical component of the PlayerEntity.
      */
-    public PlayerEntity(int id, PhysicalComponent physical, GraphicsComponent graphics) {
+    public PlayerEntity(PhysicalComponent physical, GraphicsComponent graphics) {
         super(physical, graphics);
-        this.id = id;
         this.state = new NormalState();
         this.inputBuffer = new InputBuffer();
     }
 
     @Override
     public int getId() {
-        return id;
+        return player.getId();
+    }
+
+    /**
+     * Gets the Team that this PlayerEntity belongs to.
+     *
+     * @return The Team that the PlayerEntity belongs to.
+     */
+    public Team getTeam() {
+        return player.getTeam();
     }
 
     /**
@@ -99,24 +112,40 @@ public class PlayerEntity extends GameObject implements Identifiable {
         return this.currentMove;
     }
 
-    /**
-     * Pushes a MoveDirection to the {@link InputBuffer}.
-     *
-     * @param move The MoveDirection that should be pushed to the InputBuffer.
-     */
-    public void pushInput(MoveDirection move) {
-        inputBuffer.addToInputMoves(move);
+    @Override
+    public Player getPlayer() {
+        return this.player;
+    }
+
+    @Override
+    public void setPlayer(Player player) {
+        this.player = player;
     }
 
     /**
-     * Updates the PlayerEntity according to the buffered input and the current state of the PlayerEntity.
+     * {@inheritDoc}
      *
-     * @param game The game from which the logic can query information.
-     * @param eventQueue The queue of events that will be executed by the game.
+     * Will throw an IllegalArgumentException when the input is not a {@link MoveDirection}.
+     * It will push the MoveDirection to the {@link InputBuffer} if it is a MoveDirection.
      */
+    @Override
+    public void pushInput(PlayerInput input) throws IllegalArgumentException {
+        if (input instanceof MoveDirection) {
+            inputBuffer.addToInputMoves((MoveDirection) input);
+        } else {
+            throw new IllegalArgumentException("Input needs to be of the class MoveDirection.");
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * Updates the PlayerEntity according to the buffered input and the current state of the PlayerEntity.
+     */
+    @Override
     public void update(Game game, List<Event> eventQueue) {
         currentMove = inputBuffer.getNextInputMove();
 
-        state.handleInput(this, game.getMap(), eventQueue);
+        state.handleInput(this, currentMove, game.getMap(), eventQueue);
     }
 }

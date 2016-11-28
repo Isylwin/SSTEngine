@@ -32,7 +32,7 @@ public class CountryTest {
 
     @Test
     public void getLand() throws Exception {
-        Tile tile = new Tile(null, null, new Point(0, 0));
+        Tile tile = new Tile(1, null, null, new Point(0, 0));
         countryMex.addLand(tile);
         Tile mexLand = countryMex.getLand().get(0);
 

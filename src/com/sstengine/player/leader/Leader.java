@@ -8,7 +8,9 @@ import com.sstengine.map.Map;
 import com.sstengine.map.tile.Tile;
 import com.sstengine.obstacle.placeableobstacle.PlaceableObstacle;
 import com.sstengine.obstacle.placeableobstacle.PlaceableType;
-import com.sstengine.util.Identifiable;
+import com.sstengine.player.Playable;
+import com.sstengine.player.Player;
+import com.sstengine.player.PlayerInput;
 import com.sstengine.util.enumeration.OrdinalDirection;
 
 import java.util.ArrayList;
@@ -20,26 +22,25 @@ import java.util.List;
  *
  *  @author Oscar de Leeuw
  */
-public class Leader implements Identifiable {
-    private int id;
+public class Leader implements Playable {
+    private Player player;
+
     private PlaceableManager manager;
     private List<LeaderInput> inputs;
 
     /**
      * Creates a new Leader object with the given name.
      *
-     * @param id The id of this Leader.
      * @param manager The PlaceableManager of this Leader.
      */
-    public Leader(int id, PlaceableManager manager) {
-        this.id = id;
+    public Leader(PlaceableManager manager) {
         this.manager = manager;
         this.inputs = new ArrayList<>();
     }
 
     @Override
     public int getId() {
-        return id;
+        return player.getId();
     }
 
     /**
@@ -51,22 +52,32 @@ public class Leader implements Identifiable {
         return manager;
     }
 
-    /**
-     * Pushes input to the Leader.
-     *
-     * @param input The input that should be pushed to the Leader.
-     */
-    public void pushInput(LeaderInput input) {
-        inputs.add(input);
+    @Override
+    public Player getPlayer() {
+        return this.player;
+    }
+
+    @Override
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
+
+    @Override
+    public void pushInput(PlayerInput input) throws IllegalArgumentException {
+        if (input instanceof LeaderInput) {
+            inputs.add((LeaderInput) input);
+        } else {
+            throw new IllegalArgumentException("Input should be of the LeaderInput class.");
+        }
     }
 
     /**
-     * Updates the Leader.
-     * Will first update the PlaceableManager counters and then process inputs.
+     * {@inheritDoc}
      *
-     * @param game       The game which can be used for logic.
-     * @param eventQueue A list of events to which events can be added.
+     * Will first update the PlaceableManager counters with the {@link Leader#createPlaceableEvents(List, Game, List)} method
+     * and then process inputs with the {@link Leader#processInputs(Game, List)} method.
      */
+    @Override
     public void update(Game game, List<Event> eventQueue) {
         createPlaceableEvents(manager.getUpdatedPlaceables(), game, eventQueue);
         processInputs(game, eventQueue);
@@ -101,7 +112,7 @@ public class Leader implements Identifiable {
 
             java.util.Map<OrdinalDirection, Tile> neighbours = map.getOrdinalNeighbours(tile);
 
-            if (manager.canPlace(obstacle.getType()) && obstacle.canPlaceWithNeighbours(neighbours)) {
+            if (manager.canPlace(obstacle.getType()) && obstacle.canPlaceWithNeighbours(tile, neighbours)) {
                 eventQueue.add(new ChangeObstacleTileEvent(obstacle, tile));
                 eventQueue.add(new ChangePlaceableCount(this, obstacle.getType(), -1));
             }
