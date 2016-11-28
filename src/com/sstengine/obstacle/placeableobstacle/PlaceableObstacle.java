@@ -45,9 +45,10 @@ public class PlaceableObstacle extends Obstacle {
      * Checks what the placement rules are of a placeable.
      *
      * @param neighbours The neighbours of this placeable.
+     * @param tile The tile this obstacle will be placed upon.
      * @return A boolean that indicates whether the placeable can be placed.
      */
-    public boolean canPlaceWithNeighbours(Map<OrdinalDirection, Tile> neighbours) {
-        return placementStrategy.execute(this, neighbours);
+    public boolean canPlaceWithNeighbours(Tile tile, Map<OrdinalDirection, Tile> neighbours) {
+        return placementStrategy.execute(this, neighbours, tile);
     }
 }

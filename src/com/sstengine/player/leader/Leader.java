@@ -101,7 +101,7 @@ public class Leader implements Identifiable {
 
             java.util.Map<OrdinalDirection, Tile> neighbours = map.getOrdinalNeighbours(tile);
 
-            if (manager.canPlace(obstacle.getType()) && obstacle.canPlaceWithNeighbours(neighbours)) {
+            if (manager.canPlace(obstacle.getType()) && obstacle.canPlaceWithNeighbours(tile, neighbours)) {
                 eventQueue.add(new ChangeObstacleTileEvent(obstacle, tile));
                 eventQueue.add(new ChangePlaceableCount(this, obstacle.getType(), -1));
             }

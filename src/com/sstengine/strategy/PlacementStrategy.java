@@ -13,11 +13,13 @@ import java.util.Map;
  */
 public interface PlacementStrategy {
     /**
-     * Executes a PlacementStrategy. This defines whether a placeable should be placed within the world given the neighbouring tiles.
+     * Executes a PlacementStrategy.
+     * This defines whether a placeable should be placed within the world given the tile and the neighbouring tiles.
      *
      * @param caller     The PlaceableObstacle that is being placed.
      * @param neighbours The neighbours of the PlaceableObstacle that is being placed.
+     * @param tile The tile this obstacle will be placed upon.
      * @return True when the placeable can be placed, false when it cannot be placed.
      */
-    boolean execute(PlaceableObstacle caller, Map<OrdinalDirection, Tile> neighbours);
+    boolean execute(PlaceableObstacle caller, Map<OrdinalDirection, Tile> neighbours, Tile tile);
 }
