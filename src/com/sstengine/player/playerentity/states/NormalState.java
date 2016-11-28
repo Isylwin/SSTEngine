@@ -20,15 +20,15 @@ import java.util.List;
 public class NormalState extends State {
 
     @Override
-    public void handleInput(PlayerEntity player, Map map, List<Event> eventQueue) {
+    public void handleInput(PlayerEntity player, MoveDirection nextMove, Map map, List<Event> eventQueue) {
         Point currentLocation = player.getLocation();
-        MoveDirection move = player.getCurrentMove();
-        Tile nextTile = map.getTile(move.getLocationWithMove(currentLocation));
+
+        Tile nextTile = map.getTile(nextMove.getLocationWithMove(currentLocation));
 
         if(nextTile.isAccessible(player)) {
             eventQueue.add(new ChangePlayerEntityTileEvent(player, nextTile));
         }
 
-        //TODO Handle interactions.
+        nextTile.interactWithGameObjects(player, eventQueue);
     }
 }

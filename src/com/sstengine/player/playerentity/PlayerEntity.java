@@ -146,6 +146,6 @@ public class PlayerEntity extends GameObject implements Playable {
     public void update(Game game, List<Event> eventQueue) {
         currentMove = inputBuffer.getNextInputMove();
 
-        state.handleInput(this, game.getMap(), eventQueue);
+        state.handleInput(this, currentMove, game.getMap(), eventQueue);
     }
 }

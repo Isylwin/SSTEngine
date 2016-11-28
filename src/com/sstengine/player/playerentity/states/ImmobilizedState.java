@@ -3,6 +3,7 @@ package com.sstengine.player.playerentity.states;
 import com.sstengine.event.events.ChangePlayerEntityStateEvent;
 import com.sstengine.event.framework.Event;
 import com.sstengine.map.Map;
+import com.sstengine.player.playerentity.MoveDirection;
 import com.sstengine.player.playerentity.PlayerEntity;
 import com.sstengine.player.playerentity.State;
 
@@ -26,7 +27,7 @@ public class ImmobilizedState extends State {
     }
 
     @Override
-    public void handleInput(PlayerEntity player, Map map, List<Event> eventQueue) {
+    public void handleInput(PlayerEntity player, MoveDirection nextMove, Map map, List<Event> eventQueue) {
         if(--ticks <= 0) {
             eventQueue.add(new ChangePlayerEntityStateEvent(player, new NormalState()));
         }
