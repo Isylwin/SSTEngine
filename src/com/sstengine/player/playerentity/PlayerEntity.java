@@ -6,10 +6,11 @@ import com.sstengine.component.graphics.GraphicsComponent;
 import com.sstengine.component.physical.PhysicalComponent;
 import com.sstengine.event.framework.Event;
 import com.sstengine.map.tile.Tile;
+import com.sstengine.player.Playable;
 import com.sstengine.player.Player;
+import com.sstengine.player.PlayerInput;
 import com.sstengine.player.playerentity.states.NormalState;
 import com.sstengine.team.Team;
-import com.sstengine.util.Identifiable;
 
 import java.awt.*;
 import java.util.List;
@@ -23,7 +24,7 @@ import java.util.List;
  *
  * @author Oscar de Leeuw
  */
-public class PlayerEntity extends GameObject implements Identifiable {
+public class PlayerEntity extends GameObject implements Playable {
     private Player player;
 
     private Tile tile;
@@ -111,39 +112,37 @@ public class PlayerEntity extends GameObject implements Identifiable {
         return this.currentMove;
     }
 
-    /**
-     * Gets the Player that controls this PlayerEntity.
-     *
-     * @return The Player that controls this PlayerEntity.
-     */
+    @Override
     public Player getPlayer() {
         return this.player;
     }
 
-    /**
-     * Sets the Player that is controlling this PlayerEntity.
-     *
-     * @param player The Player that is controlling this PlayerEntity.
-     */
+    @Override
     public void setPlayer(Player player) {
         this.player = player;
     }
 
     /**
-     * Pushes a MoveDirection to the {@link InputBuffer}.
+     * {@inheritDoc}
      *
-     * @param move The MoveDirection that should be pushed to the InputBuffer.
+     * Will throw an IllegalArgumentException when the input is not a {@link MoveDirection}.
+     * It will push the MoveDirection to the {@link InputBuffer} if it is a MoveDirection.
      */
-    public void pushInput(MoveDirection move) {
-        inputBuffer.addToInputMoves(move);
+    @Override
+    public void pushInput(PlayerInput input) throws IllegalArgumentException {
+        if (input instanceof MoveDirection) {
+            inputBuffer.addToInputMoves((MoveDirection) input);
+        } else {
+            throw new IllegalArgumentException("Input needs to be of the class MoveDirection.");
+        }
     }
 
     /**
-     * Updates the PlayerEntity according to the buffered input and the current state of the PlayerEntity.
+     * {@inheritDoc}
      *
-     * @param game The game from which the logic can query information.
-     * @param eventQueue The queue of events that will be executed by the game.
+     * Updates the PlayerEntity according to the buffered input and the current state of the PlayerEntity.
      */
+    @Override
     public void update(Game game, List<Event> eventQueue) {
         currentMove = inputBuffer.getNextInputMove();
 
