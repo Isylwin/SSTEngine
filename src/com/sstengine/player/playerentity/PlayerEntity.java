@@ -6,7 +6,9 @@ import com.sstengine.component.graphics.GraphicsComponent;
 import com.sstengine.component.physical.PhysicalComponent;
 import com.sstengine.event.framework.Event;
 import com.sstengine.map.tile.Tile;
+import com.sstengine.player.Player;
 import com.sstengine.player.playerentity.states.NormalState;
+import com.sstengine.team.Team;
 import com.sstengine.util.Identifiable;
 
 import java.awt.*;
@@ -22,8 +24,10 @@ import java.util.List;
  * @author Oscar de Leeuw
  */
 public class PlayerEntity extends GameObject implements Identifiable {
-    private int id;
+    private Player player;
+
     private Tile tile;
+
     private InputBuffer inputBuffer;
     private MoveDirection currentMove;
     private State state;
@@ -35,16 +39,24 @@ public class PlayerEntity extends GameObject implements Identifiable {
      * @param physical The physical component of the PlayerEntity.
      * @param graphics The graphical component of the PlayerEntity.
      */
-    public PlayerEntity(int id, PhysicalComponent physical, GraphicsComponent graphics) {
+    public PlayerEntity(PhysicalComponent physical, GraphicsComponent graphics) {
         super(physical, graphics);
-        this.id = id;
         this.state = new NormalState();
         this.inputBuffer = new InputBuffer();
     }
 
     @Override
     public int getId() {
-        return id;
+        return player.getId();
+    }
+
+    /**
+     * Gets the Team that this PlayerEntity belongs to.
+     *
+     * @return The Team that the PlayerEntity belongs to.
+     */
+    public Team getTeam() {
+        return player.getTeam();
     }
 
     /**
@@ -97,6 +109,24 @@ public class PlayerEntity extends GameObject implements Identifiable {
      */
     public MoveDirection getCurrentMove() {
         return this.currentMove;
+    }
+
+    /**
+     * Gets the Player that controls this PlayerEntity.
+     *
+     * @return The Player that controls this PlayerEntity.
+     */
+    public Player getPlayer() {
+        return this.player;
+    }
+
+    /**
+     * Sets the Player that is controlling this PlayerEntity.
+     *
+     * @param player The Player that is controlling this PlayerEntity.
+     */
+    public void setPlayer(Player player) {
+        this.player = player;
     }
 
     /**

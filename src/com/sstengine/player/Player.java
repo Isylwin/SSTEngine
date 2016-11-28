@@ -73,6 +73,15 @@ public class Player implements Identifiable {
     }
 
     /**
+     * Gets the name of the Player.
+     *
+     * @return A String that represents the name of the Player.
+     */
+    public String getName() {
+        return this.name;
+    }
+
+    /**
      * Gets the team this player is apart of.
      *
      * @return A team object.
