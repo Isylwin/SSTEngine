@@ -25,10 +25,10 @@ public class ChangeObstacleTileEventHandlerTest {
 
     @Before
     public void setUp() throws Exception {
-        tile1 = new Tile(null, MockTileType.DIRT, new Point(0, 0));
-        tile2 = new Tile(null, MockTileType.DIRT, new Point(1, 0));
+        tile1 = new Tile(1, null, MockTileType.DIRT, new Point(0, 0));
+        tile2 = new Tile(2, null, MockTileType.DIRT, new Point(1, 0));
 
-        obstacle = new StaticObstacle(null, null);
+        obstacle = new StaticObstacle(3, null, null);
         tile1.setObstacle(obstacle);
 
         assertEquals(tile1, obstacle.getTile());
