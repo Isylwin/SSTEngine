@@ -8,6 +8,7 @@ import java.awt.*;
  *
  * @author Oscar de Leeuw
  */
+@FunctionalInterface
 public interface Graphics {
     /**
      * Renders the object on the given painter on the screen.

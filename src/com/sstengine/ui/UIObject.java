@@ -5,8 +5,6 @@ import com.sstengine.component.graphics.Painter;
 
 import java.awt.*;
 
-//TODO needs doc.
-
 /**
  * The UIObject class represents an object that lives on the UI.
  * <p>
@@ -16,7 +14,7 @@ import java.awt.*;
  * @author Oscar de Leeuw
  * @param <T> The Object that is wrapped by the UIObject.
  */
-abstract public class UIObject<T> implements Comparable<UIObject> {
+public abstract class UIObject<T> implements Comparable<UIObject> {
     private GraphicsComponent graphics;
 
     private Rectangle area;
@@ -190,7 +188,7 @@ abstract public class UIObject<T> implements Comparable<UIObject> {
      * @param y The Y-coordinate of the click.
      * @return The underlying object of this UIObject.
      */
-    abstract protected T handleClick(int x, int y);
+    protected abstract T handleClick(int x, int y);
 
     /**
      * Draws this UIObject on the given painter object.

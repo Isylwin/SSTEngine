@@ -114,13 +114,14 @@ public class Team implements Identifiable {
      * Gets a Tile on which the given PlayerEntity can be respawn.
      * Requires a {@link Random} in order to choose randomly from a list of possible locations.
      *
+     * Throws an IllegalArgumentException when the given PlayerEntity is not a member of this Team.
+     * Throws an IllegalStateException when there are no Tiles that are accessible to the given PlayerEntity.
+     *
      * @param entity The PlayerEntity for which a respawn Tile needs to be found.
      * @param rnd    The Random object that is used for this Game.
      * @return A Tile on which the given PlayerEntity can be respawn.
-     * @throws IllegalArgumentException When the given PlayerEntity is not a member of this Team.
-     * @throws IllegalStateException    When there are no Tiles that are accessible to the given PlayerEntity.
      */
-    public Tile getRespawnPoint(PlayerEntity entity, Random rnd) throws IllegalArgumentException, IllegalStateException {
+    public Tile getRespawnPoint(PlayerEntity entity, Random rnd) {
         if (!playerEntities.contains(entity)) {
             throw new IllegalArgumentException("The given PlayerEntity is a member of this Team.");
         }

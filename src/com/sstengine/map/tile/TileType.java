@@ -7,6 +7,7 @@ package com.sstengine.map.tile;
  * @author Oscar de Leeuw
  * @param <T> The Enum that implements this interface.
  */
+@FunctionalInterface
 public interface TileType<T extends Enum> {
     /**
      * Gets the enum that is implementing this interface.

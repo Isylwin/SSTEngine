@@ -125,11 +125,11 @@ public class PlayerEntity extends GameObject implements Playable {
     /**
      * {@inheritDoc}
      *
-     * Will throw an IllegalArgumentException when the input is not a {@link MoveDirection}.
+     * Will throw an {@link IllegalArgumentException} when the input is not a {@link MoveDirection}.
      * It will push the MoveDirection to the {@link InputBuffer} if it is a MoveDirection.
      */
     @Override
-    public void pushInput(PlayerInput input) throws IllegalArgumentException {
+    public void pushInput(PlayerInput input) {
         if (input instanceof MoveDirection) {
             inputBuffer.addToInputMoves((MoveDirection) input);
         } else {

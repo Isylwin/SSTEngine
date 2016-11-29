@@ -18,5 +18,7 @@ public abstract class GraphicsComponent {
      * @param width    The width in pixels that is reserved for the drawing of the graphics.
      * @param height   The height in pixels that is reserved for the drawing of the graphics.
      */
-    public abstract void render(Object caller, Painter painter, Point location, int width, int height);
+    public void render(Object caller, Painter painter, Point location, int width, int height) {
+
+    }
 }

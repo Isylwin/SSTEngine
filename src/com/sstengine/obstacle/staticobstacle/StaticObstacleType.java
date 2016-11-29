@@ -7,6 +7,7 @@ package com.sstengine.obstacle.staticobstacle;
  * @author Oscar de Leeuw
  * @param <T> The Enum that implements this interface.
  */
+@FunctionalInterface
 public interface StaticObstacleType<T extends Enum> {
     /**
      * Gets the enum that implements this interface.

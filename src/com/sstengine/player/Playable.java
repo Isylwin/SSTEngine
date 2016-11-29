@@ -39,9 +39,9 @@ public interface Playable extends Identifiable {
 
     /**
      * Pushes input to the Playable.
+     * Throws an {@link IllegalArgumentException} when the input cannot be processed by the Playable.
      *
      * @param input The PlayerInput that should be pushed to the Playable.
-     * @throws IllegalArgumentException When the input cannot be processed by the Playable.
      */
-    void pushInput(PlayerInput input) throws IllegalArgumentException;
+    void pushInput(PlayerInput input);
 }

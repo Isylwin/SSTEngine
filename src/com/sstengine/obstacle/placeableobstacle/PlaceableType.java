@@ -7,6 +7,7 @@ package com.sstengine.obstacle.placeableobstacle;
  * @author Oscar de Leeuw
  * @param <T> The Enum that implements this interface.
  */
+@FunctionalInterface
 public interface PlaceableType<T extends Enum> {
     /**
      * Gets the enum that implements this interface.

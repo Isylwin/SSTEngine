@@ -10,6 +10,7 @@ import java.util.Deque;
 /**
  * @author Oscar de Leeuw
  */
+@FunctionalInterface
 public interface PathingAlgorithm {
     /**
      * Calculates a path through a given map.

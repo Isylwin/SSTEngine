@@ -5,6 +5,7 @@ package com.sstengine.util;
  *
  * @author Oscar de Leeuw
  */
+@FunctionalInterface
 public interface Identifiable {
     /**
      * Gets the ID of this object.

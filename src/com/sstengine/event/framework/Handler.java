@@ -25,6 +25,7 @@ import com.sstengine.Game;
  * @author Oscar de Leeuw
  * @param <E> The Event that this Handler will be handling.
  */
+@FunctionalInterface
 public interface Handler<E extends Event> {
     /**
      * The onEvent method should implement and handle behavior related to the event.

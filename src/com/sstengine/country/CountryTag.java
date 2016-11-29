@@ -7,6 +7,7 @@ package com.sstengine.country;
  * @author Oscar de Leeuw
  * @param <T> The Enum that implements this interface.
  */
+@FunctionalInterface
 public interface CountryTag<T extends Enum> {
     /**
      * Gets the tag of the Country.

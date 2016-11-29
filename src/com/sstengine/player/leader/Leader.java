@@ -63,7 +63,7 @@ public class Leader implements Playable {
     }
 
     @Override
-    public void pushInput(PlayerInput input) throws IllegalArgumentException {
+    public void pushInput(PlayerInput input) {
         if (input instanceof LeaderInput) {
             inputs.add((LeaderInput) input);
         } else {

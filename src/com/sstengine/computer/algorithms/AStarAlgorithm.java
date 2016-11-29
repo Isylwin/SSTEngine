@@ -83,9 +83,8 @@ public class AStarAlgorithm implements PathingAlgorithm {
      * @param entity The entity for which to perform the A* search.
      * @param start The starting location of the algorithm.
      * @param end   The goal of the algorithm.
-     * @throws Exception When the algorithm encounters an illegal cost.
      */
-    private void performAStar(Map map, PlayerEntity entity, Tile start, Tile end) throws Exception {
+    private void performAStar(Map map, PlayerEntity entity, Tile start, Tile end) {
         //Create a frontier and push the start to the frontier.
         Frontier<Tile> frontier = new Frontier<>();
         frontier.enqueue(start, 0);
