@@ -5,6 +5,7 @@ package com.sstengine.obstacle.placeableobstacle;
  * implemented by an enum that captures all the different PlaceableTypes in your game.
  *
  * @author Oscar de Leeuw
+ * @param <T> The Enum that implements this interface.
  */
 public interface PlaceableType<T extends Enum> {
     /**

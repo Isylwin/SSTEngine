@@ -23,13 +23,16 @@ import com.sstengine.Game;
  *
  * @author Ilkka Seppälä
  * @author Oscar de Leeuw
+ * @param <E> The Event that this Handler will be handling.
  */
 public interface Handler<E extends Event> {
     /**
      * The onEvent method should implement and handle behavior related to the event.
      * This can be as simple as calling another service to handle the event on publishing the event on
      * a queue to be consumed by other sub systems.
+     *
      * @param event the {@link Event} object to be handled.
+     * @param game The Game on which events can be executed.
      */
     void onEvent(E event, Game game);
 }

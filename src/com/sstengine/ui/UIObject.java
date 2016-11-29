@@ -14,6 +14,7 @@ import java.awt.*;
  * UIObject can be extended.
  *
  * @author Oscar de Leeuw
+ * @param <T> The Object that is wrapped by the UIObject.
  */
 abstract public class UIObject<T> implements Comparable<UIObject> {
     private GraphicsComponent graphics;

@@ -32,6 +32,7 @@ public class Camera extends UIObject<Tile> {
      * Creates a new camera.
      *
      * @param tileWidth    The width of the tiles in pixels..
+     * @param location     The location where the Camera will be made.
      * @param cameraWidth  The width of the camera in pixels.
      * @param cameraHeight The height of the camera in pixels.
      * @param map          The map of the game.

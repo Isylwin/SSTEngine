@@ -5,6 +5,7 @@ package com.sstengine.map.tile;
  * This enum should represent the possible types of tile there can be within the game.
  *
  * @author Oscar de Leeuw
+ * @param <T> The Enum that implements this interface.
  */
 public interface TileType<T extends Enum> {
     /**

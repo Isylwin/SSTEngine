@@ -5,6 +5,7 @@ package com.sstengine.obstacle.staticobstacle;
  * This enum should represent the possible types of static obstacles there can be within the game.
  *
  * @author Oscar de Leeuw
+ * @param <T> The Enum that implements this interface.
  */
 public interface StaticObstacleType<T extends Enum> {
     /**

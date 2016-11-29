@@ -33,6 +33,7 @@ public final class Tile implements Graphics, Identifiable {
      * Creates a new tile object with the given location, team and type.
      *
      * @param id The id of this tile.
+     * @param graphics The graphical component for this tile.
      * @param type The type of the tile.
      * @param location The location of the tile.
      */
@@ -148,7 +149,7 @@ public final class Tile implements Graphics, Identifiable {
         return this.country != null;
     }
 
-    /**
+    /*
      * Gets the cost for moving into this tile.
      *
      * @param entity The entity that will be moving into this tile.
