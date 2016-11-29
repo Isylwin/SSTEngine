@@ -17,7 +17,7 @@ import java.util.List;
  *
  * @author Oscar de Leeuw
  */
-public class NormalState extends State {
+public class NormalState implements State {
 
     @Override
     public void handleInput(PlayerEntity player, MoveDirection nextMove, Map map, List<Event> eventQueue) {
