@@ -34,7 +34,11 @@ public class Game extends Observable {
     private int elapsedTurns;
 
     /**
-     * Constructor of Game class.
+     * Creates a new Game.
+     *
+     * @param settings A GameSettings object that is used to define the settings of the game.
+     * @param map The Map on which the Game will be played.
+     * @param teams The Teams that will be playing this game.
      */
     public Game(GameSettings settings, Map map, List<Team> teams) {
         this.settings = settings;

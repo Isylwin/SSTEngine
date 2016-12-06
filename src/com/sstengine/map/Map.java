@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.function.Predicate;
-import java.util.logging.Logger;
 
 /**
  * The Map class represents a collection of tiles that form a map within the CrossTheBorder game.
@@ -21,8 +20,6 @@ import java.util.logging.Logger;
  * @author Oscar de Leeuw
  */
 public class Map {
-    private static final Logger LOGGER = Logger.getLogger(Map.class.getName());
-
     private String name;
 
     private int width;
@@ -95,7 +92,6 @@ public class Map {
         try {
             return tiles[x][y];
         } catch (ArrayIndexOutOfBoundsException e) {
-            //LOGGER.log(Level.OFF, e.toString(), e);
             //Intentionally caught and disregarded.
         }
         return null;

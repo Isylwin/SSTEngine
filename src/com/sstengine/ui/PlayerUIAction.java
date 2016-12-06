@@ -5,7 +5,9 @@ package com.sstengine.ui;
  * can perform upon the UI.
  *
  * @author Oscar de Leeuw
+ * @param <T> The Enum that implements this interface.
  */
+@FunctionalInterface
 public interface PlayerUIAction<T extends Enum> {
     /**
      * Gets the action the player wants to perform.

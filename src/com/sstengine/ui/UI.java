@@ -1,6 +1,8 @@
 package com.sstengine.ui;
 
+import com.sstengine.Game;
 import com.sstengine.component.graphics.Painter;
+import com.sstengine.player.Player;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,14 +20,20 @@ import java.util.List;
 public abstract class UI {
     protected List<UIObject> uiObjects = new ArrayList<>();
     private Painter painter;
+    private Player player;
+    private Game game;
 
     /**
      * Creates a new UI.
      *
      * @param painter The painter that the UI will use for its graphical context.
+     * @param game The Game that this UI is observing.
+     * @param player The Player that is associated with this UI.
      */
-    protected UI(Painter painter) {
+    protected UI(Painter painter, Game game, Player player) {
         this.painter = painter;
+        this.game = game;
+        this.player = player;
     }
 
     /**
@@ -44,6 +52,24 @@ public abstract class UI {
      */
     protected int getHeight() {
         return painter.getHeight();
+    }
+
+    /**
+     * Gets the Player that is associated with this UI.
+     *
+     * @return The Player that is associated with this UI.
+     */
+    public Player getPlayer() {
+        return player;
+    }
+
+    /**
+     * Gets the Game that this UI is observing.
+     *
+     * @return The Game that this UI is observing.
+     */
+    public Game getGame() {
+        return game;
     }
 
     /**

@@ -53,7 +53,8 @@ public class EventDispatcher {
     /**
      * Dispatches an {@link Event} depending on it's type.
      *
-     * @param event The {@link Event} to be dispatched
+     * @param event The {@link Event} to be dispatched.
+     * @param game The Game on which logic can be executed.
      */
     @SuppressWarnings("unchecked")
     public <E extends Event> void dispatch(E event, Game game) {

@@ -22,6 +22,7 @@ package com.sstengine.event.framework;
  * @author Ilkka Seppälä
  * @author Oscar de Leeuw
  */
+@FunctionalInterface
 public interface Event {
     /**
      * Returns the message type as a Class object. In this example the message type is

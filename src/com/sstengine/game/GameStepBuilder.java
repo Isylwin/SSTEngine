@@ -30,6 +30,7 @@ public class GameStepBuilder {
     /**
      * Represents the step in which a GameSetting is added to the Game.
      */
+    @FunctionalInterface
     public interface SettingsStep {
         /**
          * Adds a GameSetting to the building process.
@@ -43,6 +44,7 @@ public class GameStepBuilder {
     /**
      * Represents the step in which a Map is added to the Game.
      */
+    @FunctionalInterface
     public interface MapStep {
         /**
          * Adds a Map to the building process.
@@ -75,6 +77,7 @@ public class GameStepBuilder {
     /**
      * Represents the final step in the process from which the Game can be build.
      */
+    @FunctionalInterface
     public interface BuildStep {
         /**
          * Builds the game.

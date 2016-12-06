@@ -1,8 +1,6 @@
 package com.sstengine.computer;
 
 
-//TODO make sure computers can climb a wall. Or rather, know that a certain move is going to cost more and thus repeat the move.
-//TODO refactor this whole mess into nice little methods.
 
 /**
  * @author Oscar de Leeuw
@@ -182,7 +180,6 @@ package com.sstengine.computer;
         }*//*
 
         currentTarget = findClosestTarget();
-        //TODO team cannot be a valid target as it is an enum and enums are static, thus all tiles are the same.
     }
 
 }*/

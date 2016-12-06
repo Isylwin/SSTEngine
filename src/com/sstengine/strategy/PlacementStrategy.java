@@ -11,6 +11,7 @@ import java.util.Map;
  *
  * @author Oscar de Leeuw
  */
+@FunctionalInterface
 public interface PlacementStrategy {
     /**
      * Executes a PlacementStrategy.

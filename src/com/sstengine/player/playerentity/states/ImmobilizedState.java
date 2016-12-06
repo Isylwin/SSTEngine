@@ -15,7 +15,7 @@ import java.util.List;
  *
  * @author Oscar de Leeuw
  */
-public class ImmobilizedState extends State {
+public class ImmobilizedState implements State {
     private int ticks;
 
     /**

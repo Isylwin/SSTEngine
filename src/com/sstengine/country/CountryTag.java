@@ -5,7 +5,9 @@ package com.sstengine.country;
  * This enum should represent the possible tags/names a team can have within the game.
  *
  * @author Oscar de Leeuw
+ * @param <T> The Enum that implements this interface.
  */
+@FunctionalInterface
 public interface CountryTag<T extends Enum> {
     /**
      * Gets the tag of the Country.

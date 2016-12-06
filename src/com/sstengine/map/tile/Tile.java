@@ -33,6 +33,7 @@ public final class Tile implements Graphics, Identifiable {
      * Creates a new tile object with the given location, team and type.
      *
      * @param id The id of this tile.
+     * @param graphics The graphical component for this tile.
      * @param type The type of the tile.
      * @param location The location of the tile.
      */
@@ -147,25 +148,6 @@ public final class Tile implements Graphics, Identifiable {
     public boolean hasCountry() {
         return this.country != null;
     }
-
-    /**
-     * Gets the cost for moving into this tile.
-     *
-     * @param entity The entity that will be moving into this tile.
-     * @return The cost for moving into this tile in server ticks.
-     */
-    /*public int getCost(PlayerEntity entity) throws Exception {
-        int countryCost = team.getCost(entity);
-        int playerEntityCost = playerEntity != null ? playerEntity.getCost(entity) : 0;
-        int tileObjectCost = obstacle != null ? obstacle.getCost(entity) : 0;
-
-        if (countryCost == -1 || playerEntityCost == -1 || tileObjectCost == -1) {
-            throw new Exception("Undefined cost, possibly cost request to an tile that is inaccessible"); //TODO make a custom exception.
-        }
-
-        return 1 + countryCost + playerEntityCost + tileObjectCost;
-        return 1;
-    }*/
 
     /**
      * Calls all the interactWith methods on all GameObjects that exist on this tile.

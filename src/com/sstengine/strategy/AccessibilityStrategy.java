@@ -9,6 +9,7 @@ import com.sstengine.player.playerentity.PlayerEntity;
  *
  * @author Oscar de Leeuw
  */
+@FunctionalInterface
 public interface AccessibilityStrategy {
     /**
      * Determines whether this GameObject is accessible to the given PlayerEntity.

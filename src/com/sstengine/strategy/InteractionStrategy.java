@@ -12,6 +12,7 @@ import java.util.List;
  *
  * @author Oscar de Leeuw
  */
+@FunctionalInterface
 public interface InteractionStrategy {
     /**
      * Determines the interaction between a PlayerEntity and a GameObject.

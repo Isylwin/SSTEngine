@@ -6,12 +6,12 @@ import com.sstengine.map.Map;
 import java.util.List;
 
 /**
- * The State class represents the current state of a PlayerEntity.
+ * The State interface represents the current state of a PlayerEntity.
  * The State determines what should happen with the next input of the PlayerEntity.
  *
  * @author Oscar de Leeuw
  */
-public abstract class State {
+public interface State {
     /**
      * Handles input from a playerEntity according to the current state of the entity.
      *
@@ -20,5 +20,5 @@ public abstract class State {
      * @param map The map of the game.
      * @param eventQueue The queue of events that will be executed by the game.
      */
-    public abstract void handleInput(PlayerEntity player, MoveDirection nextMove, Map map, List<Event> eventQueue);
+    void handleInput(PlayerEntity player, MoveDirection nextMove, Map map, List<Event> eventQueue);
 }
