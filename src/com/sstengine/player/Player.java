@@ -30,11 +30,14 @@ public class Player implements Identifiable {
      * @param id The id of the player.
      * @param name The name of the player.
      * @param team The team the player is part of.
+     * @param playable The playable that this Player controls.
      */
-    private Player(int id, String name, Team team) {
+    private Player(int id, String name, Team team, Playable playable) {
         this.id = id;
         this.name = name;
         this.team = team;
+        this.playable = playable;
+        this.playable.setPlayer(this);
     }
 
     /**
@@ -46,8 +49,7 @@ public class Player implements Identifiable {
      * @param leader The Leader that this player wraps.
      */
     public Player(int id, String name, Team team, Leader leader) {
-        this(id, name, team);
-        this.playable = leader;
+        this(id, name, team, (Playable) leader);
         team.setLeader(leader);
     }
 
@@ -60,8 +62,7 @@ public class Player implements Identifiable {
      * @param entity The PlayerEntity that this Player wraps.
      */
     public Player(int id, String name, Team team, PlayerEntity entity) {
-        this(id, name, team);
-        this.playable = entity;
+        this(id, name, team, (Playable) entity);
         team.addPlayerEntity(entity);
     }
 
