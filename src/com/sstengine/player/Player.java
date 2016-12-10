@@ -72,6 +72,15 @@ public class Player implements Identifiable {
     }
 
     /**
+     * Gets the Playable that is being controlled by this Player.
+     *
+     * @return The Playable that is controlled by this Player.
+     */
+    public Playable getPlayable() {
+        return playable;
+    }
+
+    /**
      * Gets the name of the Player.
      *
      * @return A String that represents the name of the Player.
