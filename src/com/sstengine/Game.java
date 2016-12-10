@@ -11,6 +11,7 @@ import com.sstengine.team.Team;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
+import java.util.Random;
 
 /**
  * The Game class is the entry point into the engine.
@@ -23,9 +24,9 @@ import java.util.Observable;
  */
 public class Game extends Observable {
     private EventController eventController;
+    private Random random;
 
     private GameSettings settings;
-
     private Map map;
 
     private List<Team> teams = new ArrayList<>();
@@ -46,6 +47,7 @@ public class Game extends Observable {
         this.teams = teams;
 
         this.eventController = new EventController();
+        this.random = new Random();
     }
 
     /**
@@ -82,6 +84,15 @@ public class Game extends Observable {
      */
     public List<Player> getPlayers() {
         return players;
+    }
+
+    /**
+     * Gets the Random object that is used by this game.
+     *
+     * @return The random object that is used by this game.
+     */
+    public Random getRandom() {
+        return random;
     }
 
     /**
