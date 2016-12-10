@@ -2,10 +2,13 @@ package com.sstengine;
 
 import com.sstengine.event.EventController;
 import com.sstengine.event.EventLog;
+import com.sstengine.event.events.ChangePlayerEntityTileEvent;
 import com.sstengine.game.GameSettings;
 import com.sstengine.map.Map;
+import com.sstengine.map.tile.Tile;
 import com.sstengine.player.Player;
 import com.sstengine.player.PlayerInput;
+import com.sstengine.player.playerentity.PlayerEntity;
 import com.sstengine.team.Team;
 
 import java.util.ArrayList;
@@ -124,6 +127,23 @@ public class Game extends Observable {
         elapsedTurns++;
 
         checkTime();
+    }
+
+    /**
+     * Respawns all the PlayerEntities in the game.
+     * Uses the Team of the PlayerEntity to determine where to spawn it.
+     * Uses the Random object that is used by Game.
+     * Fires every respawn event separately.
+     */
+    public void respawnAllPlayers() {
+        for (Player player : players) {
+            if (player.getPlayable() instanceof PlayerEntity) {
+                PlayerEntity entity = (PlayerEntity) player.getPlayable();
+
+                Tile tile = entity.getTeam().getRespawnPoint(entity, random);
+                eventController.fireEvent(new ChangePlayerEntityTileEvent(entity, tile), this);
+            }
+        }
     }
 
     /**
