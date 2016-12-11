@@ -1,3 +1,7 @@
+v0.0.6-alpha:
+- Removed Player and Game from UI.
+- Added resize and setCenter calls in Camera constructor.
+
 v0.0.5-alpha:
 - Made Game, and subsequent subclasses, serializable.
 - Added a method to Game for getting the elapsed and remaining time.
