@@ -35,4 +35,15 @@ public interface Painter {
      * @param height   The height of the image.
      */
     void drawImage(File file, Point location, int width, int height);
+
+    /**
+     * Draws a rectangle at the given location.
+     *
+     * @param location The upper left corner of the rectangle.
+     * @param width    The width of the rectangle.
+     * @param height   The height of the rectangle.
+     * @param color    The color of the rectangle.
+     * @param fill     A bool that indicates whether it should be filled or not.
+     */
+    void drawRectangle(Point location, int width, int height, Color color, boolean fill);
 }

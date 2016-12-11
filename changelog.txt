@@ -1,5 +1,6 @@
 v0.0.7-alpha:
 - Changed GraphicsComponent.render to an abstract method.
+- Added more methods to Painter.
 
 v0.0.6-alpha:
 - Removed Player and Game from UI.
