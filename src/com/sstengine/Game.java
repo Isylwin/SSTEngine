@@ -2,15 +2,19 @@ package com.sstengine;
 
 import com.sstengine.event.EventController;
 import com.sstengine.event.EventLog;
+import com.sstengine.event.events.ChangePlayerEntityTileEvent;
 import com.sstengine.game.GameSettings;
 import com.sstengine.map.Map;
+import com.sstengine.map.tile.Tile;
 import com.sstengine.player.Player;
 import com.sstengine.player.PlayerInput;
+import com.sstengine.player.playerentity.PlayerEntity;
 import com.sstengine.team.Team;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
+import java.util.Random;
 
 /**
  * The Game class is the entry point into the engine.
@@ -23,9 +27,9 @@ import java.util.Observable;
  */
 public class Game extends Observable {
     private EventController eventController;
+    private Random random;
 
     private GameSettings settings;
-
     private Map map;
 
     private List<Team> teams = new ArrayList<>();
@@ -46,6 +50,7 @@ public class Game extends Observable {
         this.teams = teams;
 
         this.eventController = new EventController();
+        this.random = new Random();
     }
 
     /**
@@ -85,6 +90,15 @@ public class Game extends Observable {
     }
 
     /**
+     * Gets the Random object that is used by this game.
+     *
+     * @return The random object that is used by this game.
+     */
+    public Random getRandom() {
+        return random;
+    }
+
+    /**
      * Adds a given Player to the game.
      * Will not add the Player if it already exists within the game.
      *
@@ -113,6 +127,23 @@ public class Game extends Observable {
         elapsedTurns++;
 
         checkTime();
+    }
+
+    /**
+     * Respawns all the PlayerEntities in the game.
+     * Uses the Team of the PlayerEntity to determine where to spawn it.
+     * Uses the Random object that is used by Game.
+     * Fires every respawn event separately.
+     */
+    public void respawnAllPlayers() {
+        for (Player player : players) {
+            if (player.getPlayable() instanceof PlayerEntity) {
+                PlayerEntity entity = (PlayerEntity) player.getPlayable();
+
+                Tile tile = entity.getTeam().getRespawnPoint(entity, random);
+                eventController.fireEvent(new ChangePlayerEntityTileEvent(entity, tile), this);
+            }
+        }
     }
 
     /**
