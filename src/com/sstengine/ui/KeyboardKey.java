@@ -24,7 +24,7 @@ public class KeyboardKey<T> {
      *
      * @return The key the player has pressed.
      */
-    T getKey() {
+    public T getKey() {
         return keyCode;
     }
 }

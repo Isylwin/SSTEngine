@@ -183,6 +183,8 @@ public final class Tile implements Graphics, Identifiable {
 
     @Override
     public void render(Painter painter, Point location, int width, int height) {
+        graphics.render(this, painter, location, width, height);
+
         if (country != null) {
             country.render(painter, location, width, height);
         }
@@ -192,7 +194,5 @@ public final class Tile implements Graphics, Identifiable {
         if (playerEntity != null) {
             playerEntity.render(painter, location, width, height);
         }
-
-        graphics.render(this, painter, location, width, height);
     }
 }

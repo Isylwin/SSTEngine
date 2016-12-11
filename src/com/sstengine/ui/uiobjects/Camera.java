@@ -39,10 +39,12 @@ public class Camera extends UIObject<Tile> {
      */
     public Camera(Map map, Point location, int cameraWidth, int cameraHeight, int tileWidth) {
         super(new CameraGraphics(), location, cameraWidth, cameraHeight);
-        this.center = new Point(0, 0);
         this.tileWidth = tileWidth;
         this.map = map;
         this.currentTiles = new ArrayList<>();
+
+        setCenter(new Point(0, 0));
+        resize(cameraWidth, cameraHeight);
     }
 
     /**
