@@ -1,5 +1,6 @@
 v0.0.5-alpha:
 - Made Game, and subsequent subclasses, serializable.
+- Added a method to Game for getting the elapsed and remaining time.
 
 v0.0.4-alpha:
 - Fixed null pointer exception in handling of tile change events.

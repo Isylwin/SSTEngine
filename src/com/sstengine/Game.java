@@ -110,6 +110,24 @@ public class Game extends Observable implements Serializable {
     }
 
     /**
+     * Returns the amount of turns that have passed.
+     *
+     * @return An int that represents the amount of turns that have passed.
+     */
+    public int getElapsedTurns() {
+        return elapsedTurns;
+    }
+
+    /**
+     * Returns the amount of turns that are remaining.
+     *
+     * @return An int that represents the amount of turns remaining.
+     */
+    public int getRemainingTurns() {
+        return settings.getTimeLimit() - elapsedTurns;
+    }
+
+    /**
      * Adds a given Player to the game.
      * Will not add the Player if it already exists within the game.
      *
