@@ -3,6 +3,7 @@ package com.sstengine.player.playerentity;
 import com.sstengine.event.framework.Event;
 import com.sstengine.map.Map;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -11,7 +12,7 @@ import java.util.List;
  *
  * @author Oscar de Leeuw
  */
-public interface State {
+public interface State extends Serializable {
     /**
      * Handles input from a playerEntity according to the current state of the entity.
      *

@@ -4,6 +4,7 @@ import com.sstengine.map.tile.Tile;
 import com.sstengine.obstacle.placeableobstacle.PlaceableObstacle;
 import com.sstengine.util.enumeration.OrdinalDirection;
 
+import java.io.Serializable;
 import java.util.Map;
 
 /**
@@ -12,7 +13,7 @@ import java.util.Map;
  * @author Oscar de Leeuw
  */
 @FunctionalInterface
-public interface PlacementStrategy {
+public interface PlacementStrategy extends Serializable {
     /**
      * Executes a PlacementStrategy.
      * This defines whether a placeable should be placed within the world given the tile and the neighbouring tiles.

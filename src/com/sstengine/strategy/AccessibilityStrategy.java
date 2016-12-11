@@ -3,6 +3,8 @@ package com.sstengine.strategy;
 import com.sstengine.component.physical.Physical;
 import com.sstengine.player.playerentity.PlayerEntity;
 
+import java.io.Serializable;
+
 /**
  * The AccessibilityStrategy interface is an interface that determines
  * whether a given PlayerEntity should be able to access a Tile with this GameObject present.
@@ -10,7 +12,7 @@ import com.sstengine.player.playerentity.PlayerEntity;
  * @author Oscar de Leeuw
  */
 @FunctionalInterface
-public interface AccessibilityStrategy {
+public interface AccessibilityStrategy extends Serializable {
     /**
      * Determines whether this GameObject is accessible to the given PlayerEntity.
      *

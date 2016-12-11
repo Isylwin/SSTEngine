@@ -2,6 +2,7 @@ package com.sstengine.player.leader;
 
 import com.sstengine.obstacle.placeableobstacle.PlaceableType;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -14,7 +15,7 @@ import java.util.Map;
  *
  * @author Oscar de Leeuw
  */
-public class PlaceableManager {
+public class PlaceableManager implements Serializable {
     private Map<PlaceableType, PlaceableCounter> placeableTable;
     private List<PlaceableType> updatedPlaceables;
 
