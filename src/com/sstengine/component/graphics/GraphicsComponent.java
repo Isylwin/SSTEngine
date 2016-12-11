@@ -1,6 +1,7 @@
 package com.sstengine.component.graphics;
 
 import java.awt.*;
+import java.io.Serializable;
 
 /**
  * The GraphicsComponent class represents the graphical part of an object.
@@ -8,7 +9,7 @@ import java.awt.*;
  *
  * @author Oscar de Leeuw
  */
-public abstract class GraphicsComponent {
+public abstract class GraphicsComponent implements Serializable {
     /**
      * Renders the GraphicsComponent.
      *
