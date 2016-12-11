@@ -9,7 +9,7 @@ import java.util.List;
 
 /**
  * The UI class represents an user interface that a player can interact with.
- * It holds all the {@link UIObject}s that live on the UI and supports sending {@link PlayerUIAction}s to the UI.
+ * It holds all the {@link UIObject}s that live on the UI and supports sending {@link KeyboardKey}s to the UI.
  * The UI class does not render graphics itself but relies on a {@link Painter} on which it can draw.
  * This allows the UI class to function regardless of the graphical solution the end user chooses.
  * <p>
@@ -83,11 +83,11 @@ public abstract class UI {
     }
 
     /**
-     * Sends a PlayerUIAction to the UI.
+     * Sends a KeyboardKey to the UI.
      *
-     * @param action The UI action the player would like to perform.
+     * @param action The key that the user has pressed.
      */
-    public abstract void sendKey(PlayerUIAction action);
+    public abstract void sendKey(KeyboardKey action);
 
     /**
      * Renders the UI.
