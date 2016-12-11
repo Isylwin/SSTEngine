@@ -3,6 +3,7 @@ v0.0.6-alpha:
 - Added resize and setCenter calls in Camera constructor.
 - Switched the order of rendering in Tile.
 - Fixed KeyboardKey.getKey not being public.
+- Fixed bug in camera.
 
 v0.0.5-alpha:
 - Made Game, and subsequent subclasses, serializable.

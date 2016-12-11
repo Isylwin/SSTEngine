@@ -93,6 +93,9 @@ public class Camera extends UIObject<Tile> {
         this.xStart = center.x - xTiles / 2; //The column of the left most tiles.
         this.yStart = center.y - yTiles / 2; //The row of the top most tiles.
 
+        this.xStart = xStart < 0 ? 0 : xStart;
+        this.yStart = yStart < 0 ? 0 : yStart;
+
         Tile[][] tiles = map.getAllTiles();
         currentTiles.clear();
 
