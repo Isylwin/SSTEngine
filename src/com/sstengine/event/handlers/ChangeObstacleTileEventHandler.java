@@ -19,7 +19,12 @@ public class ChangeObstacleTileEventHandler implements Handler<ChangeObstacleTil
         Tile oldTile = event.getOldTile();
         Tile newTile = event.getNewTile();
 
-        oldTile.setObstacle(null);
-        newTile.setObstacle(obstacle);
+        if (oldTile != null) {
+            oldTile.setObstacle(null);
+        }
+
+        if (newTile != null) {
+            newTile.setObstacle(obstacle);
+        }
     }
 }

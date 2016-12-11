@@ -19,7 +19,12 @@ public class ChangePlayerEntityTileEventHandler implements Handler<ChangePlayerE
         Tile oldTile = event.getOldTile();
         PlayerEntity entity = event.getPlayer();
 
-        oldTile.setPlayerEntity(null);
-        newTile.setPlayerEntity(entity);
+        if (oldTile != null) {
+            oldTile.setPlayerEntity(null);
+        }
+
+        if (newTile != null) {
+            newTile.setPlayerEntity(entity);
+        }
     }
 }

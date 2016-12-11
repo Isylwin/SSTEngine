@@ -2,6 +2,8 @@ package com.sstengine.event.events;
 
 import com.sstengine.team.Team;
 
+import java.util.Objects;
+
 /**
  * The ChangeTeamScoreEvent is an event that changes the score of a given team by a given amount.
  *
@@ -18,6 +20,8 @@ public class ChangeTeamScoreEvent extends AbstractEvent {
      * @param scoreChange The amount the score should be changed by.
      */
     public ChangeTeamScoreEvent(Team team, int scoreChange) {
+        Objects.requireNonNull(team, "Team cannot be null.");
+
         this.team = team;
         this.scoreChange = scoreChange;
     }

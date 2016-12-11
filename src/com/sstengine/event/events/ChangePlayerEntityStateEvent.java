@@ -3,6 +3,8 @@ package com.sstengine.event.events;
 import com.sstengine.player.playerentity.PlayerEntity;
 import com.sstengine.player.playerentity.State;
 
+import java.util.Objects;
+
 /**
  * The ChangePlayerEntityStateEvent changes the {@link State} of a PlayerEntity to the given state.
  *
@@ -20,6 +22,9 @@ public class ChangePlayerEntityStateEvent extends AbstractEvent {
      * @param newState The new State of the PlayerEntity.
      */
     public ChangePlayerEntityStateEvent(PlayerEntity player, State newState) {
+        Objects.requireNonNull(player, "PlayerEntity cannot be null.");
+        Objects.requireNonNull(newState, "NewState cannot be null.");
+
         this.player = player;
         this.newState = newState;
         this.oldState = player.getState();

@@ -36,6 +36,7 @@ public class Game extends Observable {
     private List<Player> players = new ArrayList<>();
 
     private int elapsedTurns;
+    private boolean isDone = false;
 
     /**
      * Creates a new Game.
@@ -99,6 +100,15 @@ public class Game extends Observable {
     }
 
     /**
+     * Gets whether the Game is done or not.
+     *
+     * @return True when the Game is done, false if it is not.
+     */
+    public boolean isDone() {
+        return isDone;
+    }
+
+    /**
      * Adds a given Player to the game.
      * Will not add the Player if it already exists within the game.
      *
@@ -116,7 +126,11 @@ public class Game extends Observable {
      * Logs all events that were processed on this turn.
      * Checks whether the score and time victory conditions have been met.
      */
-    public void update(){
+    public void update() {
+        if (isDone) {
+            return;
+        }
+
         for (Player player : players) {
             player.update(this, eventController.getEventQueue());
             eventController.fireEventQueue(this);
@@ -172,6 +186,7 @@ public class Game extends Observable {
      * Notifies all the observers that the current game should end.
      */
     private void stop() {
+        isDone = true;
         notifyObservers();
     }
 

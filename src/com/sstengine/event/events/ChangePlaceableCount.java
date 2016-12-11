@@ -3,6 +3,8 @@ package com.sstengine.event.events;
 import com.sstengine.obstacle.placeableobstacle.PlaceableType;
 import com.sstengine.player.leader.Leader;
 
+import java.util.Objects;
+
 /**
  * The ChangePlaceableCount event changes the count of a given type by the given amount for the given leader.
  *
@@ -21,6 +23,9 @@ public class ChangePlaceableCount extends AbstractEvent {
      * @param amount The amount of change.
      */
     public ChangePlaceableCount(Leader leader, PlaceableType type, int amount) {
+        Objects.requireNonNull(leader, "Leader cannot be null.");
+        Objects.requireNonNull(type, "type cannot be null.");
+
         this.leader = leader;
         this.type = type;
         this.amount = amount;
