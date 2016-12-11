@@ -5,6 +5,7 @@ import com.sstengine.player.playerentity.PlayerEntity;
 import com.sstengine.strategy.AccessibilityStrategy;
 import com.sstengine.strategy.InteractionStrategy;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -14,7 +15,7 @@ import java.util.List;
  *
  * @author Oscar de Leeuw
  */
-public abstract class PhysicalComponent {
+public abstract class PhysicalComponent implements Serializable {
     private AccessibilityStrategy accessStrategy;
     private InteractionStrategy interactionStrategy;
 

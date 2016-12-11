@@ -1,3 +1,6 @@
+v0.0.5-alpha:
+- Made Game, and subsequent subclasses, serializable.
+
 v0.0.4-alpha:
 - Fixed null pointer exception in handling of tile change events.
 - Added an isDone field to Game.

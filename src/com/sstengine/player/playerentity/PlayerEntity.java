@@ -29,7 +29,7 @@ public class PlayerEntity extends GameObject implements Playable {
 
     private Tile tile;
 
-    private InputBuffer inputBuffer;
+    private transient InputBuffer inputBuffer;
     private MoveDirection currentMove;
     private State state;
 

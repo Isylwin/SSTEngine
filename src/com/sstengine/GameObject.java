@@ -9,6 +9,7 @@ import com.sstengine.event.framework.Event;
 import com.sstengine.player.playerentity.PlayerEntity;
 
 import java.awt.*;
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -17,7 +18,7 @@ import java.util.List;
  *
  * @author Oscar de Leeuw
  */
-public abstract class GameObject implements Physical, Graphics {
+public abstract class GameObject implements Physical, Graphics, Serializable {
     private PhysicalComponent physical;
     private GraphicsComponent graphics;
 

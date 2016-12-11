@@ -35,7 +35,7 @@ public class TestUtil {
     public static List<Team> makeTeams(Map map) {
         List<Team> ret = new ArrayList<>();
 
-        List<Tile> usaLand = map.getTiles(t -> t.getLocation().y >= 8);
+        List<Tile> usaLand = map.getTiles(t -> t.getLocation().y >= map.getHeight() - 2);
         List<Tile> mexLand = map.getTiles(t -> t.getLocation().y <= 1);
 
         ret.add(makeTeam(1, makeCountry(MockCountryTag.USA, usaLand)));

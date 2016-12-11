@@ -4,6 +4,7 @@ import com.sstengine.component.physical.Physical;
 import com.sstengine.event.framework.Event;
 import com.sstengine.player.playerentity.PlayerEntity;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -13,7 +14,7 @@ import java.util.List;
  * @author Oscar de Leeuw
  */
 @FunctionalInterface
-public interface InteractionStrategy {
+public interface InteractionStrategy extends Serializable {
     /**
      * Determines the interaction between a PlayerEntity and a GameObject.
      * Uses the given list of events in order to queue up the {@link Event}s that are generated from the interaction.

@@ -11,6 +11,10 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.List;
 
 /**
@@ -21,7 +25,7 @@ public class GameTest {
 
     @Before
     public void setUp() throws Exception {
-        Map map = TestUtil.makeMap(10, 10);
+        Map map = TestUtil.makeMap(60, 60);
         GameSettings settings = new MockGameSettings();
         List<Team> teams = TestUtil.makeTeams(map);
 
@@ -30,6 +34,7 @@ public class GameTest {
         game.addPlayer(TestUtil.makePlayer(2, "Gert", teams.get(1)));
         game.addPlayer(TestUtil.makePlayer(3, "Piet", teams.get(0)));
         game.addPlayer(TestUtil.makePlayer(4, "Jan", teams.get(1)));
+        game.addPlayer(TestUtil.makePlayer(5, "Kek", teams.get(1)));
     }
 
     @Test
@@ -61,6 +66,18 @@ public class GameTest {
         }
 
         Assert.assertTrue(game.isDone());
+    }
+
+    @Test
+    public void serialize_WithNothing_ShouldSerialize() throws IOException {
+        File temp = new File("temp.dat");
+        temp.deleteOnExit();
+
+        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(temp));
+        oos.writeObject(game);
+        oos.close();
+
+        System.out.println("Space used: " + temp.length());
     }
 
 }

@@ -11,6 +11,7 @@ import com.sstengine.player.PlayerInput;
 import com.sstengine.player.playerentity.PlayerEntity;
 import com.sstengine.team.Team;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
@@ -25,9 +26,9 @@ import java.util.Random;
  *
  * @author Oscar de Leeuw
  */
-public class Game extends Observable {
-    private EventController eventController;
-    private Random random;
+public class Game extends Observable implements Serializable {
+    private transient EventController eventController;
+    private transient Random random;
 
     private GameSettings settings;
     private Map map;

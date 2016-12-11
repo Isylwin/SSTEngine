@@ -2,6 +2,8 @@ package com.sstengine.player.leader;
 
 import com.sstengine.event.events.ChangePlaceableCount;
 
+import java.io.Serializable;
+
 /**
  * The PlaceableCounter class records placement data of a single placeableType.
  * This class should be managed by a manager.
@@ -11,7 +13,7 @@ import com.sstengine.event.events.ChangePlaceableCount;
  *
  * @author Oscar de Leeuw
  */
-public class PlaceableCounter {
+public class PlaceableCounter implements Serializable {
     private int amount;
     private int tickThreshold;
     private int currentTick;

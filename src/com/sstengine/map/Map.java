@@ -5,6 +5,7 @@ import com.sstengine.util.enumeration.CardinalDirection;
 import com.sstengine.util.enumeration.OrdinalDirection;
 
 import java.awt.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -19,7 +20,7 @@ import java.util.function.Predicate;
  *
  * @author Oscar de Leeuw
  */
-public class Map {
+public class Map implements Serializable {
     private String name;
 
     private int width;

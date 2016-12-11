@@ -1,11 +1,13 @@
 package com.sstengine.game;
 
+import java.io.Serializable;
+
 /**
  * Interface for a settings object that allows access to the settings of a game.
  *
  * @author Oscar de Leeuw
  */
-public interface GameSettings {
+public interface GameSettings extends Serializable {
     /**
      * Gets the score limit of the game.
      *
