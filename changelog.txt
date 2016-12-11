@@ -1,6 +1,7 @@
 v0.0.6-alpha:
 - Removed Player and Game from UI.
 - Added resize and setCenter calls in Camera constructor.
+- Switched the order of rendering in Tile.
 
 v0.0.5-alpha:
 - Made Game, and subsequent subclasses, serializable.
