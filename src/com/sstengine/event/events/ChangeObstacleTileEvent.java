@@ -3,6 +3,8 @@ package com.sstengine.event.events;
 import com.sstengine.map.tile.Tile;
 import com.sstengine.obstacle.Obstacle;
 
+import java.util.Objects;
+
 /**
  * The ChangeObstacleTileEvent is an event that changes the location of a given obstacle to a new Tile.
  * The newTile can be set to null in order to remove a StaticObstacle from the map.
@@ -20,6 +22,8 @@ public class ChangeObstacleTileEvent extends AbstractEvent {
      * @param newTile  The new Tile of the Obstacle.
      */
     public ChangeObstacleTileEvent(Obstacle obstacle, Tile newTile) {
+        Objects.requireNonNull(obstacle, "Obstacle cannot be null.");
+
         this.obstacle = obstacle;
         this.newTile = newTile;
         this.oldTile = obstacle.getTile();
