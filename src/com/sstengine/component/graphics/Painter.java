@@ -46,4 +46,17 @@ public interface Painter {
      * @param fill     A bool that indicates whether it should be filled or not.
      */
     void drawRectangle(Point location, int width, int height, Color color, boolean fill);
+
+    void drawString(String text, Point location, int width, int height, Color color, boolean fill);
+
+    /**
+     * Draws an ellipse at the given location.
+     *
+     * @param location The upper left corner of the ellipse.
+     * @param width    The maximum width of the text.
+     * @param height   The height of the text.
+     * @param color    The color of the text.
+     * @param fill     A boolean that indicates whether the ellipse should be filled or not.
+     */
+    void drawEllipse(Point location, int width, int height, Color color, boolean fill);
 }
