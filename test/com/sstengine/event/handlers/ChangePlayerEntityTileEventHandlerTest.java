@@ -10,6 +10,7 @@ import org.junit.Test;
 import java.awt.*;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 /**
  * @author Oscar de Leeuw
@@ -43,6 +44,15 @@ public class ChangePlayerEntityTileEventHandlerTest {
 
         assertEquals(tile2, entity.getTile());
         assertEquals(null, tile1.getPlayerEntity());
+    }
+
+    @Test
+    public void onEvent_WithNull_ReturnsNull() throws Exception {
+        int asdas = 5;
+
+        handler.onEvent(new ChangePlayerEntityTileEvent(null, tile1), null);
+
+        assertNull(tile1.getPlayerEntity());
     }
 
 }

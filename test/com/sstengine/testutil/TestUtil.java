@@ -49,7 +49,7 @@ public class TestUtil {
     }
 
     public static Country makeCountry(MockCountryTag tag, List<Tile> land) {
-        Country country = new Country(null, null, tag);
+        Country country = new Country(new StaticObstaclePhysicalComponent(), null, tag);
         land.forEach(country::addLand);
 
         return country;

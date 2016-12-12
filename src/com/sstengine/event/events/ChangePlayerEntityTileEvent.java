@@ -21,9 +21,12 @@ public class ChangePlayerEntityTileEvent extends AbstractEvent {
      * @param newTile The new Tile of the PlayerEntity.
      */
     public ChangePlayerEntityTileEvent(PlayerEntity player, Tile newTile) {
-        this.player = player;
         this.newTile = newTile;
-        this.oldTile = player.getTile();
+        this.player = player;
+
+        if (player != null) {
+            this.oldTile = player.getTile();
+        }
     }
 
     /**
