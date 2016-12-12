@@ -117,5 +117,7 @@ public class Leader implements Playable {
                 eventQueue.add(new ChangePlaceableCount(this, obstacle.getType(), -1));
             }
         }
+
+        inputs.clear();
     }
 }
