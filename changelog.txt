@@ -4,6 +4,7 @@ v0.1.0-alpha:
 - Added a refresh method to Camera.
 - Made Country.addLand set the country of the tile.
 - Fixed Leader bug by emptying inputs after processing inputs.
+- Fixed some JavaDoc warnings.
 
 v0.0.6-alpha:
 - Removed Player and Game from UI.
