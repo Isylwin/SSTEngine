@@ -44,6 +44,7 @@ public class EventDispatcher {
      *
      * @param eventType The {@link Event} to be registered
      * @param handler   The {@link Handler} that will be handling the {@link Event}
+     * @param <E> Specifies that only Event's can be given to this method.
      */
     public <E extends Event> void registerHandler(Class<E> eventType,
                                                   Handler<E> handler) {
@@ -55,6 +56,7 @@ public class EventDispatcher {
      *
      * @param event The {@link Event} to be dispatched.
      * @param game The Game on which logic can be executed.
+     * @param <E> Specifies that only Event's can be given to this method.
      */
     @SuppressWarnings("unchecked")
     public <E extends Event> void dispatch(E event, Game game) {

@@ -108,6 +108,15 @@ public class Camera extends UIObject<Tile> {
     }
 
     /**
+     * Refreshes the camera with the given map.
+     *
+     * @param map The new map the camera should use.
+     */
+    public void refresh(Map map) {
+        this.map = map;
+    }
+
+    /**
      * Resizes the camera.
      * Recalculates the tiles the camera should display.
      *

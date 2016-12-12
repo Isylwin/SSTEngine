@@ -8,7 +8,6 @@ import java.awt.*;
 /**
  * The UIObject class represents an object that lives on the UI.
  * <p>
- * <p>
  * UIObject can be extended.
  *
  * @author Oscar de Leeuw

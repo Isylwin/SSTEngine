@@ -54,6 +54,7 @@ public class PlaceableManager implements Serializable {
     /**
      * Gets all the placeables that should be increased in amount.
      * This method cannot add events to the eventQueue directly since creating the events requires the Leader object.
+     * @return A list of the PlaceableTypes that should be increased in amount.
      */
     public List<PlaceableType> getUpdatedPlaceables() {
         updatedPlaceables.clear();

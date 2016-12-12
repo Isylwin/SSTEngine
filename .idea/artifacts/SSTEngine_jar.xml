@@ -1,0 +1,11 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="SSTEngine:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/SSTEngine_jar</output-path>
+    <root id="archive" name="SSTEngine-v0.0.6-alpha.jar">
+      <element id="module-output" name="SSTEngine" />
+      <element id="directory" name="javadoc">
+        <element id="dir-copy" path="$PROJECT_DIR$/out/JavaDoc" />
+      </element>
+    </root>
+  </artifact>
+</component>

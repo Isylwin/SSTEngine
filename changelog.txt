@@ -1,3 +1,11 @@
+v0.1.0-alpha:
+- Changed GraphicsComponent.render to an abstract method.
+- Added more methods to Painter.
+- Added a refresh method to Camera.
+- Made Country.addLand set the country of the tile.
+- Fixed Leader bug by emptying inputs after processing inputs.
+- Fixed some JavaDoc warnings.
+
 v0.0.6-alpha:
 - Removed Player and Game from UI.
 - Added resize and setCenter calls in Camera constructor.
