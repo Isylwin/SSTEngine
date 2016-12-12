@@ -2,6 +2,7 @@ v0.0.7-alpha:
 - Changed GraphicsComponent.render to an abstract method.
 - Added more methods to Painter.
 - Added a refresh method to Camera.
+- Made Country.addLand set the country of the tile.
 
 v0.0.6-alpha:
 - Removed Player and Game from UI.

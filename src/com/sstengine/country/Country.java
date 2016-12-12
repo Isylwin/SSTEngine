@@ -55,11 +55,15 @@ public class Country extends GameObject {
 
     /**
      * Adds an tile to this country.
+     * Sets the Country of the tile to this Country.
+     * Only adds the Tile if isn't already part of the Country.
+     *
      * @param tile The tile that should be added to the land of this country.
      */
     public void addLand(Tile tile) {
         if (!land.contains(tile)) {
             land.add(tile);
+            tile.setCountry(this);
         }
     }
 
