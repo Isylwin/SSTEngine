@@ -42,6 +42,16 @@ public class PlaceableManager implements Serializable {
     }
 
     /**
+     * Gets the PlaceableCounter of a given PlaceableType.
+     *
+     * @param type The type for which to get the counter.
+     * @return The PlaceableCounter of the given type.
+     */
+    public PlaceableCounter getCounter(PlaceableType type) {
+        return placeableTable.get(type);
+    }
+
+    /**
      * Registers a given PlaceableType with the given counter to the manager.
      *
      * @param type    The type of placeable that this manager should manage.

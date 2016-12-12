@@ -3,8 +3,6 @@ package com.sstengine.event.events;
 import com.sstengine.map.tile.Tile;
 import com.sstengine.player.playerentity.PlayerEntity;
 
-import java.util.Objects;
-
 /**
  * The ChangePlayerEntityTileEvent is an event that changes the tile of a given PlayerEntity to a new Tile.
  * The newTile can be set to null in order to remove a PlayerEntity from the map.
@@ -23,8 +21,6 @@ public class ChangePlayerEntityTileEvent extends AbstractEvent {
      * @param newTile The new Tile of the PlayerEntity.
      */
     public ChangePlayerEntityTileEvent(PlayerEntity player, Tile newTile) {
-        Objects.requireNonNull(player, "PlayerEntity cannot be null.");
-
         this.player = player;
         this.newTile = newTile;
         this.oldTile = player.getTile();

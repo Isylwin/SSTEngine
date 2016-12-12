@@ -1,3 +1,7 @@
+v0.1.1-alpha:
+- Removed not-null requirement of PlayerEntity in ChangePlayerEntityTileEvent constructor.
+- Added a method to PlaceableManager for getting the Counter of a PlaceableType.
+
 v0.1.0-alpha:
 - Changed GraphicsComponent.render to an abstract method.
 - Added more methods to Painter.
