@@ -163,9 +163,9 @@ public class Game extends Observable implements Serializable {
      * Logs all events that were processed on this turn.
      * Checks whether the score and time victory conditions have been met.
      */
-    public void update() {
+    public EventLog update() {
         if (isDone) {
-            return;
+            return null;
         }
 
         for (Player player : players) {
@@ -174,10 +174,10 @@ public class Game extends Observable implements Serializable {
             checkScore();
         }
 
-        eventController.logGameTurn(elapsedTurns);
-        elapsedTurns++;
-
+        EventLog log = eventController.logGameTurn(elapsedTurns++);
         checkTime();
+
+        return log;
     }
 
     /**

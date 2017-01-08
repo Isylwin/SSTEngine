@@ -100,10 +100,15 @@ public class EventController {
      * Clears the eventCache after saving.
      *
      * @param turnId The id under which to save the EventLog.
+     * @return The EventLog that corresponds with this game turn.
      */
-    public void logGameTurn(int turnId) {
-        loggedGameTurns.put(turnId, new EventLog(eventCache, turnId));
+    public EventLog logGameTurn(int turnId) {
+        EventLog log = new EventLog(eventCache, turnId);
+
+        loggedGameTurns.put(turnId, log);
         eventCache.clear();
+
+        return log;
     }
 
     /**
