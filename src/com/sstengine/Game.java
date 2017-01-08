@@ -101,6 +101,24 @@ public class Game extends Observable implements Serializable {
     }
 
     /**
+     * Gets the EventLog of a given turn.
+     * Will throw an exception when the given turn is unknown or hasn't been passed.
+     *
+     * @param turnId The id of the requested turn.
+     * @return The EventLog of the given turn.
+     * @throws IllegalArgumentException When the
+     */
+    public EventLog getLogFromTurn(int turnId) throws IllegalArgumentException {
+        EventLog log = eventController.getGameTurnLog(turnId);
+
+        if (log == null) {
+            throw new IllegalArgumentException("Event log for this turn does not exist.");
+        }
+
+        return log;
+    }
+
+    /**
      * Gets whether the Game is done or not.
      *
      * @return True when the Game is done, false if it is not.
