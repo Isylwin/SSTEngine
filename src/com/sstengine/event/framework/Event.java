@@ -15,6 +15,8 @@
 
 package com.sstengine.event.framework;
 
+import java.io.Serializable;
+
 /**
  * A {@link Event} is an object with a specific type that is associated
  * to a specific {@link Handler}.
@@ -23,7 +25,7 @@ package com.sstengine.event.framework;
  * @author Oscar de Leeuw
  */
 @FunctionalInterface
-public interface Event {
+public interface Event extends Serializable {
     /**
      * Returns the message type as a Class object. In this example the message type is
      * used to handle events by their type.

@@ -2,6 +2,7 @@ package com.sstengine.event;
 
 import com.sstengine.event.framework.Event;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +12,7 @@ import java.util.List;
  *
  * @author Oscar de Leeuw
  */
-public class EventLog {
+public class EventLog implements Serializable {
     private List<Event> events;
     private int id;
 

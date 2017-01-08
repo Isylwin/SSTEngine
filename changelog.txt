@@ -2,6 +2,7 @@ v0.2.0-alpha:
 - Game#Update now returns an EventLog with all the events of that turn.
 - Added a method for fetching the EventLog of a certain turn from the game.
 - Fixed bug in earlier ChangePlayerEntityTileEvent change.
+- Made Events and EventLog serializable.
 
 v0.1.1-alpha:
 - Removed not-null requirement of PlayerEntity in ChangePlayerEntityTileEvent constructor.
