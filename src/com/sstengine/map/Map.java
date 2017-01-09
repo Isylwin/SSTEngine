@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Predicate;
 
 /**
@@ -106,7 +107,8 @@ public class Map implements Serializable {
      * @return The tile that corresponds with the given id.
      */
     public Tile getTile(int id) {
-        return getTiles(x -> x.getId() == id).get(0);
+        Optional<Tile> tile = getTiles(x -> x.getId() == id).stream().findFirst();
+        return tile.isPresent() ? tile.get() : null;
     }
 
     /**
