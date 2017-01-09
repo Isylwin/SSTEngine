@@ -10,9 +10,9 @@ import com.sstengine.player.playerentity.PlayerEntity;
  * @author Oscar de Leeuw
  */
 public class ChangePlayerEntityTileEvent extends AbstractEvent {
-    private int playerId;
-    private int newTileId;
-    private int oldTileId;
+    private int playerId = -1;
+    private int newTileId = -1;
+    private int oldTileId = -1;
 
     /**
      * Creates a new ChangePlayerEntityTileEvent.
@@ -22,10 +22,13 @@ public class ChangePlayerEntityTileEvent extends AbstractEvent {
      */
     public ChangePlayerEntityTileEvent(PlayerEntity player, Tile newTile) {
         this.newTileId = newTile.getId();
-        this.playerId = player.getId();
 
-        if (player != null && player.getTile() != null) {
-            this.oldTileId = player.getTile().getId();
+        if (player != null) {
+            this.playerId = player.getId();
+
+            if (player.getTile() != null) {
+                this.oldTileId = player.getTile().getId();
+            }
         }
     }
 
