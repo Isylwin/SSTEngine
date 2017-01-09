@@ -4,6 +4,7 @@ import com.sstengine.Game;
 import com.sstengine.event.events.ChangePlayerEntityTileEvent;
 import com.sstengine.event.framework.Handler;
 import com.sstengine.map.tile.Tile;
+import com.sstengine.player.Player;
 import com.sstengine.player.playerentity.PlayerEntity;
 
 /**
@@ -15,9 +16,14 @@ import com.sstengine.player.playerentity.PlayerEntity;
 public class ChangePlayerEntityTileEventHandler implements Handler<ChangePlayerEntityTileEvent> {
     @Override
     public void onEvent(ChangePlayerEntityTileEvent event, Game game) {
-        Tile newTile = event.getNewTile();
-        Tile oldTile = event.getOldTile();
-        PlayerEntity entity = event.getPlayer();
+        Tile newTile = game.getMap().getTile(event.getNewTile());
+        Tile oldTile = game.getMap().getTile(event.getOldTile());
+        Player player = game.getPlayerWithId(event.getPlayer());
+        PlayerEntity entity = null;
+
+        if (player != null) {
+            entity = (PlayerEntity) player.getPlayable();
+        }
 
         if (oldTile != null) {
             oldTile.setPlayerEntity(null);

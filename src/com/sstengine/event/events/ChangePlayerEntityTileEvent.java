@@ -10,9 +10,9 @@ import com.sstengine.player.playerentity.PlayerEntity;
  * @author Oscar de Leeuw
  */
 public class ChangePlayerEntityTileEvent extends AbstractEvent {
-    private PlayerEntity player;
-    private Tile newTile;
-    private Tile oldTile;
+    private int playerId;
+    private int newTileId;
+    private int oldTileId;
 
     /**
      * Creates a new ChangePlayerEntityTileEvent.
@@ -21,36 +21,36 @@ public class ChangePlayerEntityTileEvent extends AbstractEvent {
      * @param newTile The new Tile of the PlayerEntity.
      */
     public ChangePlayerEntityTileEvent(PlayerEntity player, Tile newTile) {
-        this.newTile = newTile;
-        this.player = player;
+        this.newTileId = newTile.getId();
+        this.playerId = player.getId();
 
-        if (player != null) {
-            this.oldTile = player.getTile();
+        if (player != null && player.getTile() != null) {
+            this.oldTileId = player.getTile().getId();
         }
     }
 
     /**
-     * Gets the PlayerEntity that is associated with this event.
+     * Gets the id of the PlayerEntity that is associated with this event.
      *
-     * @return The PlayerEntity that will be moved by this event.
+     * @return The id of the PlayerEntity that will be moved by this event.
      */
-    public PlayerEntity getPlayer() {
-        return player;
+    public int getPlayer() {
+        return playerId;
     }
 
     /**
-     * Gets the Tile that the PlayerEntity should be moved to.
-     * @return The Tile that the PlayerEnity will be moved to.
+     * Gets the id of the Tile that the PlayerEntity should be moved to.
+     * @return The id of the Tile that the PlayerEnity will be moved to.
      */
-    public Tile getNewTile() {
-        return newTile;
+    public int getNewTile() {
+        return newTileId;
     }
 
     /**
-     * Gets the old Tile that the PlayerEntity was at at the time of event creation.
-     * @return The old Tile of the PlayerEntity.
+     * Gets the id of the old Tile that the PlayerEntity was at at the time of event creation.
+     * @return The id of the old Tile of the PlayerEntity.
      */
-    public Tile getOldTile() {
-        return oldTile;
+    public int getOldTile() {
+        return oldTileId;
     }
 }

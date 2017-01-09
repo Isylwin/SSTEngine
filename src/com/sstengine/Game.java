@@ -119,6 +119,17 @@ public class Game extends Observable implements Serializable {
     }
 
     /**
+     * Gets the player with the given id.
+     * Returns null when no player with the given id could be found.
+     *
+     * @param id The id of the Player.
+     * @return The Player that corresponds with the given id.
+     */
+    public Player getPlayerWithId(int id) {
+        return players.stream().filter(x -> x.getId() == id).findFirst().get();
+    }
+
+    /**
      * Gets whether the Game is done or not.
      *
      * @return True when the Game is done, false if it is not.

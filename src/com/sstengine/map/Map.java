@@ -99,6 +99,17 @@ public class Map implements Serializable {
     }
 
     /**
+     * Gets the Tile with the given id.
+     * Returns null when there is no tile with the given id.
+     *
+     * @param id The id of the Tile.
+     * @return The tile that corresponds with the given id.
+     */
+    public Tile getTile(int id) {
+        return getTiles(x -> x.getId() == id).get(0);
+    }
+
+    /**
      * Gets all the tiles that satisfy a given predicate.
      *
      * @param predicate The predicate to test the tile for.
