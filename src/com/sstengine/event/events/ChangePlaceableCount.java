@@ -11,7 +11,7 @@ import java.util.Objects;
  * @author Oscar de Leeuw
  */
 public class ChangePlaceableCount extends AbstractEvent {
-    private Leader leader;
+    private int leaderId;
     private PlaceableType type;
     private int amount;
 
@@ -26,18 +26,18 @@ public class ChangePlaceableCount extends AbstractEvent {
         Objects.requireNonNull(leader, "Leader cannot be null.");
         Objects.requireNonNull(type, "type cannot be null.");
 
-        this.leader = leader;
+        this.leaderId = leader.getId();
         this.type = type;
         this.amount = amount;
     }
 
     /**
-     * Gets the Leader that is associated with this event.
+     * Gets the id of the Leader that is associated with this event.
      *
-     * @return The leader that is associated with this event.
+     * @return The id of the Leader that is associated with this event.
      */
-    public Leader getLeader() {
-        return leader;
+    public int getLeader() {
+        return leaderId;
     }
 
     /**

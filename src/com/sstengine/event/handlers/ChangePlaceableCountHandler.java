@@ -16,7 +16,7 @@ import com.sstengine.player.leader.PlaceableManager;
 public class ChangePlaceableCountHandler implements Handler<ChangePlaceableCount> {
     @Override
     public void onEvent(ChangePlaceableCount event, Game game) {
-        Leader leader = event.getLeader();
+        Leader leader = (Leader) game.getPlayerWithId(event.getLeader()).getPlayable();
         PlaceableManager manager = leader.getManager();
 
         PlaceableType type = event.getPlaceableType();
