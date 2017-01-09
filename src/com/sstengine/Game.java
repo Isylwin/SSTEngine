@@ -12,10 +12,7 @@ import com.sstengine.player.playerentity.PlayerEntity;
 import com.sstengine.team.Team;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Observable;
-import java.util.Random;
+import java.util.*;
 
 /**
  * The Game class is the entry point into the engine.
@@ -126,7 +123,8 @@ public class Game extends Observable implements Serializable {
      * @return The Player that corresponds with the given id.
      */
     public Player getPlayerWithId(int id) {
-        return players.stream().filter(x -> x.getId() == id).findFirst().get();
+        Optional<Player> player = players.stream().filter(x -> x.getId() == id).findFirst();
+        return player.isPresent() ? player.get() : null;
     }
 
     /**
