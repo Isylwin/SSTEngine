@@ -2,7 +2,7 @@ package com.sstengine.event.handlers;
 
 import com.sstengine.event.events.ChangePlayerEntityTileEvent;
 import com.sstengine.map.tile.Tile;
-import com.sstengine.mocks.MockTileType;
+import com.sstengine.mocks.enumerations.MockTileType;
 import com.sstengine.player.playerentity.PlayerEntity;
 import org.junit.Before;
 import org.junit.Test;

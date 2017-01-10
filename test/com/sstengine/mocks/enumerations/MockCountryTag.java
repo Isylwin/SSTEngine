@@ -1,4 +1,4 @@
-package com.sstengine.mocks;
+package com.sstengine.mocks.enumerations;
 
 import com.sstengine.country.CountryTag;
 

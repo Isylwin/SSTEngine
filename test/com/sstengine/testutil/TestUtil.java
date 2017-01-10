@@ -1,13 +1,19 @@
 package com.sstengine.testutil;
 
+import com.sstengine.component.physical.PhysicalComponent;
 import com.sstengine.component.physical.standard.StaticObstaclePhysicalComponent;
 import com.sstengine.country.Country;
 import com.sstengine.map.Map;
 import com.sstengine.map.tile.Tile;
-import com.sstengine.mocks.MockCountryTag;
-import com.sstengine.mocks.MockTileType;
+import com.sstengine.mocks.components.MockPhysicalComponent;
+import com.sstengine.mocks.enumerations.MockCountryTag;
+import com.sstengine.mocks.enumerations.MockObstacleType;
+import com.sstengine.mocks.enumerations.MockTileType;
+import com.sstengine.obstacle.staticobstacle.StaticObstacle;
 import com.sstengine.player.Player;
 import com.sstengine.player.playerentity.PlayerEntity;
+import com.sstengine.strategy.AccessibilityStrategy;
+import com.sstengine.strategy.InteractionStrategy;
 import com.sstengine.team.Team;
 
 import java.awt.*;
@@ -53,6 +59,26 @@ public class TestUtil {
         land.forEach(country::addLand);
 
         return country;
+    }
+
+    public static Country makeCountry(MockCountryTag tag, PhysicalComponent component) {
+        Country country = new Country(component, null, tag);
+
+        List<Tile> tiles = new ArrayList<Tile>() {{
+            add(new Tile(0, null, MockTileType.DIRT, new Point(0, 0)));
+            add(new Tile(1, null, MockTileType.DIRT, new Point(1, 0)));
+            add(new Tile(2, null, MockTileType.DIRT, new Point(2, 0)));
+            add(new Tile(3, null, MockTileType.DIRT, new Point(3, 0)));
+            add(new Tile(4, null, MockTileType.DIRT, new Point(4, 0)));
+        }};
+
+        tiles.get(0).setObstacle(new StaticObstacle(0, null, MockObstacleType.ROCK));
+        tiles.forEach(country::addLand);
+        return country;
+    }
+
+    public static PhysicalComponent makePhysicalComponent(AccessibilityStrategy access, InteractionStrategy interact) {
+        return new MockPhysicalComponent(access, interact);
     }
 
     public static Player makePlayer(int id, String name, Team team) {
